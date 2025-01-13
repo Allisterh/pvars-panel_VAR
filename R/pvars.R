@@ -253,7 +253,7 @@ NULL
 #' @references Mertens, K., and Ravn, M. O. (2019):
 #'   "The Dynamic Effects of Personal and Corporate Income Tax Changes in the 
 #'   United States: Reply", \emph{American Economic Review}, 109, pp. 2679-2691.
-#' @source \doi{10.3886/E116190V1} 
+#' @source \doi{10.3886/E116190V1}. 
 #'   Supplementary Research Data. This is open data under the CC BY license 
 #'   \url{https://creativecommons.org/licenses/by/4.0/}. 
 "PCIT"

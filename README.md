@@ -33,7 +33,6 @@ and the provided data sets allow for the replication of the implemented literatu
 
 
 ## Installation
-
 Install the development version
 
 ```r
@@ -42,7 +41,7 @@ devtools::install_github("Lenni89/pvars")
 ```
 
 ```r
-library("svars")
+library("pvars")
 ```
 
 

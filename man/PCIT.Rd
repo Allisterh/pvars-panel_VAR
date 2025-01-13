@@ -9,7 +9,7 @@ A time series data set of class '\code{data.frame}',
   where the column \code{id_t} indicates the quarter of the year.
 }
 \source{
-\doi{10.3886/E116190V1} 
+\doi{10.3886/E116190V1}. 
   Supplementary Research Data. This is open data under the CC BY license 
   \url{https://creativecommons.org/licenses/by/4.0/}.
 }
