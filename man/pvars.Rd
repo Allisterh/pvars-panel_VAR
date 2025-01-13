@@ -9,7 +9,7 @@
 This package implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and 
 (3) panel-based identification methods for structural vector autoregressive (SVAR) models. 
 The implemented functions allow to account for cross-sectional dependence in the residuals 
-and for structural breaks in the mean and linear trend of the VAR process.
+and for structural breaks in the deterministic term of the VAR process.
 }
 \details{
 \bold{(1)} The panel functions to determine the cointegration rank are:
@@ -34,6 +34,14 @@ and for structural breaks in the mean and linear trend of the VAR process.
 }\cr
 Supporting tools like the panel block bootstrap procedure (\code{\link{sboot.pmb}}) 
 and the provided data sets allow for the replication of the implemented literature.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Lenni89/pvars}
+  \item Report bugs at \url{https://github.com/Lenni89/pvars/issues}
+}
+
 }
 \author{
 Lennart Empting \email{lennart.empting@uni-goettingen.de}

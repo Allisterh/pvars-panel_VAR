@@ -9,9 +9,9 @@ A time series data set of class '\code{data.frame}',
   where the column \code{id_t} indicates the quarter of the year.
 }
 \source{
-\url{http://doi.org/10.3886/E116190V1} 
+\doi{10.3886/E116190V1} 
   Supplementary Research Data. This is open data under the CC BY license 
-  \url{http://creativecommons.org/licenses/by/4.0/}.
+  \url{https://creativecommons.org/licenses/by/4.0/}.
 }
 \usage{
 data("PCIT")

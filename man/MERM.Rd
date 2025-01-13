@@ -12,7 +12,7 @@ A long-format data panel of class '\code{data.frame}',
 \source{
 \url{https://ars.els-cdn.com/content/image/1-s2.0-S2452306216300028-mmc1.zip} 
   Supplementary Raw Research Data. This is open data under the CC BY license 
-  \url{http://creativecommons.org/licenses/by/4.0/}.
+  \url{https://creativecommons.org/licenses/by/4.0/}.
 }
 \usage{
 data("MERM")

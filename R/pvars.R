@@ -23,7 +23,7 @@ NULL
 #' This package implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and 
 #' (3) panel-based identification methods for structural vector autoregressive (SVAR) models. 
 #' The implemented functions allow to account for cross-sectional dependence in the residuals 
-#' and for structural breaks in the mean and linear trend of the VAR process. 
+#' and for structural breaks in the deterministic term of the VAR process. 
 #' @details
 #' \bold{(1)} The panel functions to determine the cointegration rank are:
 #' \itemize{
@@ -180,7 +180,7 @@ NULL
 #    \emph{Journal of International Economics}, 53, pp. 29-52.
 #' @source \url{https://ars.els-cdn.com/content/image/1-s2.0-S2452306216300028-mmc1.zip} 
 #'   Supplementary Raw Research Data. This is open data under the CC BY license 
-#'   \url{http://creativecommons.org/licenses/by/4.0/}.
+#'   \url{https://creativecommons.org/licenses/by/4.0/}.
 "MERM"
 
 
@@ -218,7 +218,7 @@ NULL
 #'   \emph{IMF Staff Papers}, 53, pp. 120-150.
 #' @source Own compilation based on data from PWT, OECD's \emph{Economic Outlook}, and Eurostat. 
 #'   Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006).  
-#'   This is open data under the CC BY license \url{http://creativecommons.org/licenses/by/4.0/}. 
+#'   This is open data under the CC BY license \url{https://creativecommons.org/licenses/by/4.0/}. 
 #' @example inst/examples/PCAP.R
 "PCAP"
 
@@ -253,8 +253,8 @@ NULL
 #' @references Mertens, K., and Ravn, M. O. (2019):
 #'   "The Dynamic Effects of Personal and Corporate Income Tax Changes in the 
 #'   United States: Reply", \emph{American Economic Review}, 109, pp. 2679-2691.
-#' @source \url{http://doi.org/10.3886/E116190V1} 
+#' @source \doi{10.3886/E116190V1} 
 #'   Supplementary Research Data. This is open data under the CC BY license 
-#'   \url{http://creativecommons.org/licenses/by/4.0/}. 
+#'   \url{https://creativecommons.org/licenses/by/4.0/}. 
 "PCIT"
 
