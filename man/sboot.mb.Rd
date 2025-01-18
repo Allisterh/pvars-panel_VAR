@@ -31,7 +31,7 @@ are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VA
 Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.}
 
-\item{normf}{Function. A given function that normalizes the \eqn{K x S} input-matrix 
+\item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 into an output matrix of same dimension. See the example in '\link{id.iv}' 
 for the normalization of Jentsch and Lunsford (2021) 
 that fixes the size of the impact response in the IRF.}
@@ -51,7 +51,7 @@ A list of class \code{sboot2} with elements:
 \item{b_length}{Length of each block.}
 \item{design}{Character indicating that the recursive design bootstrap has been performed.}
 \item{method}{Used bootstrap method.}
-\item{stars}{Matrix of (\eqn{T x }\code{n.boot}) integers containing 
+\item{stars}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
   the \eqn{T} resampling draws from each bootstrap iteration.}
 }
 \description{

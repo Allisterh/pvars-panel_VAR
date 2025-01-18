@@ -20,7 +20,7 @@ suggest this for VECM with known \eqn{\beta}.
 Ignored in case of rank-unrestricted VAR.}
 }
 \value{
-An array of dimension (\eqn{3 x (1+K) x} \code{n.boot}) 
+An array of dimension (\eqn{3 \times (1+K) x} \code{n.boot}) 
   containing the \code{n.boot} iteration results for 
   \emph{(i)} the JB, skewness and kurtosis test and for
   \emph{(ii)} the multivariate and each univariate test 

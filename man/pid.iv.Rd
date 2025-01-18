@@ -36,7 +36,7 @@ Either \code{'OMEGA'} (the default) for \eqn{\hat{U}_i \hat{U}_i'/T_i} as used i
 or \code{'SIGMA'} for \eqn{\hat{U}_i \hat{U}_i'/(T_i - n_{zi})}, which corrects for the number of regressors \eqn{n_{zi}}. 
 Both character options refer to the name of the respective estimate in the \code{varx} objects.}
 
-\item{R0}{Matrix. A \eqn{(L X S)} selection matrix for '\code{NQ}' that 
+\item{R0}{Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
 structural shock series. If \code{NULL} (the default), \code{R0} 
 \eqn{= I_S} will be used such that the \eqn{S=L} columns of \eqn{B_{i,1}} are 

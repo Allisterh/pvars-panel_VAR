@@ -19,17 +19,17 @@ VECM(
 )
 }
 \arguments{
-\item{y}{Matrix. A \eqn{(K x (p+T))} data matrix of the \eqn{K} endogenous time series variables.}
+\item{y}{Matrix. A \eqn{(K \times (p+T))} data matrix of the \eqn{K} endogenous time series variables.}
 
 \item{dim_p}{Integer. Lag-order \eqn{p} for the endogenous variables \code{y}.}
 
-\item{x}{Matrix. A \eqn{(L x (p+T))} data matrix of the \eqn{L} weakly exogenous time series variables.}
+\item{x}{Matrix. A \eqn{(L \times (p+T))} data matrix of the \eqn{L} weakly exogenous time series variables.}
 
 \item{dim_q}{Integer. Lag-order \eqn{q} for the distributed lag of the weakly exogenous variables \code{x}.}
 
 \item{dim_r}{Integer. Cointegration-rank \eqn{r} of the VECM.}
 
-\item{beta}{Matrix. A \eqn{((K+L+n_{d1}) x r)} cointegrating matrix to be imposed -- 
+\item{beta}{Matrix. A \eqn{((K+L+n_{d1}) \times r)} cointegrating matrix to be imposed -- 
 or estimated by the reduced-rank regression if \code{NULL} (the default).}
 
 \item{type}{Character. The conventional case of the 
@@ -45,13 +45,13 @@ accompanying lagged regressors are automatically included in \eqn{d_{2,t}}.}
 for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{2,t}}, 
 which are unrestricted.}
 
-\item{D1}{Matrix. A \eqn{(n_{\bullet} x (p+T))} data matrix of customized 
+\item{D1}{Matrix. A \eqn{(n_{\bullet} \times (p+T))} data matrix of customized 
 \link[=as.t_D]{deterministic regressors} added to \eqn{d_{1,t}}, 
 which are restricted to the cointegration relations. 
 Unlike '\code{t_D1}', these customized regressors require potential
 accompanying regressors to be manually included in \eqn{d_{2,it}}.}
 
-\item{D2}{Matrix. A \eqn{(n_{\bullet} x (p+T))} data matrix of customized 
+\item{D2}{Matrix. A \eqn{(n_{\bullet} \times (p+T))} data matrix of customized 
 \link[=as.t_D]{deterministic regressors} added to \eqn{d_{2,t}}, 
 which are unrestricted. 
 These additional regressors correspond to '\code{dumvar}' in \strong{urca}'s 

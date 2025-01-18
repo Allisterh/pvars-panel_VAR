@@ -12,7 +12,7 @@
 #'   are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VAR. 
 #'   Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 #'   but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.
-#' @param normf Function. A given function that normalizes the \eqn{K x S} input-matrix 
+#' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
@@ -31,7 +31,7 @@
 #' \item{b_length}{Length of each block.}
 #' \item{design}{Character indicating that the recursive design bootstrap has been performed.}
 #' \item{method}{Used bootstrap method.}
-#' \item{stars}{Matrix of (\eqn{T x }\code{n.boot}) integers containing 
+#' \item{stars}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
 #'   the \eqn{T} resampling draws from each bootstrap iteration.}
 #' 
 #' @seealso \link[svars]{mb.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
@@ -266,7 +266,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' @description Calculates confidence bands for impulse response functions via recursive-design bootstrap. 
 #' @details In case of heterogeneous lag-orders \eqn{p_i} or sample sizes \eqn{T_i},
 #'   the initial periods are fixed in accordance with the usage of presamples. 
-#'   Only the \eqn{(K x T_{min} x N)} array of the \eqn{T_{min} = min(T_1,\ldots,T_N)} 
+#'   Only the \eqn{(K \times T_{min} \times N)} array of the \eqn{T_{min} = min(T_1,\ldots,T_N)} 
 #'   last residuals is resampled.
 #'   
 #' @param x Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
@@ -284,7 +284,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VAR. 
 #'   Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 #'   but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.
-#' @param normf Function. A given function that normalizes the \eqn{K x S} input-matrix 
+#' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
@@ -308,9 +308,9 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' \item{nboot}{Number of correct bootstrap iterations.}
 #' \item{design}{Character indicating that the recursive design bootstrap has been performed.}
 #' \item{method}{Used bootstrap method.}
-#' \item{stars_t}{Matrix of (\eqn{T x }\code{n.boot}) integers containing 
+#' \item{stars_t}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
 #'   the \eqn{T} temporal resampling draws from each bootstrap iteration.}
-#' \item{stars_i}{Matrix of (\eqn{N x }\code{n.boot}) integers containing 
+#' \item{stars_i}{Matrix of (\eqn{N \times }\code{n.boot}) integers containing 
 #'   the \eqn{N} cross-sectional resampling draws from each bootstrap iteration.}
 #' 
 #' @seealso For the the individual counterpart see \link{sboot.mb}.
@@ -577,13 +577,13 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #' @details MG inference presumes the individual estimates to be the empirical variation 
 #'   around a common parameter. In case of heterogeneous lag-orders \eqn{p_i},
 #'   specifically the '\code{summary}' of VAR coefficient matrices fills 
-#'   \eqn{\hat{A}_{ij} = 0_{K x K}} for \eqn{p_i < j \le max(p_1,\ldots,p_N)} 
+#'   \eqn{\hat{A}_{ij} = 0_{K \times K}} for \eqn{p_i < j \le max(p_1,\ldots,p_N)} 
 #'   in accordance with the finite order VAR\eqn{(p_i)}.
 #'   
 #' @param x Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
 #'   or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
-#' @param normf Function. A given function that normalizes the \eqn{K x S} input-matrix 
+#' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.

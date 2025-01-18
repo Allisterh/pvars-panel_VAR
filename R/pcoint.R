@@ -4,7 +4,7 @@
 #' @description Performs test procedures for the rank of cointegration in a panel of VAR models.
 #'   First, the chosen individual procedure is applied over 
 #'   all \eqn{N} individual entities for \eqn{r_{H0}=0,\ldots,K-1}. 
-#'   Then, the \eqn{K x N} individual statistics and \eqn{p}-values 
+#'   Then, the \eqn{K \times N} individual statistics and \eqn{p}-values 
 #'   are combined to panel test results on each \eqn{r_{H0}}
 #'   using all combination approaches available for the chosen procedure.
 #' 

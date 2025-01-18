@@ -12,7 +12,7 @@ or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
 
 \item{n.ahead}{Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.}
 
-\item{normf}{Function. A given function that normalizes the \eqn{K x S} input-matrix 
+\item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 into an output matrix of same dimension. See the example in '\link{id.iv}' 
 for the normalization of Jentsch and Lunsford (2021) 
 that fixes the size of the impact response in the IRF.}
@@ -45,7 +45,7 @@ Calculates confidence bands for impulse response functions via mean group infere
 MG inference presumes the individual estimates to be the empirical variation 
   around a common parameter. In case of heterogeneous lag-orders \eqn{p_i},
   specifically the '\code{summary}' of VAR coefficient matrices fills 
-  \eqn{\hat{A}_{ij} = 0_{K x K}} for \eqn{p_i < j \le max(p_1,\ldots,p_N)} 
+  \eqn{\hat{A}_{ij} = 0_{K \times K}} for \eqn{p_i < j \le max(p_1,\ldots,p_N)} 
   in accordance with the finite order VAR\eqn{(p_i)}.
 }
 \examples{

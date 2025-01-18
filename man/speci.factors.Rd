@@ -16,7 +16,7 @@ speci.factors(
 }
 \arguments{
 \item{L.data}{List of \eqn{N} \code{data.frame} objects each collecting the \eqn{K_i} time series along the rows \eqn{t=1,\ldots,T}.
-The \eqn{\sum_{i=1}^{N} K_i} time series are immediately combined into the \eqn{T x KN} data panel \code{X}.}
+The \eqn{\sum_{i=1}^{N} K_i} time series are immediately combined into the \eqn{T \times KN} data panel \code{X}.}
 
 \item{k_max}{Integer. The maximum number of factors to consider.}
 
@@ -56,7 +56,7 @@ A list of class '\code{speci}', which contains the elements:
 }
 \description{
 Determines the number of factors in an approximate factor model
-  for a data panel, where both dimensions \eqn{(T x KN)} are large, 
+  for a data panel, where both dimensions \eqn{(T \times KN)} are large, 
   and calculates the factor time series and corresponding list of \eqn{N} idiosyncratic components.
   See Corona et al. (2017) for an overview and further details.
 }

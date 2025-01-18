@@ -10,7 +10,7 @@ id.iv(x, iv, S2 = c("MR", "JL", "NQ"), cov_u = "OMEGA", R0 = NULL)
 \item{x}{VAR object of class '\code{varx}' or any other 
 that will be \link[=as.varx]{coerced} to '\code{varx}'.}
 
-\item{iv}{Matrix. A \eqn{(L x T)} data matrix of the \eqn{L} proxy 
+\item{iv}{Matrix. A \eqn{(L \times T)} data matrix of the \eqn{L} proxy 
 time series \eqn{m_t}.}
 
 \item{S2}{Character. Identification within multiple proxies \eqn{m_t} 
@@ -25,7 +25,7 @@ Either \code{'OMEGA'} (the default) for \eqn{\hat{U} \hat{U}'/T_i} as used in Me
 or \code{'SIGMA'} for \eqn{\hat{U}\hat{U}'/(T-n_{z})}, which corrects for the number of regressors \eqn{n_z}. 
 Both character options refer to the name of the respective estimate in the \code{varx} object.}
 
-\item{R0}{Matrix. A \eqn{(L x S)} selection matrix for '\code{NQ}' that 
+\item{R0}{Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
 structural shock series. If \code{NULL} (the default), \code{R0} 
 \eqn{= I_S} will be used such that the \eqn{S=L} columns of \eqn{B_1} are 

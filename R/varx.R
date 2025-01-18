@@ -3,12 +3,12 @@
 #' @title Estimation of a Vector Error Correction Model
 #' @description Estimates a VECM under a given cointegration-rank restriction or cointegrating vectors.
 #' 
-#' @param y Matrix. A \eqn{(K x (p+T))} data matrix of the \eqn{K} endogenous time series variables.
+#' @param y Matrix. A \eqn{(K \times (p+T))} data matrix of the \eqn{K} endogenous time series variables.
 #' @param dim_p Integer. Lag-order \eqn{p} for the endogenous variables \code{y}.
-#' @param x Matrix. A \eqn{(L x (p+T))} data matrix of the \eqn{L} weakly exogenous time series variables.
+#' @param x Matrix. A \eqn{(L \times (p+T))} data matrix of the \eqn{L} weakly exogenous time series variables.
 #' @param dim_q Integer. Lag-order \eqn{q} for the distributed lag of the weakly exogenous variables \code{x}.
 #' @param dim_r Integer. Cointegration-rank \eqn{r} of the VECM.
-#' @param beta Matrix. A \eqn{((K+L+n_{d1}) x r)} cointegrating matrix to be imposed -- 
+#' @param beta Matrix. A \eqn{((K+L+n_{d1}) \times r)} cointegrating matrix to be imposed -- 
 #'   or estimated by the reduced-rank regression if \code{NULL} (the default).
 #' @param type Character. The conventional case of the 
 #'   \link[=as.t_D]{deterministic term} in the Johansen procedure.  
@@ -20,12 +20,12 @@
 #' @param t_D2 List of vectors. The activating break periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{2,t}}, 
 #'   which are unrestricted.
-#' @param D1 Matrix. A \eqn{(n_{\bullet} x (p+T))} data matrix of customized 
+#' @param D1 Matrix. A \eqn{(n_{\bullet} \times (p+T))} data matrix of customized 
 #'   \link[=as.t_D]{deterministic regressors} added to \eqn{d_{1,t}}, 
 #'   which are restricted to the cointegration relations. 
 #'   Unlike '\code{t_D1}', these customized regressors require potential
 #'   accompanying regressors to be manually included in \eqn{d_{2,it}}.
-#' @param D2 Matrix. A \eqn{(n_{\bullet} x (p+T))} data matrix of customized 
+#' @param D2 Matrix. A \eqn{(n_{\bullet} \times (p+T))} data matrix of customized 
 #'   \link[=as.t_D]{deterministic regressors} added to \eqn{d_{2,t}}, 
 #'   which are unrestricted. 
 #'   These additional regressors correspond to '\code{dumvar}' in \strong{urca}'s 
@@ -186,9 +186,9 @@ summary.varx <- function(object, ...){
 #' @return  A list of class '\code{varx}'. Objects of this class contain the elements:
 #' \item{A}{Matrix. The lined-up VAR coefficient matrices \eqn{A_j, j=1,\ldots,p} for the 
 #'   lagged variables.}
-#' \item{B}{Matrix. The \eqn{(K x S)} structural impact matrix of the SVAR model 
+#' \item{B}{Matrix. The \eqn{(K \times S)} structural impact matrix of the SVAR model 
 #'   or an identity matrix \eqn{I_K} as a placeholder for the unidentified VAR model.}
-#' \item{SIGMA}{Matrix. The \eqn{(K x K)} residual covariance matrix estimated by least-squares.}
+#' \item{SIGMA}{Matrix. The \eqn{(K \times K)} residual covariance matrix estimated by least-squares.}
 #'   The following integers indicate the size of dimensions:
 #' \item{dim_K}{Integer. The number of endogenous variables \eqn{K} in the full-system.}
 #' \item{dim_S}{Integer. The number of identified shocks \eqn{S} in the SVAR model.}
@@ -197,13 +197,13 @@ summary.varx <- function(object, ...){
 #' \item{dim_r}{Integer. The cointegration rank \eqn{r} of the VAR model
 #'   if transformed from a rank-restricted VECM.}
 #'   Some further elements required for the bootstrap functions are: 
-#' \item{y}{Matrix. The \eqn{(K x (p+T))} endogenous variables.}
-#' \item{D,D1,D2}{Matrices. The \eqn{(n_{\bullet} x (p+T))}
+#' \item{y}{Matrix. The \eqn{(K \times (p+T))} endogenous variables.}
+#' \item{D,D1,D2}{Matrices. The \eqn{(n_{\bullet} \times (p+T))}
 #'   deterministic variables, fixed over bootstrap iterations, 
 #'   (un)restricted to the cointegration relations of the VAR model 
 #'   if transformed from a rank-restricted VECM.}
-#' \item{resid}{Matrix. The \eqn{(K x T)} residual matrix.}
-#' \item{beta}{Matrix. The \eqn{((K+n_{d1}) x r)} cointegrating matrix of the VAR model 
+#' \item{resid}{Matrix. The \eqn{(K \times T)} residual matrix.}
+#' \item{beta}{Matrix. The \eqn{((K+n_{d1}) \times r)} cointegrating matrix of the VAR model 
 #'   if transformed from a rank-restricted VECM.}
 #' \item{args_id}{List of characters and integers indicating the identification 
 #'   methods and specifications that have been used. This element is specific 

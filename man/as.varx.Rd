@@ -15,9 +15,9 @@ as.varx(x, ...)
 A list of class '\code{varx}'. Objects of this class contain the elements:
 \item{A}{Matrix. The lined-up VAR coefficient matrices \eqn{A_j, j=1,\ldots,p} for the 
   lagged variables.}
-\item{B}{Matrix. The \eqn{(K x S)} structural impact matrix of the SVAR model 
+\item{B}{Matrix. The \eqn{(K \times S)} structural impact matrix of the SVAR model 
   or an identity matrix \eqn{I_K} as a placeholder for the unidentified VAR model.}
-\item{SIGMA}{Matrix. The \eqn{(K x K)} residual covariance matrix estimated by least-squares.}
+\item{SIGMA}{Matrix. The \eqn{(K \times K)} residual covariance matrix estimated by least-squares.}
   The following integers indicate the size of dimensions:
 \item{dim_K}{Integer. The number of endogenous variables \eqn{K} in the full-system.}
 \item{dim_S}{Integer. The number of identified shocks \eqn{S} in the SVAR model.}
@@ -26,13 +26,13 @@ A list of class '\code{varx}'. Objects of this class contain the elements:
 \item{dim_r}{Integer. The cointegration rank \eqn{r} of the VAR model
   if transformed from a rank-restricted VECM.}
   Some further elements required for the bootstrap functions are: 
-\item{y}{Matrix. The \eqn{(K x (p+T))} endogenous variables.}
-\item{D,D1,D2}{Matrices. The \eqn{(n_{\bullet} x (p+T))}
+\item{y}{Matrix. The \eqn{(K \times (p+T))} endogenous variables.}
+\item{D,D1,D2}{Matrices. The \eqn{(n_{\bullet} \times (p+T))}
   deterministic variables, fixed over bootstrap iterations, 
   (un)restricted to the cointegration relations of the VAR model 
   if transformed from a rank-restricted VECM.}
-\item{resid}{Matrix. The \eqn{(K x T)} residual matrix.}
-\item{beta}{Matrix. The \eqn{((K+n_{d1}) x r)} cointegrating matrix of the VAR model 
+\item{resid}{Matrix. The \eqn{(K \times T)} residual matrix.}
+\item{beta}{Matrix. The \eqn{((K+n_{d1}) \times r)} cointegrating matrix of the VAR model 
   if transformed from a rank-restricted VECM.}
 \item{args_id}{List of characters and integers indicating the identification 
   methods and specifications that have been used. This element is specific 
