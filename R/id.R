@@ -26,12 +26,12 @@
 #'   via '\code{JL}' for chol\eqn{(\Sigma_{mu} \Sigma_{u}^{-1} \Sigma_{um})} by Jentsch, Lunsford (2021), or
 #'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al (2025). 
 #'   In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_1}.
-#' @param cov_u Character. Selection of the estimated residual covariance matrix \eqn{\hat{\Sigma_{u}}} 
+#' @param cov_u Character. Selection of the estimated residual covariance matrix \eqn{\hat{\Sigma}_{u}} 
 #'   to be used in the identification procedure. 
 #'   Either \code{'OMEGA'} (the default) for \eqn{\hat{U} \hat{U}'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 #'   or \code{'SIGMA'} for \eqn{\hat{U}\hat{U}'/(T-n_{z})}, which corrects for the number of regressors \eqn{n_z}. 
 #'   Both character options refer to the name of the respective estimate in the \code{varx} object.
-#' @param R0 Matrix. A \eqn{(L X S)} selection matrix for '\code{NQ}' that 
+#' @param R0 Matrix. A \eqn{(L x S)} selection matrix for '\code{NQ}' that 
 #'   governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
 #'   structural shock series. If \code{NULL} (the default), \code{R0} 
 #'   \eqn{= I_S} will be used such that the \eqn{S=L} columns of \eqn{B_1} are 
