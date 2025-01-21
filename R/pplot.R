@@ -64,7 +64,7 @@ as.pplot.default <- function(..., names_k=NULL, names_s=NULL, names_g=NULL,
   if( is.null(scales) ){ scales = "free_y" }
   if( is.null(Latex)  ){ Latex  = FALSE }
   
-  # try to homogenize all listed elements to ggplot object
+  # try to homogenize all listed elements to ggplot and ggplot_built objects
   aux_ggunlist <- function(x){
     L.out = list()
     for(j in 1:length(x)){
@@ -84,36 +84,36 @@ as.pplot.default <- function(..., names_k=NULL, names_s=NULL, names_g=NULL,
   x      = list(...)
   L.plot = aux_ggunlist(x)
   dim_G  = length(L.plot)  # number of plotted groups
-  
   if( !all(sapply(L.plot, FUN=function(x) inherits(x, "ggplot"))) ){
      stop("Arguments are not objects of suitable class!") }
+  L.built = lapply(L.plot, FUN=function(x) ggplot2::ggplot_build(x))
   
   # names for variables, for shocks, and for the header of each IRF
-  if( is.null(names_k) | is.null(names_s) ){
-    # get names from first ggplot object
-    R.grob = ggplot2::ggplotGrob(L.plot[[1]])
-    idx_ks = which(grepl("strip-t", R.grob$layout$name))
-    R.labs = sapply(1:length(idx_ks), FUN=function(x) as.character(R.grob$grobs
-       [idx_ks][[x]]$grobs[[1]]$children[[2]]$children[[1]]$label))
-    if( is.list(R.labs) ){ R.labs  = do.call("cbind", R.labs) }  # in case of 'selection' of IRF sub-plots
-    
-    ### default dimensions: https://stackoverflow.com/questions/60104268/default-panel-layout-of-ggplot2facet-wrap
-    n.labs = ncol(R.labs)  # number of facet labels
-    n.cols = if(n.labs > 3){ ceiling(sqrt(n.labs)) }else{ n.labs } # number of columns in facet plot
-    n.void = n.cols^2 - n.labs  # number of void facet sub-plots
-    idx_ks = c(sapply((n.cols-1):0, FUN=function(x) x*n.cols + 1:n.cols)) - n.void
-    idx_ks = idx_ks[idx_ks > 0]  # index to reorder in left-right top-down
-    if( is.null(names_k) ){ names_k = unique(R.labs[3, idx_ks]) }
-    if( is.null(names_s) ){ names_s = unique(R.labs[2, idx_ks]) }
+  df_lay = L.built[[1]]$layout$layout  # get names from first ggplot object
+  R.labs = do.call("rbind", sapply(df_lay$variable, FUN=function(x)
+    strsplit(as.character(x), split=c(" %->% ", " \\rightarrow "))))
+  
+  if( is.null(names_k) ){ 
+    names_k = unique(R.labs[, 2])
+    df_lay$names_k = R.labs[, 2]
+  }else{
+    df_lay$names_k = names_k[df_lay$ROW]
+  }
+  
+  if( is.null(names_s) ){ 
+    names_s = unique(R.labs[, 1])
+    df_lay$names_s = R.labs[, 1]
+  }else{
+    df_lay$names_s = names_s[df_lay$COL]
   }
   
   if(Latex){ 
-    names_IRF = c(sapply(names_k, FUN=function(k) paste0("$ ", names_s, " \\rightarrow ", k, " $")))
-    names(names_IRF) = 1:length(names_IRF)
+    names_IRF = paste0("$ ", df_lay$names_s, " \\rightarrow ", df_lay$names_k, " $")
+    names(names_IRF) = names_IRF
     label_IRF = as_labeller(names_IRF, default=label_value)
   }else{ 
-    names_IRF = c(sapply(names_k, FUN=function(k) paste0(names_s, " %->% ", k)))
-    names(names_IRF) = 1:length(names_IRF)
+    names_IRF = paste0(df_lay$names_s, " %->% ", df_lay$names_k)
+    names(names_IRF) = names_IRF
     label_IRF = as_labeller(names_IRF, default=label_parsed)
   }
   
@@ -136,31 +136,27 @@ as.pplot.default <- function(..., names_k=NULL, names_s=NULL, names_g=NULL,
   names_g = factor(names_g, levels=names_g)  # ordering of names_g and of layers must be identical 
   
   # gather data from plots in data.frame
-  L.data = lapply(L.plot, FUN=function(x_g) ggplot2::ggplot_build(x_g)$data)
-  L.irf  = L.cbs = list()
+  L.irf = L.cbs = list()
   for(g in 1:dim_G){
-    n.layers = length(L.data[[g]])
+    n.layers = length(L.built[[g]]$data)
     if(n.layers==2){
       # from plot.svarirf() for IRF or PP
-      L.irf[[g]] = L.data[[g]][[1]]
+      L.irf[[g]] = L.built[[g]]$data[[1]]
       L.cbs[[g]] = NULL
+      L.irf[[g]]$variable = names_IRF[match(L.irf[[g]]$PANEL, df_lay$PANEL)]
       L.irf[[g]]$colour = names_g[g]  # slot name in British English!
     }else{
       # from plot.sboot() for IRF with confidence bands
-      L.irf[[g]] = L.data[[g]][[2]]
-      L.cbs[[g]] = L.data[[g]][[1]]
+      L.irf[[g]] = L.built[[g]]$data[[2]]
+      L.cbs[[g]] = L.built[[g]]$data[[1]]
+      L.irf[[g]]$variable = names_IRF[match(L.irf[[g]]$PANEL, df_lay$PANEL)]
+      L.cbs[[g]]$variable = names_IRF[match(L.cbs[[g]]$PANEL, df_lay$PANEL)]
       L.irf[[g]]$colour = names_g[g]  # slot name in British English!
       L.cbs[[g]]$fill   = names_g[g]
     }
   }
   df_irf = do.call("rbind", L.irf)
   df_cbs = do.call("rbind", L.cbs)
-  
-  # "PANEL" is not an allowed name for faceting variables
-  names(df_irf)[names(df_irf) == "PANEL"] = "variable"
-  if(!is.null(df_cbs)){ 
-    names(df_cbs)[names(df_cbs) == "PANEL"] = "variable"
-  }
   
   # stfu R CMD check vs. ggplot2 (common practice, aes_ is deprecated)
   y = ymin = ymax = fill = alpha = group = colour = NULL
@@ -175,8 +171,7 @@ as.pplot.default <- function(..., names_k=NULL, names_s=NULL, names_g=NULL,
     {if(!is.null(shape_g)) 
       geom_point(data = df_irf, aes(x=x, y=y, color=colour, shape=colour))} +
     geom_hline(yintercept=0, color="red") + 
-    facet_wrap(~variable, nrow=n.rows, scales=scales, labeller=label_IRF) + 
-    #### TODO: facet_wrap(~factor(variable, levels=unique(variable)), nrow=n.rows, scales=scales, labeller=label_IRF) + 
+    facet_wrap(~factor(variable, levels=names_IRF), nrow=n.rows, scales=scales, labeller=label_IRF) + 
     ## scales ##
     {if(!is.null(df_cbs)) 
       scale_fill_manual( labels=names(names_g), values=R.fill)} + 

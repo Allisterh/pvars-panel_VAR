@@ -60,12 +60,10 @@ R.ppv2 = PP.variable(R.vecm, n.ahead=50, shock=shock2)
 R.ppsy = PP.system(R.vecm, n.ahead=50)
 
 # edit plots #
-\dontrun{
 library("ggplot2")
-as.pplot(ppv1=plot(R.ppv1), n.rows=dim_r)$F.plot + guides(color="none")
+as.pplot(ppv1=plot(R.ppv1), n.rows=4)$F.plot + guides(color="none")
 as.pplot(ppv2=plot(R.ppv2), n.rows=3, color_g="black") # reshape facet array
 plot(R.ppsy, selection=list(1, c(1,4)))  # dismiss cross-term PP
-}
 
 }
 \references{

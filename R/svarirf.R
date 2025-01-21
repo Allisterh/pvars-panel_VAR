@@ -45,9 +45,7 @@
 #' library("ggplot2")
 #' R.irf = irf(R.pid, n.ahead=60)
 #' F.irf = plot(R.irf, selection=list(2:4, 1:2))
-#' \dontrun{
 #' as.pplot(F.irf=F.irf, color_g="black", n.rows=3)$F.plot + guides(color="none")
-#' }
 #'
 #' @import vars
 #' @method irf pvarx
@@ -165,12 +163,10 @@ irf.varx <- function(x, ..., n.ahead=20, normf=NULL){
 #' R.ppsy = PP.system(R.vecm, n.ahead=50)
 #' 
 #' # edit plots #
-#' \dontrun{
 #' library("ggplot2")
-#' as.pplot(ppv1=plot(R.ppv1), n.rows=dim_r)$F.plot + guides(color="none")
+#' as.pplot(ppv1=plot(R.ppv1), n.rows=4)$F.plot + guides(color="none")
 #' as.pplot(ppv2=plot(R.ppv2), n.rows=3, color_g="black") # reshape facet array
 #' plot(R.ppsy, selection=list(1, c(1,4)))  # dismiss cross-term PP
-#' }
 #' 
 #' @name PP
 NULL

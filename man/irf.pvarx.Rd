@@ -48,9 +48,7 @@ R.pid   = pid.chol(L.vars, order_k=names_k)
 library("ggplot2")
 R.irf = irf(R.pid, n.ahead=60)
 F.irf = plot(R.irf, selection=list(2:4, 1:2))
-\dontrun{
 as.pplot(F.irf=F.irf, color_g="black", n.rows=3)$F.plot + guides(color="none")
-}
 
 }
 \references{
