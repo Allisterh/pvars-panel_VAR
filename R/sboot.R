@@ -4,6 +4,8 @@
 #' @description Calculates confidence bands for impulse response functions via recursive-design bootstrap.
 #' @param x VAR object of class '\code{id}' or '\code{varx}' or any other 
 #'   that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.
+#'   If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in \code{sboot2}), 
+#'   the bias-corrected second-step of the bootstrap-after-bootstrap procedure by Kilian (1998) is performed.
 #' @param b.length Integer. Length \eqn{b_{(t)}} of each time series block, which is often set to \eqn{T/10}.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
 #' @param n.boot Integer. Number of bootstrap iterations.
@@ -12,6 +14,10 @@
 #'   are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VAR. 
 #'   Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 #'   but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.
+#' @param deltas Vector. Numeric weights \eqn{\delta_j} that are successively 
+#'   multiplied to the bias estimate \eqn{\hat{\Psi}} for a stationary correction. 
+#'   The default weights \code{deltas = cumprod((100:0)/100)} correspond
+#'   to the iterative correction procedure of Step 1b in Kilian (1998).
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
@@ -26,7 +32,10 @@
 #' \item{B}{List for the structural impact matrix containing 
 #'   the matrix of point estimates \code{par} and 
 #'   the array of bootstrap results \code{sim}.}
-#' \item{varx}{Input VAR object of class '\code{varx}'.}
+#' \item{PSI_bc}{Matrix of the estimated bias term \eqn{\hat{\Psi}} 
+#'   for the VAR coefficients \eqn{\hat{A}} according to Kilian (1998).}
+#' \item{varx}{Input VAR object of class '\code{varx}' 
+#'   that has been subjected to the first-step bias-correction.}
 #' \item{nboot}{Number of correct bootstrap iterations.}
 #' \item{b_length}{Length of each block.}
 #' \item{design}{Character indicating that the recursive design bootstrap has been performed.}
@@ -34,7 +43,7 @@
 #' \item{stars}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
 #'   the \eqn{T} resampling draws from each bootstrap iteration.}
 #' 
-#' @seealso \link[svars]{mb.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
+#' @seealso \link[svars]{mb.boot}, \link[svars]{ba.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
 #' 
 #' @examples 
 #' \dontrun{
@@ -77,9 +86,12 @@
 #' @references Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
 #'   "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
 #'   \emph{Journal of Econometrics}, 191, pp. 69-85.
-#' @references Jentsch, C., and Lunsford, K. G. (2021):
+#' @references Jentsch, C., and Lunsford, K. G. (2021): 
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
 #'   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
+#' @references Kilian, L. (1998): 
+#'   "Small-Sample Confidence Intervals for Impulse Response Functions",
+#'   \emph{Review of Economics and Statistics}, 80, pp. 218-230.
 #' @references Luetkepohl, H. (2005): 
 #'   \emph{New Introduction to Multiple Time Series Analysis}, 
 #'   Springer, 2nd ed.
@@ -87,8 +99,9 @@
 #' @importFrom steadyICA steadyICA 
 #' @export
 #' 
-sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, normf=NULL){
+sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, deltas=cumprod((100:0)/100), normf=NULL){
   # define
+  PSI_bc = x$PSI_bc  # bias term (Note that 'x' will be overwritten for exogenous variables.)
   y = D = D1 = D2 = A = B = beta = resid = NULL
   dim_K = dim_S = dim_T = dim_p = dim_r = t_D1 = t_D2 = NULL
   args_varx = args_id = NULL
@@ -146,6 +159,9 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
     }else if(is.null(dim_r)){  # ... by least squares
       star_var  = aux_VARX(Ystar, dim_p=dim_p, D=D)
       star_beta = NULL
+      if(!is.null(PSI_bc)){  # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
+        star_var$A = aux_BaB(star_var$A, dim_p=dim_p, PSI=PSI_bc, deltas=deltas)
+      }
       
     }else{  # ... by reduced-rank regression
       star_def  = aux_stackRRR(Ystar, dim_p=dim_p, D1=D1, D2=D2)
@@ -213,50 +229,58 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
     star_IRF = aperm(star_vma$THETA, perm=c(2,1,3))
     star_IRF = matrix(star_IRF, nrow=n.ahead+1, byrow=TRUE, dimnames=list(NULL, names_IRF))
     star_IRF = list(irf=as.data.frame(cbind(V1=0:n.ahead, star_IRF))); class(star_IRF) = "svarirf"
-    result   = list(star_IRF, Pstar=star_B, star_A=star_var$A, star_beta=star_beta, star=star)
+    result   = list(star_IRF, Pstar=star_B, star_A=star_var$A, star_beta=star_beta)
     return(result)
   }
   
   # run bootstrap procedure
-  bootstraps = pbapply::pblapply(L.star, FUN=function(n) try(sbootf(n), silent=TRUE), cl=n.cores)
-  idx_error  = sapply(bootstraps, FUN=function(n) inherits(n, "try-error"))
+  L.boot    = pbapply::pblapply(L.star, FUN=function(n) try(sbootf(n), silent=TRUE), cl=n.cores)
+  idx_error = sapply(L.boot, FUN=function(n) inherits(n, "try-error"))
   if(any(idx_error)){
-    bootstraps[idx_error] = NULL
-    n.boot = length(bootstraps)
+    L.star[idx_error] = NULL
+    L.boot[idx_error] = NULL
+    n.boot = length(L.boot)
     warning("Erroneous bootstrap replications have been deleted: ", sum(idx_error), " run(s)")
   }
   
   ipb   = list()
   Bs    = array(NA, dim=c(dim_K, dim_S, n.boot), dimnames=list(names_k, names_s, NULL))
   Aboot = array(NA, dim=c(dim_K, ncol(A_hat), n.boot), dimnames=list(names_k, colnames(A_hat), NULL))
-  IDX   = list()
-  for(i in 1:n.boot){
-    ipb[[i]]    = bootstraps[[i]][[1]]  # IRF
-    Bs[,, i]    = bootstraps[[i]][[2]]  # structural impact matrix
-    Aboot[,, i] = bootstraps[[i]][[3]]  # VAR coefficients
-    IDX[[i]]    = bootstraps[[i]][[5]]  # resampled "in-sample" indexes
+  for(j in 1:n.boot){
+    ipb[[j]]    = L.boot[[j]][[1]]  # IRF
+    Bs[,, j]    = L.boot[[j]][[2]]  # structural impact matrix
+    Aboot[,, j] = L.boot[[j]][[3]]  # VAR coefficients
   }
   
   if(!is.null(dim_r)){
     betas = array(NA, dim=c(dim(beta), n.boot), dimnames=dimnames(beta))
-    for(i in 1:n.boot){ betas[,, i] = bootstraps[[i]][[4]] }
+    for(j in 1:n.boot){ betas[,, j] = L.boot[[j]][[4]] }
     betas = aperm(betas, perm=c(2, 1, 3))
     beta  = t(beta)
   }else{ betas = NULL }
   
+  # first-step bias-correction of VAR coefficients, from Kilian 1998:220
+  if(is.null(PSI_bc)){
+    # Step 1a: bias estimate
+    PSI_bc   = apply(Aboot, MARGIN=1:2, mean) - A_hat
+    # Step 1b: stationary correction
+    R.varx$A = aux_BaB(A_hat=A_hat, dim_p=dim_p, PSI=PSI_bc, deltas=deltas)
+  }
+  
   # return result
-  result = list(true = IRF, 
-                bootstrap = ipb, 
+  result = list(true = IRF,
+                bootstrap = ipb,
                 A = list(par=A_hat, sim=Aboot),
                 B = list(par=B, sim=Bs),
                 beta = list(par=beta, sim=betas),
+                PSI_bc = PSI_bc,
                 varx = R.varx,
                 nboot = n.boot,
                 b_length = b.length,
                 rest_mat = matrix(NA, nrow=dim_K, ncol=dim_S),  # for 'bonferroni'
                 design = "recursive",
                 method = "Moving block bootstrap",
-                stars = matrix(unlist(IDX), nrow=dim_T))
+                stars = matrix(unlist(L.star), nrow=dim_T))
   class(result) = c("sboot2", "sboot")
   return(result)
 }
@@ -271,6 +295,10 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   
 #' @param x Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
 #'   or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
+#'   If a list \code{x$L.PSI_bc} of \eqn{N} bias terms are available 
+#'   for the \eqn{N} coefficient matrices \eqn{A_i} (such as in \code{sboot2}), 
+#'   the bias-corrected second-step of the bootstrap-after-bootstrap procedure 
+#'   by Empting et al. (2025) is performed.
 #' @param b.dim Vector of two integers. The dimensions \eqn{(b_{(t)}, b_{(i)})} 
 #'   of each panel block for temporal and cross-sectional resampling. The default 
 #'   \code{c(1, 1)} specifies an \eqn{i.i.d.} resampling in both dimensions, 
@@ -284,6 +312,10 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VAR. 
 #'   Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 #'   but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.
+#' @param deltas Vector. Numeric weights \eqn{\delta_j} that are successively 
+#'   multiplied to each bias estimate \eqn{\hat{\Psi}_i} for a stationary correction. 
+#'   The default weights \code{deltas = cumprod((100:0)/100)} correspond
+#'   to the iterative correction procedure of Step 1b in Kilian (1998).
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
@@ -303,7 +335,10 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' \item{B}{List for the structural impact matrix containing 
 #'   the matrix of point estimates \code{par} and 
 #'   the array of bootstrap results \code{sim}.}
-#' \item{pvarx}{Input panel VAR object of class '\code{pvarx}'.}
+#' \item{L.PSI_bc}{List of the estimated bias terms \eqn{\hat{\Psi}_i} 
+#'   for the individual VAR coefficients \eqn{\hat{A}_i} according to Kilian (1998).}
+#' \item{pvarx}{Input panel VAR object of class '\code{pvarx}' 
+#'   that has been subjected to the first-step bias-correction.}
 #' \item{b.dim}{Dimensions of each block.}
 #' \item{nboot}{Number of correct bootstrap iterations.}
 #' \item{design}{Character indicating that the recursive design bootstrap has been performed.}
@@ -315,14 +350,17 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' 
 #' @seealso For the the individual counterpart see \link{sboot.mb}.
 #' 
-#' @references Kapetanios, G. (2008): 
-#'   "A Bootstrap Procedure for Panel Data Sets with many Cross-sectional Units", 
-#'   \emph{The Econometrics Journal}, 11, pp.377-395.
 #' @references Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
 #'   "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
 #'   \emph{Journal of Econometrics}, 191, pp. 69-85.
 #' @references Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
 #'   "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+#' @references Kapetanios, G. (2008): 
+#'   "A Bootstrap Procedure for Panel Data Sets with many Cross-sectional Units", 
+#'   \emph{The Econometrics Journal}, 11, pp.377-395.
+#' @references Kilian, L. (1998): 
+#'   "Small-Sample Confidence Intervals for Impulse Response Functions",
+#'   \emph{Review of Economics and Statistics}, 80, pp. 218-230.
 #' 
 #' @examples
 #' \dontrun{
@@ -344,8 +382,9 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' 
 #' @export
 #' 
-sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, normf=NULL, w=NULL){
+sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, deltas=cumprod((100:0)/100), normf=NULL, w=NULL){
   # define
+  L.PSI_bc = x$L.PSI_bc  # list of individual bias terms
   A_MG = B_MG = beta = dim_N = dim_K = dim_S = dim_r = NULL
   L.varx = L.dim_T = L.dim_p = L.resid = L.beta = L.A = L.B = L.D = L.D1 = L.D2 = NULL
   args_pvarx = args_pid = NULL
@@ -441,6 +480,10 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     }else if(is.null(dim_r)){  # ... by least squares
       L.def = lapply(1:dim_N, FUN=function(i) aux_stackOLS(S.data[[i]], dim_p=L.dim_p[i], D=L.D[[i]]))
       S.est = aux_pvar(L.def, n.factors=args_pvarx$n.factors, n.iterations=args_pvarx$n.iterations)
+      if(!is.null(L.PSI_bc)){  # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
+      for(i in 1:dim_N){
+        S.est$L.varx[[i]]$A = aux_BaB(S.est$L.varx[[i]]$A, dim_p=L.varx[[i]]$dim_p, PSI=L.PSI_bc[[i]], deltas=deltas)
+      }}
       S.mgA = aux_MG(S.est$L.varx, w=w, idx_par="A")$mean
       S.pvarx = list(L.varx=S.est$L.varx, A=S.mgA, args_pvarx=args_pvarx)
       class(S.pvarx) = "pvarx"
@@ -521,35 +564,52 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     }
     
     # return bootstrap result
+    S.Ais  = lapply(S.pvarx$L.varx, FUN=function(i) i$A)
     S.irf  = irf.pvarx(S.pid, n.ahead=n.ahead, normf=normf, w=w)
-    result = list(irf=S.irf, Pstar=S.pid$B, star_A=S.pvarx$A, star_beta=S.pvarx$beta)
+    result = list(irf=S.irf, Pstar=S.pid$B, star_A=S.pvarx$A, star_beta=S.pvarx$beta, star_Ais=S.Ais)
     return(result)
   }
   
   # run bootstrap procedure
-  bootstraps = pbapply::pblapply(L.star, FUN=function(n) try(sbootf(n), silent=TRUE), cl=n.cores)
-  idx_error  = sapply(bootstraps, FUN=function(n) inherits(n, "try-error"))
+  L.boot    = pbapply::pblapply(L.star, FUN=function(n) try(sbootf(n), silent=TRUE), cl=n.cores)
+  idx_error = sapply(L.boot, FUN=function(n) inherits(n, "try-error"))
   if(any(idx_error)){
-    bootstraps[idx_error] = NULL
-    n.boot = length(bootstraps)
+    L.star[idx_error] = NULL
+    L.boot[idx_error] = NULL
+    n.boot = length(L.boot)
     warning("Erroneous bootstrap replications have been deleted: ", sum(idx_error), " run(s)")
   }
   
   ipb   = list()
   Bs    = array(NA, dim=c(dim_K, dim_S, n.boot), dimnames=list(names_k, names_s, NULL))
   Aboot = array(NA, dim=c(dim_K, ncol(A_MG), n.boot), dimnames=list(names_k, colnames(A_MG), NULL))
-  for(i in 1:n.boot){
-    ipb[[i]]    = bootstraps[[i]][[1]]  # IRF
-    Bs[,, i]    = bootstraps[[i]][[2]]  # structural impact matrix
-    Aboot[,, i] = bootstraps[[i]][[3]]  # MG-VAR coefficients
+  for(j in 1:n.boot){
+    ipb[[j]]    = L.boot[[j]][[1]]  # IRF
+    Bs[,, j]    = L.boot[[j]][[2]]  # structural impact matrix
+    Aboot[,, j] = L.boot[[j]][[3]]  # MG-VAR coefficients
   }
   
   if(!is.null(dim_r)){
     betas = array(NA, dim=c(dim(beta), n.boot), dimnames=dimnames(beta))
-    for(i in 1:n.boot){ betas[,, i] = bootstraps[[i]][[4]] }
+    for(j in 1:n.boot){ betas[,, j] = L.boot[[j]][[4]] }
     betas = aperm(betas, perm=c(2, 1, 3))
     beta  = t(beta)
   }else{ betas = NULL }
+  
+  # first-step bias-correction of VAR coefficients, from Kilian 1998:220 / Empting et al. (2025)
+  if(is.null(L.PSI_bc)){
+    for(i in 1:dim_N){  
+      # Step 1a: bias estimate
+      A_hat = R.pvarx$L.varx[[i]]$A
+      A_sim = array(NA, dim=c(dim_K, ncol(A_hat), n.boot), dimnames=list(names_k, colnames(A_hat), NULL))
+      for(j in 1:n.boot){ A_sim[,, j] = L.boot[[j]][[5]][[i]] }
+      L.PSI_bc[[i]] = apply(A_sim, MARGIN=1:2, mean) - A_hat
+      
+      # Step 1b: stationary correction
+      R.pvarx$L.varx[[i]]$A = aux_BaB(A_hat=A_hat, dim_p=R.pvarx$L.varx[[i]]$dim_p, PSI=L.PSI_bc[[i]], deltas=deltas)
+    }
+    R.pvarx$A = aux_MG(R.pvarx$L.varx, idx_par="A")$mean
+  }
   
   # return result
   result = list(true = IRF,
@@ -557,6 +617,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
                 A = list(par=A_MG, sim=Aboot),
                 B = list(par=B_MG, sim=Bs),
                 beta = list(par=beta, sim=betas),
+                L.PSI_bc = L.PSI_bc,
                 pvarx = R.pvarx,
                 nboot = n.boot,
                 b.dim = b.dim,
@@ -573,7 +634,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #' @title Mean group inference for panel SVAR models
 #' @description Calculates confidence bands for impulse response functions via mean group inference. 
 #'   The function does not perform bootstraps, but coerces the panel VAR object to class '\code{sboot}'
-#'   and, therewith, gives a distributional overview on the parameter heterogeneity.  
+#'   and, therewith, gives a distributional overview on the parameter heterogeneity.
 #' @details MG inference presumes the individual estimates to be the empirical variation 
 #'   around a common parameter. In case of heterogeneous lag-orders \eqn{p_i},
 #'   specifically the '\code{summary}' of VAR coefficient matrices fills 

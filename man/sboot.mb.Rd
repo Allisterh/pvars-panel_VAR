@@ -11,12 +11,15 @@ sboot.mb(
   n.boot = 500,
   n.cores = 1,
   fix_beta = TRUE,
+  deltas = cumprod((100:0)/100),
   normf = NULL
 )
 }
 \arguments{
 \item{x}{VAR object of class '\code{id}' or '\code{varx}' or any other 
-that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.}
+that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.
+If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in \code{sboot2}), 
+the bias-corrected second-step of the bootstrap-after-bootstrap procedure by Kilian (1998) is performed.}
 
 \item{b.length}{Integer. Length \eqn{b_{(t)}} of each time series block, which is often set to \eqn{T/10}.}
 
@@ -30,6 +33,11 @@ that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.}
 are fixed over all bootstrap iterations. Ignored in case of rank-unrestricted VAR. 
 Use this for VECM with known \eqn{\beta}, too. Note that \eqn{\beta} is fixed in \code{vars:::.bootsvec}, 
 but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.}
+
+\item{deltas}{Vector. Numeric weights \eqn{\delta_j} that are successively 
+multiplied to the bias estimate \eqn{\hat{\Psi}} for a stationary correction. 
+The default weights \code{deltas = cumprod((100:0)/100)} correspond
+to the iterative correction procedure of Step 1b in Kilian (1998).}
 
 \item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 into an output matrix of same dimension. See the example in '\link{id.iv}' 
@@ -46,7 +54,10 @@ A list of class \code{sboot2} with elements:
 \item{B}{List for the structural impact matrix containing 
   the matrix of point estimates \code{par} and 
   the array of bootstrap results \code{sim}.}
-\item{varx}{Input VAR object of class '\code{varx}'.}
+\item{PSI_bc}{Matrix of the estimated bias term \eqn{\hat{\Psi}} 
+  for the VAR coefficients \eqn{\hat{A}} according to Kilian (1998).}
+\item{varx}{Input VAR object of class '\code{varx}' 
+  that has been subjected to the first-step bias-correction.}
 \item{nboot}{Number of correct bootstrap iterations.}
 \item{b_length}{Length of each block.}
 \item{design}{Character indicating that the recursive design bootstrap has been performed.}
@@ -102,14 +113,18 @@ Brueggemann R., Jentsch, C., and Trenkler, C. (2016):
   "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
   \emph{Journal of Econometrics}, 191, pp. 69-85.
 
-Jentsch, C., and Lunsford, K. G. (2021):
+Jentsch, C., and Lunsford, K. G. (2021): 
   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
+
+Kilian, L. (1998): 
+  "Small-Sample Confidence Intervals for Impulse Response Functions",
+  \emph{Review of Economics and Statistics}, 80, pp. 218-230.
 
 Luetkepohl, H. (2005): 
   \emph{New Introduction to Multiple Time Series Analysis}, 
   Springer, 2nd ed.
 }
 \seealso{
-\link[svars]{mb.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
+\link[svars]{mb.boot}, \link[svars]{ba.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
 }

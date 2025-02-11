@@ -121,7 +121,7 @@ test_that("aux_check() warns or stops in case of incorrect arguments", {
 })
 
 
-test_that("sboot.pmb() under N=1 and sboot.mb() return identical BQ-VAR results", {
+test_that("sboot.pmb() under N=1 and sboot.mb() return identical Chol-VAR and BQ-VAR results", {
   # prepare data and arguments #
   data("PCAP")
   names_k = c("g", "k", "l", "y")  # variable names
@@ -143,13 +143,17 @@ test_that("sboot.pmb() under N=1 and sboot.mb() return identical BQ-VAR results"
   R.pvar = pvarx.VAR(L.data[1], lags=dim_p, type="none")
   R.pid  = pid.chol(R.pvar)
   R.pmb  = sboot.pmb(R.pid, b.dim=c(5, FALSE), n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
+  R.pmb2 = sboot.pmb(R.pmb, b.dim=c(5, FALSE), n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
   
   # estimate, identify, and bootstrap individual VAR #
   set.seed(8349)
-  R.mb = sboot.mb(R.pid$L.varx[[1]], b.length=5, n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
+  R.id  = R.pid$L.varx[[1]]
+  R.mb  = sboot.mb(R.id, b.length=5, n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
+  R.mb2 = sboot.mb(R.mb, b.length=5, n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
   
   set.seed(8349)
-  R.mbBQ = sboot.mb(L.idBQ[[1]], b.length=5, n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
+  R.idBQ = L.idBQ[[1]]
+  R.mbBQ = sboot.mb(R.idBQ, b.length=5, n.boot=n.boot, n.ahead=n.ahead, n.cores=1)
   
   ###tolerant = 1.04e-04  
   ### Note that vars::VAR() is based on equation-wise lm() instead of multivariate LS. 
@@ -165,6 +169,11 @@ test_that("sboot.pmb() under N=1 and sboot.mb() return identical BQ-VAR results"
   expect_equal(R.pmb$bootstrap, R.mb$bootstrap)
   expect_equal(R.pmb$A, R.mb$A)
   expect_equal(R.pmb$B, R.mb$B)
+  
+  expect_equal(R.pmb2$true, R.mb2$true)
+  expect_equal(R.pmb2$bootstrap, R.mb2$bootstrap)
+  expect_equal(R.pmb2$A, R.mb2$A)
+  expect_equal(R.pmb2$B, R.mb2$B)
   
   expect_equal(R.pbBQ$true, R.mbBQ$true)
   expect_equal(R.pbBQ$bootstrap, R.mbBQ$bootstrap)
