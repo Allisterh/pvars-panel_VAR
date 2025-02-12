@@ -583,3 +583,23 @@ aux_var2vma <- function(A, B=diag(dim_K), dim_p, n.ahead=20, normf=NULL){
 }
 
 
+# bias-correction in bootstrap-after-bootstrap, from Kilian (1998)
+aux_BaB <- function(A_hat, dim_p, PSI, deltas=cumprod((100:0)/100)){
+  ### These geometric deltas correspond to the recursive loop in Kilian 1998:220, Step 1b.
+  m_hat = Mod(eigen(aux_var2companion(A=A_hat, dim_p=dim_p))$values[1])
+  if( m_hat >= 1 ){
+    # no bias-correction under non-stationarity 
+    A_bc = A_hat
+  }else{
+    # keep bias-corrected A within the range of stationarity
+    for(delta_i in deltas){
+      A_bc = A_hat - delta_i * PSI  # bias-corrected coefficients, from Kilian 1998:220
+      m_bc = Mod(eigen(aux_var2companion(A=A_bc, dim_p=dim_p))$values[1])
+      if( m_bc < 1 ){ break }
+  }}
+  
+  # return result
+  return(A_bc)
+}
+
+
