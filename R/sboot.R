@@ -17,7 +17,8 @@
 #' @param deltas Vector. Numeric weights \eqn{\delta_j} that are successively 
 #'   multiplied to the bias estimate \eqn{\hat{\Psi}} for a stationary correction. 
 #'   The default weights \code{deltas = cumprod((100:0)/100)} correspond
-#'   to the iterative correction procedure of Step 1b in Kilian (1998).
+#'   to the iterative correction procedure of Step 1b in Kilian (1998). 
+#'   Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
@@ -47,7 +48,7 @@
 #' 
 #' @examples 
 #' \dontrun{
-#' ### use 'b.length=1' to conduct basic "vars" bootstraps ###
+#' # use 'b.length=1' to conduct basic "vars" bootstraps #
 #' set.seed(23211)
 #' data("Canada")
 #' R.vars = vars::VAR(Canada, p=2, type="const")
@@ -56,7 +57,12 @@
 #' summary(R.boot, idx_par="A", level=0.9)  # VAR coefficients with 90%-confidence intervals 
 #' plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' 
-#' ### conduct bootstraps for Blanchard-Quah type SVAR from "vars" ###
+#' # second step of bootstrap-after-bootstrap #
+#' R.bab = sboot.mb(R.boot, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
+#' summary(R.bab, idx_par="A", level=0.9)  # VAR coefficients with 90%-confidence intervals 
+#' plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
+#' 
+#' # conduct bootstraps for Blanchard-Quah type SVAR from "vars" #
 #' set.seed(23211)
 #' data("Canada")
 #' R.vars = vars::VAR(Canada, p=2, type="const")
@@ -66,7 +72,7 @@
 #' plot(R.boot, lowerq = c(0.05, 0.1), upperq = c(0.95, 0.9), cumulative=2:3) 
 #' # impulse responses of the second and third variable are accumulated
 #' 
-#' ### set 'args_id' to CvM defaults of "svars" bootstraps ###
+#' # set 'args_id' to CvM defaults of "svars" bootstraps #
 #' set.seed(23211)
 #' data("USA")
 #' R.vars = vars::VAR(USA, lag.max=10, ic="AIC")
@@ -159,7 +165,8 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
     }else if(is.null(dim_r)){  # ... by least squares
       star_var  = aux_VARX(Ystar, dim_p=dim_p, D=D)
       star_beta = NULL
-      if(!is.null(PSI_bc)){  # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
+      if(!is.null(PSI_bc) & !is.null(deltas)){  
+        # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
         star_var$A = aux_BaB(star_var$A, dim_p=dim_p, PSI=PSI_bc, deltas=deltas)
       }
       
@@ -260,7 +267,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
   }else{ betas = NULL }
   
   # first-step bias-correction of VAR coefficients, from Kilian 1998:220
-  if(is.null(PSI_bc)){
+  if(is.null(PSI_bc) & !is.null(deltas)){
     # Step 1a: bias estimate
     PSI_bc   = apply(Aboot, MARGIN=1:2, mean) - A_hat
     # Step 1b: stationary correction
@@ -315,7 +322,8 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' @param deltas Vector. Numeric weights \eqn{\delta_j} that are successively 
 #'   multiplied to each bias estimate \eqn{\hat{\Psi}_i} for a stationary correction. 
 #'   The default weights \code{deltas = cumprod((100:0)/100)} correspond
-#'   to the iterative correction procedure of Step 1b in Kilian (1998).
+#'   to the iterative correction procedure of Step 1b in Kilian (1998). 
+#'   Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 #'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
 #'   for the normalization of Jentsch and Lunsford (2021) 
@@ -373,11 +381,17 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' R.lags = c(2, 4, 2, 3, 2, 4, 4, 2, 2, 3, 3, 3, 2, 4, 4, 2, 2, 2, 4, 2, 2, 2, 4)
 #' names(R.lags) = names_i
 #' 
+#' # estimate, identify, and bootstrap #
 #' R.pvar = pvarx.VAR(L.data, lags=R.lags, type="both")
 #' R.pid  = pid.chol(R.pvar)
 #' R.boot = sboot.pmb(R.pid, n.boot=200)
 #' summary(R.boot, idx_par="A", level=0.95)  # VAR coefficients with 95%-confidence intervals
 #' plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
+#' 
+#' # second step of bootstrap-after-bootstrap #
+#' R.bab = sboot.pmb(R.boot, n.boot=200)
+#' summary(R.bab, idx_par="A", level=0.95)  # VAR coefficients with 95%-confidence intervals
+#' plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' }
 #' 
 #' @export
@@ -480,8 +494,8 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     }else if(is.null(dim_r)){  # ... by least squares
       L.def = lapply(1:dim_N, FUN=function(i) aux_stackOLS(S.data[[i]], dim_p=L.dim_p[i], D=L.D[[i]]))
       S.est = aux_pvar(L.def, n.factors=args_pvarx$n.factors, n.iterations=args_pvarx$n.iterations)
-      if(!is.null(L.PSI_bc)){  # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
-      for(i in 1:dim_N){
+      if(!is.null(L.PSI_bc) & !is.null(deltas)){
+      for(i in 1:dim_N){  # ... under second-step bias-correction, from Kilian 1998:220 (Step 2b)
         S.est$L.varx[[i]]$A = aux_BaB(S.est$L.varx[[i]]$A, dim_p=L.varx[[i]]$dim_p, PSI=L.PSI_bc[[i]], deltas=deltas)
       }}
       S.mgA = aux_MG(S.est$L.varx, w=w, idx_par="A")$mean
@@ -597,7 +611,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
   }else{ betas = NULL }
   
   # first-step bias-correction of VAR coefficients, from Kilian 1998:220 / Empting et al. (2025)
-  if(is.null(L.PSI_bc)){
+  if(is.null(L.PSI_bc) & !is.null(deltas)){
     for(i in 1:dim_N){  
       # Step 1a: bias estimate
       A_hat = R.pvarx$L.varx[[i]]$A

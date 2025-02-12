@@ -45,7 +45,8 @@ but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.}
 \item{deltas}{Vector. Numeric weights \eqn{\delta_j} that are successively 
 multiplied to each bias estimate \eqn{\hat{\Psi}_i} for a stationary correction. 
 The default weights \code{deltas = cumprod((100:0)/100)} correspond
-to the iterative correction procedure of Step 1b in Kilian (1998).}
+to the iterative correction procedure of Step 1b in Kilian (1998). 
+Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.}
 
 \item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 into an output matrix of same dimension. See the example in '\link{id.iv}' 
@@ -101,11 +102,17 @@ L.data  = sapply(names_i, FUN=function(i)
 R.lags = c(2, 4, 2, 3, 2, 4, 4, 2, 2, 3, 3, 3, 2, 4, 4, 2, 2, 2, 4, 2, 2, 2, 4)
 names(R.lags) = names_i
 
+# estimate, identify, and bootstrap #
 R.pvar = pvarx.VAR(L.data, lags=R.lags, type="both")
 R.pid  = pid.chol(R.pvar)
 R.boot = sboot.pmb(R.pid, n.boot=200)
 summary(R.boot, idx_par="A", level=0.95)  # VAR coefficients with 95\%-confidence intervals
 plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
+
+# second step of bootstrap-after-bootstrap #
+R.bab = sboot.pmb(R.boot, n.boot=200)
+summary(R.bab, idx_par="A", level=0.95)  # VAR coefficients with 95\%-confidence intervals
+plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 }
 
 }

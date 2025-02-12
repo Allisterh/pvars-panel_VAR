@@ -37,7 +37,8 @@ but not in \code{vars:::.bootirfsvec} or \code{vars:::.bootirfvec2var}.}
 \item{deltas}{Vector. Numeric weights \eqn{\delta_j} that are successively 
 multiplied to the bias estimate \eqn{\hat{\Psi}} for a stationary correction. 
 The default weights \code{deltas = cumprod((100:0)/100)} correspond
-to the iterative correction procedure of Step 1b in Kilian (1998).}
+to the iterative correction procedure of Step 1b in Kilian (1998). 
+Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.}
 
 \item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
 into an output matrix of same dimension. See the example in '\link{id.iv}' 
@@ -70,7 +71,7 @@ Calculates confidence bands for impulse response functions via recursive-design 
 }
 \examples{
 \dontrun{
-### use 'b.length=1' to conduct basic "vars" bootstraps ###
+# use 'b.length=1' to conduct basic "vars" bootstraps #
 set.seed(23211)
 data("Canada")
 R.vars = vars::VAR(Canada, p=2, type="const")
@@ -79,7 +80,12 @@ R.boot = sboot.mb(R.svar, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
 summary(R.boot, idx_par="A", level=0.9)  # VAR coefficients with 90\%-confidence intervals 
 plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 
-### conduct bootstraps for Blanchard-Quah type SVAR from "vars" ###
+# second step of bootstrap-after-bootstrap #
+R.bab = sboot.mb(R.boot, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
+summary(R.bab, idx_par="A", level=0.9)  # VAR coefficients with 90\%-confidence intervals 
+plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
+
+# conduct bootstraps for Blanchard-Quah type SVAR from "vars" #
 set.seed(23211)
 data("Canada")
 R.vars = vars::VAR(Canada, p=2, type="const")
@@ -89,7 +95,7 @@ summary(R.boot, idx_par="B", level=0.9)  # impact matrix with 90\%-confidence in
 plot(R.boot, lowerq = c(0.05, 0.1), upperq = c(0.95, 0.9), cumulative=2:3) 
 # impulse responses of the second and third variable are accumulated
 
-### set 'args_id' to CvM defaults of "svars" bootstraps ###
+# set 'args_id' to CvM defaults of "svars" bootstraps #
 set.seed(23211)
 data("USA")
 R.vars = vars::VAR(USA, lag.max=10, ic="AIC")
