@@ -2,9 +2,9 @@
 % Please edit documentation in R/svarirf.R
 \name{irf.pvarx}
 \alias{irf.pvarx}
-\title{Mean-Group Impulse Response Functions for Panel SVAR Models}
+\title{Impulse Response Functions for Panel SVAR Models}
 \usage{
-\method{irf}{pvarx}(x, ..., n.ahead = 20, normf = NULL, w = NULL)
+\method{irf}{pvarx}(x, ..., n.ahead = 20, normf = NULL, w = NULL, MG_IRF = TRUE)
 }
 \arguments{
 \item{x}{Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
@@ -24,12 +24,16 @@ that fixes the size of the impact response.}
 names or \eqn{N} logical elements selecting a subset from the 
 individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
 (the default), all \eqn{N} individuals are included without weights.}
+
+\item{MG_IRF}{Logical. If \code{TRUE} (the default), the mean-group of individual 
+IRF is calculated in accordance with Gambacorta et al. (2014). If \code{FALSE}, 
+the IRF is calculated for the mean-group of individual VAR estimates.}
 }
 \value{
 A list of class '\code{svarirf}' holding the impulse response functions as a '\code{data.frame}'.
 }
 \description{
-Calculates mean-group impulse response functions for panel VAR objects.
+Calculates impulse response functions for panel VAR objects.
 }
 \examples{
 data("PCAP")
@@ -58,7 +62,7 @@ Luetkepohl, H. (2005):
 
 Gambacorta L., Hofmann B., and Peersman G. (2014):
   "The Effectiveness of Unconventional Monetary Policy at the Zero Lower Bound: A Cross-Country Analysis",
-  \emph{Journal of Money, Credit and Banking}, 46, pp 615-642.
+  \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 
 Jentsch, C., and Lunsford, K. G. (2021):
   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
