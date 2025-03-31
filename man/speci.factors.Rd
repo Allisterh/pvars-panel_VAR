@@ -63,7 +63,7 @@ Determines the number of factors in an approximate factor model
 \details{
 If \code{differenced} is \code{TRUE}, the approximate factor model is estimated as proposed by Bai, Ng (2004).
   If all data transformations are selected, the estimation results are identical 
-  to the objects in \code{$CSD} for PANIC analyses in \code{pcoint} objects.
+  to the objects in \code{$CSD} for PANIC analyses in '\code{pcoint}' objects.
 }
 \examples{
 ### reproduce Arsova,Oersal 2017:67, Ch.5 ###

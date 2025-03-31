@@ -18,10 +18,10 @@ pid.iv(
 that will be \link[=as.varx]{coerced} to '\code{varx}'. 
 Estimated panel of VAR objects.}
 
-\item{iv}{List. A single \code{data.frame} of the \eqn{L} common proxy time 
-series \eqn{m_t} or a list of \eqn{N} \code{data.frame} objects of the \eqn{L} 
+\item{iv}{List. A single '\code{data.frame}' of the \eqn{L} common proxy time 
+series \eqn{m_t} or a list of \eqn{N} '\code{data.frame}' objects of the \eqn{L} 
 individual proxy time series \eqn{m_{it}}. The proxies must have the same 
-succession \eqn{l = 1,\ldots,L} in each individual \code{data.frame}.}
+succession \eqn{l = 1,\ldots,L} in each individual '\code{data.frame}'.}
 
 \item{S2}{Character. Identification within multiple proxies \eqn{m_{it}} 
 via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{i,11} B_{i,12}^{-1} ] B_{i,1}} by Mertens, Ravn (2013), 
@@ -30,7 +30,7 @@ via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decompositio
 In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.}
 
-\item{cov_u}{Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma_{u}}_i} 
+\item{cov_u}{Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma}_{u,i}} 
 to be used in the identification procedure. 
 Either \code{'OMEGA'} (the default) for \eqn{\hat{U}_i \hat{U}_i'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 or \code{'SIGMA'} for \eqn{\hat{U}_i \hat{U}_i'/(T_i - n_{zi})}, which corrects for the number of regressors \eqn{n_{zi}}. 
@@ -47,12 +47,12 @@ via '\code{pool}' for the pooled shocks by Empting et al (2025) using a common o
 via '\code{indiv}' for individual-specific \eqn{B_i \forall i} using strictly separated identification runs.}
 }
 \value{
-List of class \code{pid} with elements:
+List of class '\code{pid}' with elements:
 \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 
    for the lagged variables in the panel VAR.}
 \item{B}{Matrix. Mean group of the estimated structural impact matrices \eqn{B_i}, 
    i.e. the unique decomposition of the covariance matrices of reduced-form errors.}
-\item{L.varx}{List of \code{varx} objects for the individual estimation results
+\item{L.varx}{List of '\code{varx}' objects for the individual estimation results
   to which the structural impact matrices \eqn{B_i} have been added.}
 \item{eps0}{Matrix. The combined whitened residuals \eqn{\epsilon_{0}} 
   to which the pooled identification procedure has been applied subsequently.

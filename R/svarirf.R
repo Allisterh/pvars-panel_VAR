@@ -1,7 +1,7 @@
 
 
-#' @title Mean-Group Impulse Response Functions for Panel SVAR Models
-#' @description Calculates mean-group impulse response functions for panel VAR objects.
+#' @title Impulse Response Functions for Panel SVAR Models
+#' @description Calculates impulse response functions for panel VAR objects.
 #' @param x Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
 #'   or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
 #' @param ... Currently not used.
@@ -15,6 +15,9 @@
 #'   names or \eqn{N} logical elements selecting a subset from the 
 #'   individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
 #'   (the default), all \eqn{N} individuals are included without weights.
+#' @param MG_IRF Logical. If \code{TRUE} (the default), the mean-group of individual 
+#'   IRF is calculated in accordance with Gambacorta et al. (2014). If \code{FALSE}, 
+#'   the IRF is calculated for the mean-group of individual VAR estimates.
 #' 
 #' @return A list of class '\code{svarirf}' holding the impulse response functions as a '\code{data.frame}'.
 #' 
@@ -23,7 +26,7 @@
 #'   Springer, 2nd ed.
 #' @references Gambacorta L., Hofmann B., and Peersman G. (2014):
 #'   "The Effectiveness of Unconventional Monetary Policy at the Zero Lower Bound: A Cross-Country Analysis",
-#'   \emph{Journal of Money, Credit and Banking}, 46, pp 615-642.
+#'   \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 #' @references Jentsch, C., and Lunsford, K. G. (2021):
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
 #'   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
@@ -51,7 +54,7 @@
 #' @method irf pvarx
 #' @export
 #' 
-irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL){
+irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL, MG_IRF=TRUE){
   # define and check
   x = as.pvarx(x)
   
@@ -60,10 +63,20 @@ irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL){
   names_s   = if( !is.null(colnames(x$B)) ){ colnames(x$B) }else{ paste0("epsilon[ ", 1:ncol(x$B), " ]") }
   names_IRF = c(sapply(names_k, FUN=function(k) paste0(names_s, " %->% ", k)))
   
-  # calculate structural MG-IRF, from Gambacorta et al. 2014:627
-  A.irf = sapply(x$L.varx, simplify="array", FUN=function(x) 
-    aux_var2vma(A=x$A, B=x$B, dim_p=x$dim_p, n.ahead=n.ahead, normf=normf)$THETA)
-  THETA = aux_MG(A.irf, w=w)$mean  # (optionally weighted) group mean
+  # calculate structural IRF
+  if(MG_IRF){  # ... by MG of individual IRF, from Gambacorta et al. 2014:627
+    A.irf = sapply(x$L.varx, simplify="array", FUN=function(x) 
+      aux_var2vma(A=x$A, B=x$B, dim_p=x$dim_p, n.ahead=n.ahead, normf=normf)$THETA)
+    THETA = aux_MG(A.irf, w=w)$mean  # (optionally weighted) group mean
+  
+  }else{  # ... by IRF for MG of individual VAR coefficients
+    if(!is.null(w)){
+      x$A = aux_MG(x$L.varx, w=w, idx_par="A")$mean  ### TODO: respect MG of VECM!
+      x$B = aux_MG(x$L.varx, w=w, idx_par="B")$mean
+    }
+    dim_p = max(sapply(x$L.varx, FUN=function(i) i$dim_p))
+    THETA = aux_var2vma(A=x$A, B=x$B, dim_p=dim_p, n.ahead=n.ahead, normf=normf)$THETA
+  }
   
   # return result
   IRF = aperm(THETA, perm=c(2,1,3))

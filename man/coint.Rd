@@ -19,11 +19,11 @@ coint.JO(
 coint.SL(y, dim_p, type_SL = c("SL_mean", "SL_trend"), t_D = NULL)
 }
 \arguments{
-\item{y}{Matrix. A \eqn{(K x (p+T))} data matrix of the \eqn{K} endogenous time series variables.}
+\item{y}{Matrix. A \eqn{(K \times (p+T))} data matrix of the \eqn{K} endogenous time series variables.}
 
 \item{dim_p}{Integer. Lag-order \eqn{p} for the endogenous variables \code{y}.}
 
-\item{x}{Matrix. A \eqn{(L x (q+T))} data matrix of the \eqn{L} weakly exogenous time series variables.}
+\item{x}{Matrix. A \eqn{(L \times (q+T))} data matrix of the \eqn{L} weakly exogenous time series variables.}
 
 \item{dim_q}{Integer. Lag-order \eqn{q} for the weakly exogenous variables \code{x}. 
 The literature uses \code{dim_p} (the default).}

@@ -23,7 +23,7 @@
 #'   Simulated independent sample(s) of the same size as the data. 
 #'   If the sample sizes \eqn{T_i - p_i} differ across '\eqn{i}', the strictly separated identification
 #'   requires a list of \eqn{N} individual '\code{indepTestDist}'-objects with respective sample sizes.
-#'   If '\code{NULL}' (the default), a suitable object will be calculated in the function '\code{pid.cvm()}'.
+#'   If \code{NULL} (the default), a suitable object will be calculated in the function '\code{pid.cvm()}'.
 #' @param itermax Integer. Maximum number of iterations for DEoptim
 #' @param steptol Numeric. Tolerance for steps without improvement for DEoptim
 #' @param iter2 Integer. Number of iterations for the second optimization
@@ -459,10 +459,10 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #' @param x An object of class '\code{pvarx}' or a list of VAR objects 
 #'   that will be \link[=as.varx]{coerced} to '\code{varx}'. 
 #'   Estimated panel of VAR objects.
-#' @param iv List. A single \code{data.frame} of the \eqn{L} common proxy time 
-#'   series \eqn{m_t} or a list of \eqn{N} \code{data.frame} objects of the \eqn{L} 
+#' @param iv List. A single '\code{data.frame}' of the \eqn{L} common proxy time 
+#'   series \eqn{m_t} or a list of \eqn{N} '\code{data.frame}' objects of the \eqn{L} 
 #'   individual proxy time series \eqn{m_{it}}. The proxies must have the same 
-#'   succession \eqn{l = 1,\ldots,L} in each individual \code{data.frame}.
+#'   succession \eqn{l = 1,\ldots,L} in each individual '\code{data.frame}'.
 #' @param combine Character. The combination of the individual reduced-form residuals 
 #'   via '\code{pool}' for the pooled shocks by Empting et al (2025) using a common orthogonal matrix or
 #'   via '\code{indiv}' for individual-specific \eqn{B_i \forall i} using strictly separated identification runs.
@@ -472,7 +472,7 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al (2025). 
 #'   In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 #'   In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.
-#' @param cov_u Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma_{u}}_i} 
+#' @param cov_u Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma}_{u,i}} 
 #'   to be used in the identification procedure. 
 #'   Either \code{'OMEGA'} (the default) for \eqn{\hat{U}_i \hat{U}_i'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 #'   or \code{'SIGMA'} for \eqn{\hat{U}_i \hat{U}_i'/(T_i - n_{zi})}, which corrects for the number of regressors \eqn{n_{zi}}. 
@@ -483,12 +483,12 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   \eqn{= I_S} will be used such that the \eqn{S=L} columns of \eqn{B_{i,1}} are 
 #'   one-by-one estimated from the \eqn{S=L} proxy series '\code{iv}' available. 
 #' 
-#' @return List of class \code{pid} with elements:
+#' @return List of class '\code{pid}' with elements:
 #' \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 
 #'    for the lagged variables in the panel VAR.}
 #' \item{B}{Matrix. Mean group of the estimated structural impact matrices \eqn{B_i}, 
 #'    i.e. the unique decomposition of the covariance matrices of reduced-form errors.}
-#' \item{L.varx}{List of \code{varx} objects for the individual estimation results
+#' \item{L.varx}{List of '\code{varx}' objects for the individual estimation results
 #'   to which the structural impact matrices \eqn{B_i} have been added.}
 #' \item{eps0}{Matrix. The combined whitened residuals \eqn{\epsilon_{0}} 
 #'   to which the pooled identification procedure has been applied subsequently.

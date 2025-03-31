@@ -6,9 +6,9 @@
 #'   whose moments are automatically adjusted to 
 #'   potential period-specific deterministic regressors 
 #'   and weakly exogenous regressors in the partial VECM.
-#' @param y Matrix. A \eqn{(K x (p+T))} data matrix of the \eqn{K} endogenous time series variables.
+#' @param y Matrix. A \eqn{(K \times (p+T))} data matrix of the \eqn{K} endogenous time series variables.
 #' @param dim_p Integer. Lag-order \eqn{p} for the endogenous variables \code{y}.
-#' @param x Matrix. A \eqn{(L x (q+T))} data matrix of the \eqn{L} weakly exogenous time series variables.
+#' @param x Matrix. A \eqn{(L \times (q+T))} data matrix of the \eqn{L} weakly exogenous time series variables.
 #' @param dim_q Integer. Lag-order \eqn{q} for the weakly exogenous variables \code{x}. 
 #'   The literature uses \code{dim_p} (the default).
 #' @param t_D1 List of vectors. The activating break periods \eqn{\tau} 

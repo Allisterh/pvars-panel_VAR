@@ -39,7 +39,7 @@
 #' 
 #' @details If \code{differenced} is \code{TRUE}, the approximate factor model is estimated as proposed by Bai, Ng (2004).
 #'   If all data transformations are selected, the estimation results are identical 
-#'   to the objects in \code{$CSD} for PANIC analyses in \code{pcoint} objects.
+#'   to the objects in \code{$CSD} for PANIC analyses in '\code{pcoint}' objects.
 #' 
 #' @references Ahn, S., and Horenstein, A. (2013): 
 #'   "Eigenvalue Ratio Test for the Number of Factors", 
@@ -89,11 +89,14 @@
 speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, centered=FALSE, scaled=FALSE, n.factors=NULL){
   # define
   L.dim_K = sapply(L.data, FUN=function(x) ncol(x))
-  X = do.call("cbind", L.data)  # data matrix of dimension (T x sum(K_i))
-  dim_NK = ncol(X)
-  dim_T = nrow(X)
+  L.dim_T = sapply(L.data, FUN=function(x) nrow(x))
+  dim_NK = sum(L.dim_K)
+  dim_T = min(L.dim_T)
   dim_N = length(L.data)
   idx_d = if(differenced){ 1:2 }else{ 1:3 }
+  
+  # data matrix of dimension (T_min x sum(K_i))
+  X = do.call("cbind", lapply(L.data, FUN=function(x) tail(x, n=dim_T))) # first dim in tail() is T
   
   # data transformation and PCA
   if(differenced){ xit = diff(X) }else{ xit = X }
