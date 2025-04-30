@@ -60,7 +60,7 @@ NULL
 #' @usage data("EU_w")
 #' @format A numeric vector containing 14 named elements.
 #' @family data sets
-#' @references Herwartz, H., and Wang, Shu (2024): 
+#' @references Herwartz, H., and Wang, S. (2024): 
 #'   "Statistical Identification in Panel Structural Vector Autoregressive 
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
@@ -95,7 +95,7 @@ NULL
 #' @format A list-format data panel of class '\code{list}' 
 #'   containing 15 '\code{data.frame}' objects with named time series.
 #' @family data sets
-#' @references Herwartz, H., and Wang, Shu (2024): 
+#' @references Herwartz, H., and Wang, S. (2024): 
 #'   "Statistical Identification in Panel Structural Vector Autoregressive 
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
@@ -208,8 +208,8 @@ NULL
 #'   indicate the country and year respectively.
 #' @family data sets
 #' @references Empting, L. F. T., and Herwartz, H. (2025): 
-#'   "Revising the 'Productivity of Public Capital': 
-#'   VAR Evidences on the Heterogeneous Dynamics in a New Panel of 23 OECD Countries".
+#'   "Revisiting the 'Productivity of Public Capital': 
+#'   VAR Evidence on the Heterogeneous Dynamics in a New Panel of 23 OECD Countries".
 #' @references Feenstra, R. C., Inklaar, R., and Timmer, M. P. (2015):
 #'   "The Next Generation of the Penn World Table", 
 #'   \emph{American Economic Review}, 105, pp. 3150-3182.

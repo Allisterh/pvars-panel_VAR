@@ -1,12 +1,13 @@
 
 
-#' @title Bootstrap for individual SVAR models
+#' @title Bootstrap with residual moving blocks for individual SVAR models
 #' @description Calculates confidence bands for impulse response functions via recursive-design bootstrap.
 #' @param x VAR object of class '\code{id}' or '\code{varx}' or any other 
 #'   that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.
-#'   If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in \code{sboot2}), 
+#'   If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in '\code{sboot2}'), 
 #'   the bias-corrected second-step of the bootstrap-after-bootstrap procedure by Kilian (1998) is performed.
-#' @param b.length Integer. Length \eqn{b_{(t)}} of each time series block, which is often set to \eqn{T/10}.
+#' @param b.length Integer. Length \eqn{b_{(t)}} of each residual time series block, 
+#'   which is often set to \eqn{T/10}.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
 #' @param n.boot Integer. Number of bootstrap iterations.
 #' @param n.cores Integer. Number of allocated processor cores.
@@ -24,15 +25,15 @@
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
 #' 
-#' @return A list of class \code{sboot2} with elements:
+#' @return A list of class '\code{sboot2}' with elements:
 #' \item{true}{Point estimate of impulse response functions.}
-#' \item{bootstrap}{List of length \code{n.boot} holding bootstrap impulse response functions.}
+#' \item{bootstrap}{List of length '\code{n.boot}' holding bootstrap impulse response functions.}
 #' \item{A}{List for the VAR coefficients containing 
-#'   the matrix of point estimates \code{par} and 
-#'   the array of bootstrap results \code{sim}.}
+#'   the matrix of point estimates '\code{par}' and 
+#'   the array of bootstrap results '\code{sim}'.}
 #' \item{B}{List for the structural impact matrix containing 
-#'   the matrix of point estimates \code{par} and 
-#'   the array of bootstrap results \code{sim}.}
+#'   the matrix of point estimates '\code{par}' and 
+#'   the array of bootstrap results '\code{sim}'.}
 #' \item{PSI_bc}{Matrix of the estimated bias term \eqn{\hat{\Psi}} 
 #'   for the VAR coefficients \eqn{\hat{A}} according to Kilian (1998).}
 #' \item{varx}{Input VAR object of class '\code{varx}' 
@@ -90,7 +91,7 @@
 #'   ed. by H. Luetkepohl and M. Kraetzig, 
 #'   Cambridge University Press, Cambridge.
 #' @references Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
-#'   "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
+#'   "Inference in VARs with Conditional Heteroskedasticity of Unknown Form", 
 #'   \emph{Journal of Econometrics}, 191, pp. 69-85.
 #' @references Jentsch, C., and Lunsford, K. G. (2021): 
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
@@ -293,7 +294,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 }
 
 
-#' @title Parametric bootstrap with panel blocks for panel SVAR models
+#' @title Bootstrap with residual panel blocks for panel SVAR models
 #' @description Calculates confidence bands for impulse response functions via recursive-design bootstrap. 
 #' @details In case of heterogeneous lag-orders \eqn{p_i} or sample sizes \eqn{T_i},
 #'   the initial periods are fixed in accordance with the usage of presamples. 
@@ -307,7 +308,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   the bias-corrected second-step of the bootstrap-after-bootstrap procedure 
 #'   by Empting et al. (2025) is performed.
 #' @param b.dim Vector of two integers. The dimensions \eqn{(b_{(t)}, b_{(i)})} 
-#'   of each panel block for temporal and cross-sectional resampling. The default 
+#'   of each residual panel block for temporal and cross-sectional resampling. The default 
 #'   \code{c(1, 1)} specifies an \eqn{i.i.d.} resampling in both dimensions, 
 #'   \code{c(1, FALSE)} a temporal resampling, and 
 #'   \code{c(FALSE, 1)} a cross-sectional resampling. 
@@ -333,16 +334,19 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   names or \eqn{N} logical elements selecting a subset from the 
 #'   individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
 #'   (the default), all \eqn{N} individuals are included without weights.
+#' @param MG_IRF Logical. If \code{TRUE} (the default), the mean-group of individual 
+#'   IRF is calculated in accordance with Gambacorta et al. (2014). If \code{FALSE}, 
+#'   the IRF is calculated for the mean-group of individual VAR estimates.
 #' 
-#' @return A list of class \code{sboot2} with elements:
+#' @return A list of class '\code{sboot2}' with elements:
 #' \item{true}{Mean group estimate of impulse response functions.}
 #' \item{bootstrap}{List of length \code{nboot} holding bootstrap impulse response functions.}
 #' \item{A}{List for the VAR coefficients containing 
-#'   the matrix of point estimates \code{par} and 
-#'   the array of bootstrap results \code{sim}.}
+#'   the matrix of point estimates '\code{par}' and 
+#'   the array of bootstrap results '\code{sim}'.}
 #' \item{B}{List for the structural impact matrix containing 
-#'   the matrix of point estimates \code{par} and 
-#'   the array of bootstrap results \code{sim}.}
+#'   the matrix of point estimates '\code{par}' and 
+#'   the array of bootstrap results '\code{sim}'.}
 #' \item{L.PSI_bc}{List of the estimated bias terms \eqn{\hat{\Psi}_i} 
 #'   for the individual VAR coefficients \eqn{\hat{A}_i} according to Kilian (1998).}
 #' \item{pvarx}{Input panel VAR object of class '\code{pvarx}' 
@@ -359,16 +363,19 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' @seealso For the the individual counterpart see \link{sboot.mb}.
 #' 
 #' @references Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
-#'   "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
+#'   "Inference in VARs with Conditional Heteroskedasticity of Unknown Form", 
 #'   \emph{Journal of Econometrics}, 191, pp. 69-85.
 #' @references Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
-#'   "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+#'   "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 #' @references Kapetanios, G. (2008): 
 #'   "A Bootstrap Procedure for Panel Data Sets with many Cross-sectional Units", 
 #'   \emph{The Econometrics Journal}, 11, pp.377-395.
 #' @references Kilian, L. (1998): 
 #'   "Small-Sample Confidence Intervals for Impulse Response Functions",
 #'   \emph{Review of Economics and Statistics}, 80, pp. 218-230.
+#' @references Gambacorta L., Hofmann B., and Peersman G. (2014):
+#'   "The Effectiveness of Unconventional Monetary Policy at the Zero Lower Bound: A Cross-Country Analysis",
+#'   \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 #' 
 #' @examples
 #' \dontrun{
@@ -396,7 +403,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' 
 #' @export
 #' 
-sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, deltas=cumprod((100:0)/100), normf=NULL, w=NULL){
+sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_beta=TRUE, deltas=cumprod((100:0)/100), normf=NULL, w=NULL, MG_IRF=TRUE){
   # define
   L.PSI_bc = x$L.PSI_bc  # list of individual bias terms
   A_MG = B_MG = beta = dim_N = dim_K = dim_S = dim_r = NULL
@@ -410,8 +417,8 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
   names_IRF = c(sapply(names_k, FUN=function(k) paste0(names_s, " %->% ", k)))
   
   # calculate MG point estimates under 'w'
-  IRF  = irf.pvarx(R.pvarx, n.ahead=n.ahead, normf=normf, w=w)
-  A_MG = aux_MG(L.varx, w=w, idx_par="A")$mean
+  IRF  = irf.pvarx(R.pvarx, n.ahead=n.ahead, normf=normf, w=w, MG_IRF=MG_IRF)
+  A_MG = aux_MG(L.varx, w=w, idx_par="A")$mean  ### TODO: respect MG of VECM!
   B_MG = aux_MG(L.varx, w=w, idx_par="B")$mean
   beta = if(!is.null(dim_r)){ aux_MG(L.varx, w=w, idx_par="beta")$mean }else{ NULL }
   dimnames(B_MG) = list(names_k, names_s)
@@ -568,7 +575,9 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     }
     
     # sign and column ordering according to the point estimates
-    if(args_pid$method %in% c("Distance covariances", "Cramer-von Mises distance")){ 
+    if(is.null(args_pid$method)){
+      S.pid$B    = B_MG  # diagonal matrix with dimnames
+    }else if(args_pid$method %in% c("Distance covariances", "Cramer-von Mises distance")){ 
       for(i in 1:dim_N){ S.pid$L.varx[[i]]$B = aux_sico(S.pid$L.varx[[i]]$B, B.orig=L.B[[i]]) }
       S.pid$MG_B = aux_MG(S.pid$L.varx, w=w, idx_par="B")
       S.pid$B    = S.pid$MG_B$mean
@@ -579,7 +588,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     
     # return bootstrap result
     S.Ais  = lapply(S.pvarx$L.varx, FUN=function(i) i$A)
-    S.irf  = irf.pvarx(S.pid, n.ahead=n.ahead, normf=normf, w=w)
+    S.irf  = irf.pvarx(S.pid, n.ahead=n.ahead, normf=normf, w=w, MG_IRF=MG_IRF)
     result = list(irf=S.irf, Pstar=S.pid$B, star_A=S.pvarx$A, star_beta=S.pvarx$beta, star_Ais=S.Ais)
     return(result)
   }
@@ -667,15 +676,15 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #'   individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
 #'   (the default), all \eqn{N} individuals are included.
 #' 
-#' @return A list of class \code{sboot2} with elements:
+#' @return A list of class '\code{sboot2}' with elements:
 #' \item{true}{Mean group estimate of impulse response functions.}
 #' \item{bootstrap}{List of length \eqn{N} holding the individual impulse response functions.}
 #' \item{A}{List for the VAR coefficients containing 
-#'   the matrix of mean group estimates \code{par} and 
-#'   the array of individual results \code{sim}.}
+#'   the matrix of mean group estimates '\code{par}' and 
+#'   the array of individual results '\code{sim}'.}
 #' \item{B}{List for the structural impact matrix containing 
-#'   the matrix of mean group estimates \code{par} and 
-#'   the array of individual results \code{sim}.}
+#'   the matrix of mean group estimates '\code{par}' and 
+#'   the array of individual results '\code{sim}'.}
 #' \item{pvarx}{Input panel VAR object of class '\code{pvarx}'.}
 #' \item{nboot}{Integer '0' indicating that no bootstrap iteration has been performed.}
 #' \item{method}{Method used for inference.}

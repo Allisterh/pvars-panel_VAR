@@ -360,7 +360,7 @@ pcoint.CAIN <- function(L.data, lags, type="SL_trend", t_D=NULL){
   dim_TN = max(L.dim_T)  # total number of periods incl. presamples
   idx_tN = -(0:dim_pN)   # periods without presample of any individual
   
-  # apply (T)SL procedure to each individual, from Oersal,Arsova 2016:3 / Trenkler et al (2008)
+  # apply (T)SL procedure to each individual, from Oersal,Arsova 2016:3 / Trenkler et al. (2008)
   cointf <- function(i){
     # define
     y = L.y[[i]]  # named matrix y is KxT regardless of input

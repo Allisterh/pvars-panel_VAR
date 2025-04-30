@@ -23,15 +23,15 @@ individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL}
 (the default), all \eqn{N} individuals are included.}
 }
 \value{
-A list of class \code{sboot2} with elements:
+A list of class '\code{sboot2}' with elements:
 \item{true}{Mean group estimate of impulse response functions.}
 \item{bootstrap}{List of length \eqn{N} holding the individual impulse response functions.}
 \item{A}{List for the VAR coefficients containing 
-  the matrix of mean group estimates \code{par} and 
-  the array of individual results \code{sim}.}
+  the matrix of mean group estimates '\code{par}' and 
+  the array of individual results '\code{sim}'.}
 \item{B}{List for the structural impact matrix containing 
-  the matrix of mean group estimates \code{par} and 
-  the array of individual results \code{sim}.}
+  the matrix of mean group estimates '\code{par}' and 
+  the array of individual results '\code{sim}'.}
 \item{pvarx}{Input panel VAR object of class '\code{pvarx}'.}
 \item{nboot}{Integer '0' indicating that no bootstrap iteration has been performed.}
 \item{method}{Method used for inference.}

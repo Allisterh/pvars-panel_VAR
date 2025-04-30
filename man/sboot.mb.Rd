@@ -2,7 +2,7 @@
 % Please edit documentation in R/sboot.R
 \name{sboot.mb}
 \alias{sboot.mb}
-\title{Bootstrap for individual SVAR models}
+\title{Bootstrap with residual moving blocks for individual SVAR models}
 \usage{
 sboot.mb(
   x,
@@ -18,10 +18,11 @@ sboot.mb(
 \arguments{
 \item{x}{VAR object of class '\code{id}' or '\code{varx}' or any other 
 that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{svars}'.
-If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in \code{sboot2}), 
+If a bias term \code{x$PSI_bc} is available for coefficient matrix \eqn{A} (such as in '\code{sboot2}'), 
 the bias-corrected second-step of the bootstrap-after-bootstrap procedure by Kilian (1998) is performed.}
 
-\item{b.length}{Integer. Length \eqn{b_{(t)}} of each time series block, which is often set to \eqn{T/10}.}
+\item{b.length}{Integer. Length \eqn{b_{(t)}} of each residual time series block, 
+which is often set to \eqn{T/10}.}
 
 \item{n.ahead}{Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.}
 
@@ -46,15 +47,15 @@ for the normalization of Jentsch and Lunsford (2021)
 that fixes the size of the impact response in the IRF.}
 }
 \value{
-A list of class \code{sboot2} with elements:
+A list of class '\code{sboot2}' with elements:
 \item{true}{Point estimate of impulse response functions.}
-\item{bootstrap}{List of length \code{n.boot} holding bootstrap impulse response functions.}
+\item{bootstrap}{List of length '\code{n.boot}' holding bootstrap impulse response functions.}
 \item{A}{List for the VAR coefficients containing 
-  the matrix of point estimates \code{par} and 
-  the array of bootstrap results \code{sim}.}
+  the matrix of point estimates '\code{par}' and 
+  the array of bootstrap results '\code{sim}'.}
 \item{B}{List for the structural impact matrix containing 
-  the matrix of point estimates \code{par} and 
-  the array of bootstrap results \code{sim}.}
+  the matrix of point estimates '\code{par}' and 
+  the array of bootstrap results '\code{sim}'.}
 \item{PSI_bc}{Matrix of the estimated bias term \eqn{\hat{\Psi}} 
   for the VAR coefficients \eqn{\hat{A}} according to Kilian (1998).}
 \item{varx}{Input VAR object of class '\code{varx}' 
@@ -116,7 +117,7 @@ Breitung, J., Brueggemann R., and Luetkepohl, H. (2004):
   Cambridge University Press, Cambridge.
 
 Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
-  "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
+  "Inference in VARs with Conditional Heteroskedasticity of Unknown Form", 
   \emph{Journal of Econometrics}, 191, pp. 69-85.
 
 Jentsch, C., and Lunsford, K. G. (2021): 

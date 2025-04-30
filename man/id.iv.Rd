@@ -16,7 +16,7 @@ time series \eqn{m_t}.}
 \item{S2}{Character. Identification within multiple proxies \eqn{m_t} 
 via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{11} B_{12}^{-1} ] B_{1}} by Mertens, Ravn (2013), 
 via '\code{JL}' for chol\eqn{(\Sigma_{mu} \Sigma_{u}^{-1} \Sigma_{um})} by Jentsch, Lunsford (2021), or
-via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al (2025). 
+via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
 In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_1}.}
 
 \item{cov_u}{Character. Selection of the estimated residual covariance matrix \eqn{\hat{\Sigma}_{u}} 
@@ -121,7 +121,7 @@ Jentsch, C., and Lunsford, K. G. (2021):
   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
 
 Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
-  "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+  "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 }
 \seealso{
 \ldots the individual identification approaches 

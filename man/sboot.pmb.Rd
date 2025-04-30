@@ -2,7 +2,7 @@
 % Please edit documentation in R/sboot.R
 \name{sboot.pmb}
 \alias{sboot.pmb}
-\title{Parametric bootstrap with panel blocks for panel SVAR models}
+\title{Bootstrap with residual panel blocks for panel SVAR models}
 \usage{
 sboot.pmb(
   x,
@@ -13,7 +13,8 @@ sboot.pmb(
   fix_beta = TRUE,
   deltas = cumprod((100:0)/100),
   normf = NULL,
-  w = NULL
+  w = NULL,
+  MG_IRF = TRUE
 )
 }
 \arguments{
@@ -25,7 +26,7 @@ the bias-corrected second-step of the bootstrap-after-bootstrap procedure
 by Empting et al. (2025) is performed.}
 
 \item{b.dim}{Vector of two integers. The dimensions \eqn{(b_{(t)}, b_{(i)})} 
-of each panel block for temporal and cross-sectional resampling. The default 
+of each residual panel block for temporal and cross-sectional resampling. The default 
 \code{c(1, 1)} specifies an \eqn{i.i.d.} resampling in both dimensions, 
 \code{c(1, FALSE)} a temporal resampling, and 
 \code{c(FALSE, 1)} a cross-sectional resampling. 
@@ -58,17 +59,21 @@ that fixes the size of the impact response in the IRF.}
 names or \eqn{N} logical elements selecting a subset from the 
 individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
 (the default), all \eqn{N} individuals are included without weights.}
+
+\item{MG_IRF}{Logical. If \code{TRUE} (the default), the mean-group of individual 
+IRF is calculated in accordance with Gambacorta et al. (2014). If \code{FALSE}, 
+the IRF is calculated for the mean-group of individual VAR estimates.}
 }
 \value{
-A list of class \code{sboot2} with elements:
+A list of class '\code{sboot2}' with elements:
 \item{true}{Mean group estimate of impulse response functions.}
 \item{bootstrap}{List of length \code{nboot} holding bootstrap impulse response functions.}
 \item{A}{List for the VAR coefficients containing 
-  the matrix of point estimates \code{par} and 
-  the array of bootstrap results \code{sim}.}
+  the matrix of point estimates '\code{par}' and 
+  the array of bootstrap results '\code{sim}'.}
 \item{B}{List for the structural impact matrix containing 
-  the matrix of point estimates \code{par} and 
-  the array of bootstrap results \code{sim}.}
+  the matrix of point estimates '\code{par}' and 
+  the array of bootstrap results '\code{sim}'.}
 \item{L.PSI_bc}{List of the estimated bias terms \eqn{\hat{\Psi}_i} 
   for the individual VAR coefficients \eqn{\hat{A}_i} according to Kilian (1998).}
 \item{pvarx}{Input panel VAR object of class '\code{pvarx}' 
@@ -118,11 +123,11 @@ plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 }
 \references{
 Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
-  "Inference in VARs with Conditional Heteroskedasticity of unknown Form", 
+  "Inference in VARs with Conditional Heteroskedasticity of Unknown Form", 
   \emph{Journal of Econometrics}, 191, pp. 69-85.
 
 Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
-  "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+  "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 
 Kapetanios, G. (2008): 
   "A Bootstrap Procedure for Panel Data Sets with many Cross-sectional Units", 
@@ -131,6 +136,10 @@ Kapetanios, G. (2008):
 Kilian, L. (1998): 
   "Small-Sample Confidence Intervals for Impulse Response Functions",
   \emph{Review of Economics and Statistics}, 80, pp. 218-230.
+
+Gambacorta L., Hofmann B., and Peersman G. (2014):
+  "The Effectiveness of Unconventional Monetary Policy at the Zero Lower Bound: A Cross-Country Analysis",
+  \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 }
 \seealso{
 For the the individual counterpart see \link{sboot.mb}.

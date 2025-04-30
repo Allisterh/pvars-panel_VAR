@@ -102,8 +102,8 @@ dev.off()
 }
 \references{
 Empting, L. F. T., and Herwartz, H. (2025): 
-  "Revising the 'Productivity of Public Capital': 
-  VAR Evidences on the Heterogeneous Dynamics in a New Panel of 23 OECD Countries".
+  "Revisiting the 'Productivity of Public Capital': 
+  VAR Evidence on the Heterogeneous Dynamics in a New Panel of 23 OECD Countries".
 
 Feenstra, R. C., Inklaar, R., and Timmer, M. P. (2015):
   "The Next Generation of the Penn World Table", 

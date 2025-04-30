@@ -53,7 +53,7 @@
 #' @references Genest, C., and Remillard, B. (2004): 
 #'   "Tests of Independence and Randomness based on the Empirical Copula Process", 
 #'   Test, 13, pp. 335-370.
-#' @references Herwartz, H., and Wang, Shu (2024): 
+#' @references Herwartz, H., and Wang, S. (2024): 
 #'   "Statistical Identification in Panel Structural Vector Autoregressive 
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
@@ -241,7 +241,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 #'   \deqn{       = c_{it} + A_{i1} y_{i,t-1} + ... + A_{i,p_i} y_{i,t-p_i} + B_i \epsilon_{it}.}
 #'   Matrix \eqn{B_i} corresponds to the unique decomposition of the least squares covariance matrix \eqn{\Sigma_{u,i} = B_i B_i'} 
 #'   if the vector of structural shocks \eqn{\epsilon_{it}} contains at most one Gaussian shock (Comon, 1994).
-#'   A nonparametric dependence measure, the distance covariance (Szekely et al, 2007), determines 
+#'   A nonparametric dependence measure, the distance covariance (Szekely et al., 2007), determines 
 #'   least dependent structural shocks. The algorithm described in Matteson and Tsay (2013) is applied 
 #'   to calculate the matrix \eqn{B_i}.
 #' 
@@ -282,7 +282,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 #' @references Comon, P. (1994): 
 #'   "Independent Component Analysis: A new Concept?", 
 #'   \emph{Signal Processing}, 36, pp. 287-314.
-#' @references Herwartz, H., and Wang, Shu (2024): 
+#' @references Herwartz, H., and Wang, S. (2024): 
 #'   "Statistical Identification in Panel Structural Vector Autoregressive 
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
@@ -464,12 +464,12 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   individual proxy time series \eqn{m_{it}}. The proxies must have the same 
 #'   succession \eqn{l = 1,\ldots,L} in each individual '\code{data.frame}'.
 #' @param combine Character. The combination of the individual reduced-form residuals 
-#'   via '\code{pool}' for the pooled shocks by Empting et al (2025) using a common orthogonal matrix or
+#'   via '\code{pool}' for the pooled shocks by Empting et al. (2025) using a common orthogonal matrix or
 #'   via '\code{indiv}' for individual-specific \eqn{B_i \forall i} using strictly separated identification runs.
 #' @param S2 Character. Identification within multiple proxies \eqn{m_{it}} 
 #'   via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{i,11} B_{i,12}^{-1} ] B_{i,1}} by Mertens, Ravn (2013), 
 #'   via '\code{JL}' for chol\eqn{(\Sigma_{mu,i} \Sigma_{u,i}^{-1} \Sigma_{um,i})} by Jentsch, Lunsford (2021), or
-#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al (2025). 
+#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
 #'   In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 #'   In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.
 #' @param cov_u Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma}_{u,i}} 
@@ -511,7 +511,7 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
 #'   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
 #' @references Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
-#'   "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+#'   "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 #' 
 #' @importFrom steadyICA steadyICA W2theta
 #' @export

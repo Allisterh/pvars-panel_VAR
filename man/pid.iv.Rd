@@ -26,7 +26,7 @@ succession \eqn{l = 1,\ldots,L} in each individual '\code{data.frame}'.}
 \item{S2}{Character. Identification within multiple proxies \eqn{m_{it}} 
 via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{i,11} B_{i,12}^{-1} ] B_{i,1}} by Mertens, Ravn (2013), 
 via '\code{JL}' for chol\eqn{(\Sigma_{mu,i} \Sigma_{u,i}^{-1} \Sigma_{um,i})} by Jentsch, Lunsford (2021), or
-via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al (2025). 
+via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
 In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.}
 
@@ -43,7 +43,7 @@ structural shock series. If \code{NULL} (the default), \code{R0}
 one-by-one estimated from the \eqn{S=L} proxy series '\code{iv}' available.}
 
 \item{combine}{Character. The combination of the individual reduced-form residuals 
-via '\code{pool}' for the pooled shocks by Empting et al (2025) using a common orthogonal matrix or
+via '\code{pool}' for the pooled shocks by Empting et al. (2025) using a common orthogonal matrix or
 via '\code{indiv}' for individual-specific \eqn{B_i \forall i} using strictly separated identification runs.}
 }
 \value{
@@ -94,5 +94,5 @@ Jentsch, C., and Lunsford, K. G. (2021):
   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
 
 Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
-  "Inference in Panel SVARs with Cross-Sectional Dependence of unknown Form".
+  "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 }

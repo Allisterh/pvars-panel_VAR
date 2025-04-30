@@ -38,7 +38,7 @@ The data set \code{EURO} is a list of 15 '\code{data.frame}' objects,
   \eqn{N=14} of its member countries (subsequent 14 elements in list).
 }
 \references{
-Herwartz, H., and Wang, Shu (2024): 
+Herwartz, H., and Wang, S. (2024): 
   "Statistical Identification in Panel Structural Vector Autoregressive 
   Models based on Independence Criteria", 
   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.

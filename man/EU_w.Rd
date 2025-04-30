@@ -22,7 +22,7 @@ The data set \code{EU_w} is a vector of 14 elements.
   over the sample period in Herwartz, Wang (2024).
 }
 \references{
-Herwartz, H., and Wang, Shu (2024): 
+Herwartz, H., and Wang, S. (2024): 
   "Statistical Identification in Panel Structural Vector Autoregressive 
   Models based on Independence Criteria", 
   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.

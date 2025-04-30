@@ -56,7 +56,7 @@ Given an estimated panel of VAR models, this function applies independence-based
   \deqn{       = c_{it} + A_{i1} y_{i,t-1} + ... + A_{i,p_i} y_{i,t-p_i} + B_i \epsilon_{it}.}
   Matrix \eqn{B_i} corresponds to the unique decomposition of the least squares covariance matrix \eqn{\Sigma_{u,i} = B_i B_i'} 
   if the vector of structural shocks \eqn{\epsilon_{it}} contains at most one Gaussian shock (Comon, 1994).
-  A nonparametric dependence measure, the distance covariance (Szekely et al, 2007), determines 
+  A nonparametric dependence measure, the distance covariance (Szekely et al., 2007), determines 
   least dependent structural shocks. The algorithm described in Matteson and Tsay (2013) is applied 
   to calculate the matrix \eqn{B_i}.
 }
@@ -142,7 +142,7 @@ Comon, P. (1994):
   "Independent Component Analysis: A new Concept?", 
   \emph{Signal Processing}, 36, pp. 287-314.
 
-Herwartz, H., and Wang, Shu (2024): 
+Herwartz, H., and Wang, S. (2024): 
   "Statistical Identification in Panel Structural Vector Autoregressive 
   Models based on Independence Criteria", 
   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.

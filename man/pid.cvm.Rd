@@ -108,7 +108,7 @@ Genest, C., and Remillard, B. (2004):
   "Tests of Independence and Randomness based on the Empirical Copula Process", 
   Test, 13, pp. 335-370.
 
-Herwartz, H., and Wang, Shu (2024): 
+Herwartz, H., and Wang, S. (2024): 
   "Statistical Identification in Panel Structural Vector Autoregressive 
   Models based on Independence Criteria", 
   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
