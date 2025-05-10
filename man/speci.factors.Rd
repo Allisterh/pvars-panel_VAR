@@ -44,11 +44,11 @@ A list of class '\code{speci}', which contains the elements:
 \item{Bai}{Array. The values of the criteria \eqn{PC(k)}, \eqn{IC(k)}, and \eqn{IPC(k)}
      with penalty weights \eqn{p1}, \eqn{p2}, and \eqn{p3} for \eqn{k=0,\ldots,}\code{k_max} factors.}
 \item{selection}{List of the optimal number of common factors:
-     (1) A matrix of \eqn{k*} which minimizes each information criterion with each penalty weight. 
-     (2) A vector of \eqn{k*} which maximizes \code{ER} and \code{GR} respectively. 
+     (1) A matrix of \eqn{k^*} which minimizes each information criterion with each penalty weight. 
+     (2) A vector of \eqn{k^*} which maximizes \code{ER} and \code{GR} respectively. 
      \code{ED} denotes the result by Onatski's (2010) "edge distribution" after convergence.}
-\item{Ft}{Matrix. The common factors of dimension \eqn{(T x} \code{n.factors}) estimated by PCA.}
-\item{LAMBDA}{Matrix. The loadings of dimension \eqn{(KN x} \code{n.factors}) estimated by OLS.}
+\item{Ft}{Matrix. The common factors of dimension \eqn{(T \times} \code{n.factors}) estimated by PCA.}
+\item{LAMBDA}{Matrix. The loadings of dimension \eqn{(KN \times} \code{n.factors}) estimated by OLS.}
 \item{L.idio}{List of \eqn{N} \code{data.frame} objects each collecting the \eqn{K_i} idiosyncratic series \eqn{\hat{e}_{it}} along the rows \eqn{t=1,\ldots,T}. 
       The series \eqn{\hat{e}_{it}} are given in levels and may contain a deterministic component with 
       (1) the initial \eqn{\hat{e}_{i1}} being non-zero and (2) re-accumulated means of the the first-differenced series.}

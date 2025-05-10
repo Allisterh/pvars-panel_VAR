@@ -27,11 +27,11 @@
 #' \item{Bai}{Array. The values of the criteria \eqn{PC(k)}, \eqn{IC(k)}, and \eqn{IPC(k)}
 #'      with penalty weights \eqn{p1}, \eqn{p2}, and \eqn{p3} for \eqn{k=0,\ldots,}\code{k_max} factors.}
 #' \item{selection}{List of the optimal number of common factors:
-#'      (1) A matrix of \eqn{k*} which minimizes each information criterion with each penalty weight. 
-#'      (2) A vector of \eqn{k*} which maximizes \code{ER} and \code{GR} respectively. 
+#'      (1) A matrix of \eqn{k^*} which minimizes each information criterion with each penalty weight. 
+#'      (2) A vector of \eqn{k^*} which maximizes \code{ER} and \code{GR} respectively. 
 #'      \code{ED} denotes the result by Onatski's (2010) "edge distribution" after convergence.}
-#' \item{Ft}{Matrix. The common factors of dimension \eqn{(T x} \code{n.factors}) estimated by PCA.}
-#' \item{LAMBDA}{Matrix. The loadings of dimension \eqn{(KN x} \code{n.factors}) estimated by OLS.}
+#' \item{Ft}{Matrix. The common factors of dimension \eqn{(T \times} \code{n.factors}) estimated by PCA.}
+#' \item{LAMBDA}{Matrix. The loadings of dimension \eqn{(KN \times} \code{n.factors}) estimated by OLS.}
 #' \item{L.idio}{List of \eqn{N} \code{data.frame} objects each collecting the \eqn{K_i} idiosyncratic series \eqn{\hat{e}_{it}} along the rows \eqn{t=1,\ldots,T}. 
 #'       The series \eqn{\hat{e}_{it}} are given in levels and may contain a deterministic component with 
 #'       (1) the initial \eqn{\hat{e}_{i1}} being non-zero and (2) re-accumulated means of the the first-differenced series.}
@@ -150,7 +150,7 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
                       value = evals, 
                       share = evals / sum(evals))  # share of explained variation
   select = list(R.min, c(R.ahc$selection, ED=R.onc$selection))
-  argues = list(specifies="common factors", n.factors=n.factors, k_max=k_max,
+  argues = list(specifies="number of common factors", n.factors=n.factors, k_max=k_max,
                 differenced=differenced, centered=centered, scaled=scaled)
   result = list(eigenvals=R.eval, Ahn=R.ahc$criteria, Onatski=R.onc$converge, Bai=R.bai,
                 selection=select, Ft=Ft, LAMBDA=LAMBDA, L.idio=L.idio, args_speci=argues)
@@ -163,7 +163,7 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #' @export
 print.speci <- function(x, ...){
   # create table
-  header_args = c("### Optimal number of ", x$args_speci$specifies, " ###")
+  header_args = c("### Optimal ", x$args_speci$specifies, " ###")
   
   # print
   cat(header_args, "\n", sep="")
