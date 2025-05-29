@@ -16,13 +16,14 @@ speci.factors(
 }
 \arguments{
 \item{L.data}{List of \eqn{N} \code{data.frame} objects each collecting the \eqn{K_i} time series along the rows \eqn{t=1,\ldots,T}.
-The \eqn{\sum_{i=1}^{N} K_i} time series are immediately combined into the \eqn{T \times KN} data panel \code{X}.}
+The \eqn{\sum_{i=1}^{N} K_i = NK} time series are immediately combined into the \eqn{T \times KN} data panel \code{X}.}
 
 \item{k_max}{Integer. The maximum number of factors to consider.}
 
 \item{n.iterations}{Integer. Number of iterations for the Onatski criterion.}
 
-\item{differenced}{Logical. If \code{TRUE}, each time series of the panel \code{X} is first-differenced prior to any further transformation.
+\item{differenced}{Logical. If \code{TRUE}, each time series of the panel 
+\code{X} is first-differenced prior to any further transformation.
 Thereby, all criteria are calculated as outlined by Corona et al. (2017).}
 
 \item{centered}{Logical. If \code{TRUE}, each time series of the panel \code{X} is centered.}
@@ -49,7 +50,8 @@ A list of class '\code{speci}', which contains the elements:
      \code{ED} denotes the result by Onatski's (2010) "edge distribution" after convergence.}
 \item{Ft}{Matrix. The common factors of dimension \eqn{(T \times} \code{n.factors}) estimated by PCA.}
 \item{LAMBDA}{Matrix. The loadings of dimension \eqn{(KN \times} \code{n.factors}) estimated by OLS.}
-\item{L.idio}{List of \eqn{N} \code{data.frame} objects each collecting the \eqn{K_i} idiosyncratic series \eqn{\hat{e}_{it}} along the rows \eqn{t=1,\ldots,T}. 
+\item{L.idio}{List of \eqn{N} \code{data.frame} objects each collecting 
+      the \eqn{K_i} idiosyncratic series \eqn{\hat{e}_{it}} along the rows \eqn{t=1,\ldots,T}. 
       The series \eqn{\hat{e}_{it}} are given in levels and may contain a deterministic component with 
       (1) the initial \eqn{\hat{e}_{i1}} being non-zero and (2) re-accumulated means of the the first-differenced series.}
 \item{args_speci}{List of characters and integers indicating the specifications that have been used.}
@@ -114,5 +116,9 @@ Corona, F., Poncela, P., and Ruiz, E. (2017):
 Onatski, A. (2010): 
   "Determining the Number of Factors from Empirical Distribution of Eigenvalues", 
   \emph{Review of Econometrics and Statistics}, 92, pp. 1004-1016.
+}
+\seealso{
+Other specification functions: 
+\code{\link{speci.VAR}()}
 }
 \concept{specification functions}

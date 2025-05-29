@@ -121,6 +121,48 @@ test_that("aux_check() warns or stops in case of incorrect arguments", {
 })
 
 
+test_that("speci.VAR() can reproduce basic examples from vars and urca package.", {
+  # prepare data #
+  library("urca")
+  library("vars")
+  data("denmark")
+  sjd = denmark[, c("LRM", "LRY", "IBO", "IDE")]
+  
+  # use a single lag-order to determine only the break period #
+  R.vars  = vars::VAR(sjd, type="both", p=1, season=4)
+  R.speci = speci.VAR(R.vars, lag_set=2, dim_m=1, trim=3, add_dummy=FALSE)
+  
+  # perform cointegration test procedure #
+  R.t_D   = list(t_shift=8, n.season=4)
+  R.coint = coint.SL(sjd, dim_p=2, type_SL="SL_trend", t_D=R.t_D)
+  R.urca  = urca::cajolst(sjd, trend=TRUE, K=2, season=4)
+  
+  # use m=0 to determine only the lag-order #
+  data(Canada)
+  R.vars_ic = vars::VARselect(Canada, lag.max=5, type="const")
+  R.spec_ic = speci.VAR(vars::VAR(Canada, p=1, type="const"), lag_set=1:5, dim_m=0)
+  
+  # joint determination of lag-order and break period #
+  R.spec_jnt = speci.VAR(R.vars, lag_set=1:2, dim_m=2, trim=0.2)
+  ### has no original results to replicate and test against.
+  
+  # check #
+  expect_equivalent(R.speci$selection[2,2], R.urca@bp)
+  ### expect_equal(rev(R.coint$stats_TR),       R.urca@teststat)
+  ### Trace statistics are not equal because cajolst() uses just OLS-detrending,
+  ### ... while coint.SL() uses GLS-detrending ('urca' version 1.3-4).
+  expect_equivalent(t(R.spec_ic$df[ ,-1]),  R.vars_ic$criteria)
+  expect_equivalent(R.spec_ic$selection,    R.vars_ic$selection)
+  
+  # test the stops and warnings #
+  R.vars_none = VAR(sjd, type="none", p=1, season=4)
+  expect_warning(speci.VAR(R.vars_none, lag_set=2, dim_m=1, trim=3, type_break="const"),
+                 "'type_break' pertains the constant, which is missing in the provided VAR model 'x'.")
+  expect_warning(speci.VAR(R.vars_none, lag_set=2, dim_m=1, trim=4, type_break="trend"),
+                 "'type_break' pertains the linear trend, which is missing in the provided VAR model 'x'.")
+})
+
+
 test_that("sboot.pmb() under N=1 and sboot.mb() return identical Chol-VAR and BQ-VAR results", {
   # prepare data and arguments #
   data("PCAP")

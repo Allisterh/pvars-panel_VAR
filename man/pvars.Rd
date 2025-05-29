@@ -14,26 +14,30 @@ and for structural breaks in the deterministic terms of the VAR processes.
 \details{
 \bold{(1)} The panel functions to determine the cointegration rank are:
 \itemize{
-\item \tabular{ll}{\code{\link{pcoint.JO}}:   \tab panel Johansen procedures,}
-\item \tabular{ll}{\code{\link{pcoint.BR}}:   \tab panel test with pooled two-step estimation,}
-\item \tabular{ll}{\code{\link{pcoint.SL}}:   \tab panel SL-procedures,}
-\item \tabular{ll}{\code{\link{pcoint.CAIN}}: \tab correlation-augmented inverse normal test.}
+\item \tabular{ll}{\code{\link{pcoint.JO}}   \tab panel Johansen procedures,}
+\item \tabular{ll}{\code{\link{pcoint.BR}}   \tab panel test with pooled two-step estimation,}
+\item \tabular{ll}{\code{\link{pcoint.SL}}   \tab panel SL-procedures,}
+\item \tabular{ll}{\code{\link{pcoint.CAIN}} \tab correlation-augmented inverse normal test.}
 }\cr
 \bold{(2)} The panel functions to estimate the VAR models are:
 \itemize{
-\item \tabular{ll}{\code{\link{pvarx.VAR}}: \tab mean-group of a panel of VAR models,}
-\item \tabular{ll}{\code{\link{pvarx.VEC}}: \tab pooled cointegrating vectors in a panel VECM.}
+\item \tabular{ll}{\code{\link{pvarx.VAR}} \tab mean-group of a panel of VAR models,}
+\item \tabular{ll}{\code{\link{pvarx.VEC}} \tab pooled cointegrating vectors in a panel VECM.}
 }\cr
 \bold{(3)} The panel functions to retrieve structural impact matrices are:
 \itemize{
-\item \tabular{ll}{\code{\link{pid.chol}}: \tab identification of panel SVAR models using Cholesky decomposition to impose recursive causality,}
-\item \tabular{ll}{\code{\link{pid.grt}}:  \tab identification of panel SVEC models,}
-\item \tabular{ll}{\code{\link{pid.iv}}:   \tab identification of panel SVAR models by means of proxy variables.}
-\item \tabular{ll}{\code{\link{pid.dc}}:   \tab independence-based identification of panel SVAR models using distance covariance (DC) statistic,}
-\item \tabular{ll}{\code{\link{pid.cvm}}:  \tab independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.}
+\item \tabular{ll}{\code{\link{pid.chol}} \tab identification of panel SVAR models using Cholesky decomposition to impose recursive causality,}
+\item \tabular{ll}{\code{\link{pid.grt}}  \tab identification of panel SVEC models,}
+\item \tabular{ll}{\code{\link{pid.iv}}   \tab identification of panel SVAR models by means of proxy variables.}
+\item \tabular{ll}{\code{\link{pid.dc}}   \tab independence-based identification of panel SVAR models using distance covariance (DC) statistic,}
+\item \tabular{ll}{\code{\link{pid.cvm}}  \tab independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.}
 }\cr
-Supporting tools like the panel block bootstrap procedure (\code{\link{sboot.pmb}}) 
-and the provided data sets allow for the replication of the implemented literature.
+Supporting tools, such as the specification functions (\code{\link{speci.VAR}}, 
+\code{\link{speci.factors}}) and the panel block bootstrap procedure 
+(\code{\link{sboot.pmb}}), complement the panel VAR functions and complete 
+this coherent approach to \strong{\emph{VAR modeling for heterogeneous panels}} 
+within the \strong{vars} ecosystem. The provided data sets further allow for 
+the exact replication of the implemented literature.
 }
 \seealso{
 Useful links:
@@ -44,5 +48,5 @@ Useful links:
 
 }
 \author{
-Lennart Empting \email{lennart.empting@uni-goettingen.de}
+Lennart Empting \email{lennart.empting@vwl.uni-due.de}
 }

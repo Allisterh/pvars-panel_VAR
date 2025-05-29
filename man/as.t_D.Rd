@@ -40,8 +40,8 @@ A list of class '\code{t_D}' specifying \eqn{\tau}.
   the reference time interval. Accordingly, '\code{D}' contains \eqn{p+T} 
   observations, and '\code{t_D}' contains the positions of activating 
   periods \eqn{\tau} in \eqn{1,\ldots,(p+T)}. In a balanced panel 
-  \eqn{p_i+T_i = T*}, the same date implies the same \eqn{\tau} in 
-  \eqn{1,\ldots,T*}, as shown in the example for '\link{pcoint.CAIN}'. 
+  \eqn{p_i+T_i = T^*}, the same date implies the same \eqn{\tau} in 
+  \eqn{1,\ldots,T^*}, as shown in the example for '\link{pcoint.CAIN}'. 
   However, in an unbalanced panel, the same date can imply different 
   \eqn{\tau} across \eqn{i} in accordance with the individual time interval 
   \eqn{1,\ldots,(p_i+T_i)}. Note that across the time series in '\code{L.data}', 

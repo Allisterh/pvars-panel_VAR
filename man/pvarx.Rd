@@ -98,8 +98,8 @@ A list of class '\code{\link[=as.pvarx]{pvarx}}' with the elements:
 \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 
         for the lagged variables in the panel VAR estimated by mean-group.}
 \item{B}{Matrix. Placeholder for the structural impact matrix.}
-\item{beta}{Matrix. The \eqn{((K+n_{d1}) x r)} cointegrating matrix of the VAR model 
-  if transformed from a rank-restricted VECM.}
+\item{beta}{Matrix. The \eqn{((K+n_{d1}) \times r)} cointegrating matrix
+  of the VAR model if transformed from a rank-restricted VECM.}
 \item{L.varx}{List of '\code{varx}' objects for the individual estimation results.}
 \item{L.data}{List of '\code{data.frame}' objects for each individual.}
 \item{CSD}{List of measures for cross-sectional dependency. 
