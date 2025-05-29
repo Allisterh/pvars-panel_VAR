@@ -1,5 +1,4 @@
-pvars
-====
+# pvars
 
 VAR Modeling for Heterogeneous Panels
 
