@@ -8,11 +8,22 @@ VAR Modeling for Heterogeneous Panels
 
 This package implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and (3) panel-based identification methods for structural vector autoregressive (SVAR) models. The implemented functions allow to account for cross-sectional dependence in the error terms and for structural breaks in the deterministic terms of the VAR processes.
 
-**(1)** The panel functions to determine the cointegration rank are: - `pcoint.JO()` panel Johansen procedures, - `pcoint.BR()` panel test with pooled two-step estimation, - `pcoint.SL()` panel Saikkonen-Luetkepohl procedures, - `pcoint.CAIN()` correlation-augmented inverse normal test.
+**(1)** The panel functions to determine the cointegration rank are: 
+-   `pcoint.JO()` panel Johansen procedures, 
+-   `pcoint.BR()` panel test with pooled two-step estimation, 
+-   `pcoint.SL()` panel Saikkonen-Luetkepohl procedures, 
+-   `pcoint.CAIN()` correlation-augmented inverse normal test.
 
-**(2)** The panel functions to estimate the VAR models are: - `pvarx.VAR()` mean-group of a panel of VAR models, - `pvarx.VEC()` pooled cointegrating vectors in a panel VECM.
+**(2)** The panel functions to estimate the VAR models are:
+-   `pvarx.VAR()` mean-group of a panel of VAR models,
+-   `pvarx.VEC()` pooled cointegrating vectors in a panel VECM.
 
-**(3)** The panel functions to retrieve structural impact matrices are: - `pid.chol()` identification of panel SVAR models using Cholesky decomposition to impose recursive causality, - `pid.grt()` identification of panel SVEC models, - `pid.iv()` identification of panel SVAR models by means of proxy variables. - `pid.dc()` independence-based identification of panel SVAR models using distance covariance (DC) statistic, - `pid.cvm()` independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.
+**(3)** The panel functions to retrieve structural impact matrices are: 
+-   `pid.chol()` identification of panel SVAR models using Cholesky decomposition to impose recursive causality, 
+-   `pid.grt()` identification of panel SVEC models,
+-   `pid.iv()` identification of panel SVAR models by means of proxy variables, 
+-   `pid.dc()` independence-based identification of panel SVAR models using distance covariance (DC) statistic, 
+-   `pid.cvm()` independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.
 
 Supporting tools, such as the specification functions (`speci.VAR`, `speci.factors`) and the panel block bootstrap procedure (`sboot.pmb`), complement the panel VAR functions and complete this coherent approach to ***VAR modeling for heterogeneous panels*** within the **vars** ecosystem. The provided data sets further allow for the exact replication of the implemented literature.
 
