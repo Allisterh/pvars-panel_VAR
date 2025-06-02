@@ -8,7 +8,7 @@ VAR Modeling for Heterogeneous Panels
 
 This package implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and (3) panel-based identification methods for structural vector autoregressive (SVAR) models. The implemented functions allow to account for cross-sectional dependence in the error terms and for structural breaks in the deterministic terms of the VAR processes.
 
-**(1)** The panel functions to determine the cointegration rank are: - `pcoint.JO()` panel Johansen procedures, - `pcoint.BR()` panel test with pooled two-step estimation, - `pcoint.SL()` panel SL-procedures, - `pcoint.CAIN()` correlation-augmented inverse normal test.
+**(1)** The panel functions to determine the cointegration rank are: - `pcoint.JO()` panel Johansen procedures, - `pcoint.BR()` panel test with pooled two-step estimation, - `pcoint.SL()` panel Saikkonen-Luetkepohl procedures, - `pcoint.CAIN()` correlation-augmented inverse normal test.
 
 **(2)** The panel functions to estimate the VAR models are: - `pvarx.VAR()` mean-group of a panel of VAR models, - `pvarx.VEC()` pooled cointegrating vectors in a panel VECM.
 
@@ -62,6 +62,7 @@ R.fac0 = speci.factors(L.data, k_max=20, n.iterations=4,
    differenced=TRUE, centered=TRUE, scaled=TRUE, n.factors=8)
 ```
 
+The same estimated factors $\hat{F}_t$ can be retrieved from `R.fac0` or the subsequent `pcoint` object. Their plot is identical to the original Fig. 4 in Arsova and Oersal (2017, p. 71) up to sign and scale.
 
 ``` r
 library("ggfortify")

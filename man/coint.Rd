@@ -42,7 +42,7 @@ for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{2,t}
 which are unrestricted.}
 
 \item{type_SL}{Character. The conventional case of the 
-\link[=as.t_D]{deterministic term} in the SL-procedure.}
+\link[=as.t_D]{deterministic term} in the Saikkonen-Luetkepohl (SL) procedure.}
 
 \item{t_D}{List of vectors. The activation periods \eqn{\tau} 
 for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{t}} of the SL-procedure. 

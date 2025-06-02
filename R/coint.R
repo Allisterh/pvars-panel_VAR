@@ -103,7 +103,7 @@ coint.JO <- function(y, dim_p, x=NULL, dim_q=dim_p,
 
 #' @describeIn coint (T)SL-procedure.
 #' @param type_SL Character. The conventional case of the 
-#'   \link[=as.t_D]{deterministic term} in the SL-procedure. 
+#'   \link[=as.t_D]{deterministic term} in the Saikkonen-Luetkepohl (SL) procedure. 
 #' @param t_D List of vectors. The activation periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{t}} of the SL-procedure. 
 #'   The accompanying lagged regressors are automatically included in \eqn{d_{t}}. 

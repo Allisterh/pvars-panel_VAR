@@ -16,7 +16,7 @@ and for structural breaks in the deterministic terms of the VAR processes.
 \itemize{
 \item \tabular{ll}{\code{\link{pcoint.JO}}   \tab panel Johansen procedures,}
 \item \tabular{ll}{\code{\link{pcoint.BR}}   \tab panel test with pooled two-step estimation,}
-\item \tabular{ll}{\code{\link{pcoint.SL}}   \tab panel SL-procedures,}
+\item \tabular{ll}{\code{\link{pcoint.SL}}   \tab panel Saikkonen-Luetkepohl procedures,}
 \item \tabular{ll}{\code{\link{pcoint.CAIN}} \tab correlation-augmented inverse normal test.}
 }\cr
 \bold{(2)} The panel functions to estimate the VAR models are:
