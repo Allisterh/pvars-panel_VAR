@@ -49,7 +49,7 @@ library("pvars")
 
 Several empirical illustrations accompany pvars to demonstrate its application. In the `help()` for functions, the examples provide chunks of R-code for directly copy-pasting unit-tested reproductions. In this README, we show how to reproduce the empirical illustration of Oersal and Arsova (2017, Sec. 5) on the *Monetary Exchange Rate Model*: We first transform the panel data set, then determine the number of factors in the approximate factor model, conduct panel cointegration rank tests on the idiosyncratic components, and finally test the cointegration rank of the common factors.
 
-**Data.** pvars' exemplary data sets are panels in the popular long-format and thus stored as $(N \cdot T ) \times (2 + K )$ `data.frame` objects. The first two columns `id_i` and `id_t` contain factor elements, which serve as identifiers for individuals $i = 1,\ldots,N$ and time periods $t = 1,\ldots,T$. The subsequent $K$ columns contain the $NT$ stacked observations for the $K$ variables. You can use `sapply` to split the long-format panel into a list of $N$ time series matrices. This list is suitable for all panel functions and allows to pick single matrices for individual analysis, too.
+**Data.** pvars' exemplary data sets are panels in the popular long-format and thus stored as $(N \cdot T ) \times (2 + K )$ `data.frame` objects. The first two columns `id_i` and `id_t` contain factor elements, which serve as identifiers for individuals $i = 1,\ldots,N$ and time periods $t = 1,\ldots,T$. The subsequent $K$ columns contain the $NT$ stacked observations for the $K$ variables. 
 
 ``` r
 data("MERM")
@@ -61,7 +61,11 @@ head(MERM, n=3)
 # 1 Brazil 1995_Jan -0.1660546 -3.094546 0.07401953 0.3357538
 # 2 Brazil 1995_Feb -0.1731636 -3.054644 0.07127137 0.3422039
 # 3 Brazil 1995_Mar -0.1176580 -3.055017 0.06986985 0.3539417
+```
 
+You can use `sapply` to split the long-format panel into a list of $N$ time series matrices. This list is suitable for all panel functions and allows to pick single matrices for individual analysis, too.
+
+``` r
 L.data = sapply(names_i, FUN=function(i)
   ts(MERM[MERM$id_i==i, names_k], start=c(1995, 1), frequency=12),
   simplify=FALSE)
@@ -121,5 +125,6 @@ toLatex(R.Ftsl, R.Ftjo, write_ME=TRUE,
 -   Johansen, S. (1996): *Likelihood-based Inference in Cointegrated Vector Autoregressive Models*, Advanced Texts in Econometrics, Oxford University Press, USA.
 -   Larsson, R., Lyhagen, J., and Lothgren, M. (2001): "Likelihood-based Cointegration Tests in Heterogeneous Panels", *Econometrics Journal*, 4, pp. 109-142.
 -   Oersal, D. D. K., and Arsova, A. (2017): "Meta-Analytic Cointegrating Rank Tests for Dependent Panels", *Econometrics and Statistics*, 2, pp. 61-72.
+-   Onatski, A. (2010): "Determining the Number of Factors from Empirical Distribution of Eigenvalues", *Review of Econometrics and Statistics*, 92, pp. 1004-1016.
 -   Saikkonen, P., and Luetkepohl, H. (2000): "Trend Adjustment Prior to Testing for the Cointegrating Rank of a Vector Autoregressive Process", *Journal of Time Series Analysis*, 21, pp. 435-456.
 
