@@ -172,7 +172,7 @@ Breitung, J. (2005):
   \emph{Econometric Reviews}, 24, pp. 151-173.
 
 Johansen, S. (1996): 
-  \emph{Likelihood-Based Inference in Cointegrated Vector Autoregressive Models}, 
+  \emph{Likelihood-based Inference in Cointegrated Vector Autoregressive Models}, 
   Advanced Texts in Econometrics, Oxford University Press, USA.
 
 Pesaran, M. H., Shin, Y, and Smith R. J. (1999): 

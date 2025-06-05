@@ -28,7 +28,7 @@ and for structural breaks in the deterministic terms of the VAR processes.
 \itemize{
 \item \tabular{ll}{\code{\link{pid.chol}} \tab identification of panel SVAR models using Cholesky decomposition to impose recursive causality,}
 \item \tabular{ll}{\code{\link{pid.grt}}  \tab identification of panel SVEC models,}
-\item \tabular{ll}{\code{\link{pid.iv}}   \tab identification of panel SVAR models by means of proxy variables.}
+\item \tabular{ll}{\code{\link{pid.iv}}   \tab identification of panel SVAR models by means of proxy variables,}
 \item \tabular{ll}{\code{\link{pid.dc}}   \tab independence-based identification of panel SVAR models using distance covariance (DC) statistic,}
 \item \tabular{ll}{\code{\link{pid.cvm}}  \tab independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.}
 }\cr
