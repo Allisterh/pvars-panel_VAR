@@ -147,7 +147,7 @@ pvarx.VAR <- function(L.data, lags, type=c("const", "trend", "both", "none"),
 #'   "A Parametric Approach to the Estimation of Cointegration Vectors in Panel Data",
 #'   \emph{Econometric Reviews}, 24, pp. 151-173.
 #' @references Johansen, S. (1996): 
-#'   \emph{Likelihood-Based Inference in Cointegrated Vector Autoregressive Models}, 
+#'   \emph{Likelihood-based Inference in Cointegrated Vector Autoregressive Models}, 
 #'   Advanced Texts in Econometrics, Oxford University Press, USA.
 #' @references Pesaran, M. H., Shin, Y, and Smith R. J. (1999): 
 #'   "Pooled Mean Group Estimation of Dynamic Heterogeneous Panels",
