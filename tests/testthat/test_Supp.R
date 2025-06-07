@@ -116,6 +116,8 @@ test_that("aux_check() warns or stops in case of incorrect arguments", {
                "Argument 'lags' must be either a single integer or a vector of N integers specific to each individual.")
   expect_warning(pcoint.SL(L.data, lags=R.lagsF, type="SL_trend"),
                  "Arguments 'L.data' and lags have mismatching names for individuals.")
+  expect_warning(pcoint.SL(L.data, lags=2, type="SL_trend", t_D=list(t_impulse=10), n.factors=2),
+                 "The factor estimation by PCA ignores period-specific deterministic regressors.")
   expect_warning(pcoint.CAIN(L.data, lags=2, type="SL_trend", t_D=t_DF),
                  "Unrecognized elements in 't_D' have been removed: t_error")
 })

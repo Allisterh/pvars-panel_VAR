@@ -85,7 +85,7 @@ pcoint.JO <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
   if(n.factors>0){
     trend = switch(type, "Case1"=FALSE, "Case2"=FALSE, "Case3"=TRUE, "Case4"=TRUE, "Case5"=TRUE)
     Ycd = do.call("cbind", L.y)  # data matrix of dimension (T x K*N), which include common and deterministic components
-    PCA = aux_ComFact(X=Ycd, trend=trend, n.factors=n.factors)  # PANIC (2004) decomposition
+    PCA = aux_ComFact(X=Ycd, trend=trend, n.factors=n.factors, D=c(t_D1, t_D2))  # PANIC (2004) decomposition
     Xit = PCA$eit   # panel of idiosyncratic components without deterministic term
     L.y = lapply(1:dim_N, FUN=function(i) Xit[ ,dim_K*(i-1) + 1:dim_K])  # overwrite for subsequent VECM estimation
     
@@ -235,7 +235,7 @@ pcoint.SL <- function(L.data, lags, type="SL_trend", t_D=NULL, n.factors=FALSE){
   if(n.factors>0){
     trend = switch(type, "SL_mean"=FALSE, "SL_trend"=TRUE)
     Ycd = do.call("cbind", L.y)  # data matrix of dimension (T x K*N), which include common and deterministic components
-    PCA = aux_ComFact(X=Ycd, trend=trend, n.factors=n.factors)  # PANIC (2004) decomposition
+    PCA = aux_ComFact(X=Ycd, trend=trend, n.factors=n.factors, D=t_D)  # PANIC (2004) decomposition
     Y.star = PCA$eit2  # panel of idiosyncratic components with deterministic term
     L.y = lapply(1:dim_N, FUN=function(i) Y.star[ ,dim_K*(i-1) + 1:dim_K])  # overwrite for subsequent VECM estimation
     type = "SL_trend"  # defactoring introduces deterministic and stochastic trend in VECM, see Arsova,Oersal 2018:1037 / 2017:64

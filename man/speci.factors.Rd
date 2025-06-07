@@ -94,11 +94,11 @@ plot(F.scree)
 # factor plot (comp. Oersal,Arsova 2017:71, Fig.4) #
 library("ggfortify")
 Ft = ts(R.fac0$Ft, start=c(1995, 1), frequency=12)
-F.factor = autoplot(Ft, facets=FALSE, size=1.5) + 
+F.factors = autoplot(Ft, facets=FALSE, size=1.5) + 
   scale_color_brewer(palette="Spectral") +
   labs(x="Year", y=NULL, color="Factor", title=NULL) +
   theme_bw()
-plot(F.factor)
+plot(F.factors)
 
 }
 \references{

@@ -434,13 +434,14 @@ aux_MG <- function(x, idx_par, w=NULL){
 
 
 # estimate common factors for PANIC, from Bai,Ng (2004)
-aux_ComFact <- function(X, trend=TRUE, scaled=TRUE, SVD=TRUE, n.factors){
+aux_ComFact <- function(X, trend=TRUE, scaled=TRUE, SVD=TRUE, n.factors, D=NULL){
   ### see also Silvestre,Surdeanu 2011:5 for VAR process
   # define
+  if(!is.null(D)){ warning("The factor estimation by PCA ignores period-specific deterministic regressors.", call.=FALSE) }  # Bai,Ng 2013:23, Ch.5, adopt D in factor models.
   X = as.matrix(X)  # matrix X must be of dimension (T x K*N)
   dim_T = nrow(X)   # number of time periods
   xit = diff(X)  # first-differences against non-stationarity,  from Bai,Ng 2004:1138, Eq.9
-  xit = scale(xit, center=trend, scale=FALSE)  # demeaning against a linear trend
+  xit = scale(xit, center=trend, scale=FALSE)  # demeaning against a (first-differenced) linear trend
   xsd = scale(xit, center=FALSE, scale=scaled) # scaling against variables' differing units or magnitudes, from Oersal,Arsova 2017:67
   
   # principal component analysis
