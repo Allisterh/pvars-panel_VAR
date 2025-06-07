@@ -8,14 +8,14 @@
 # and their subordinated modules.
 
 
-test_that("pcoint.s' PANIC can reproduce 'MERM' in Arsova,Oersal 2017:67, Ch.5", {
+test_that("pcoint.s' PANIC can reproduce 'MERM' in Oersal,Arsova 2017:67, Ch.5", {
   # prepare data
   data("MERM")
   names_k = colnames(MERM)[-(1:2)] # variable names
   names_i = levels(MERM$id_i)      # country names
   L.data  = sapply(names_i, FUN=function(i) ts(MERM[MERM$id_i==i, names_k], start=c(1995, 1), frequency=12), simplify=FALSE)
   
-  # Arsova,Oersal 2017:67, Tab.5 #
+  # Oersal,Arsova 2017:67, Tab.5 #
   R.lags = c(2, 2, 2, 2, 1, 2, 2, 4, 2, 3, 2, 2, 2, 2, 2, 1, 1, 2, 2); names(R.lags)=names_i  # individual lags by AIC (lag_max=4)
   R.pcsl = pcoint.SL(L.data, lags=R.lags, type="SL_trend", n.factors=8)  # eight factors by Onatski's (2010) criterion
   R.pcjo = pcoint.JO(L.data, lags=R.lags, type="Case4",    n.factors=8)
@@ -36,7 +36,7 @@ test_that("pcoint.s' PANIC can reproduce 'MERM' in Arsova,Oersal 2017:67, Ch.5",
   expect_equal(our_panel, their_panel, tolerance = 0.05)
   expect_equal(R.pcsl$CSD, R.pcjo$CSD)
   
-  # Arsova,Oersal 2017:67, Tab.6 #
+  # Oersal,Arsova 2017:67, Tab.6 #
   R.Ftsl = coint.SL(y=R.pcsl$CSD$Ft, dim_p=2, type_SL="SL_trend")  # lag-order by AIC
   R.Ftjo = coint.JO(y=R.pcsl$CSD$Ft, dim_p=2, type="Case4")
   ours   = cbind(SL_stats = R.Ftsl$stats_TR, 

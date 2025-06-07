@@ -100,7 +100,7 @@ Performs test procedures for the rank of cointegration in a panel of VAR models.
 
 }}
 \examples{
-### reproduce Arsova,Oersal 2017:67, Ch.5 ###
+### reproduce Oersal,Arsova 2017:67, Ch.5 ###
 data("MERM")
 names_k = colnames(MERM)[-(1:2)] # variable names
 names_i = levels(MERM$id_i)      # country names
@@ -108,14 +108,14 @@ L.data  = sapply(names_i, FUN=function(i)
    ts(MERM[MERM$id_i==i, names_k], start=c(1995, 1), frequency=12), 
    simplify=FALSE)
 
-# Arsova,Oersal 2017:67, Tab.5 #
+# Oersal,Arsova 2017:67, Tab.5 #
 R.lags = c(2, 2, 2, 2, 1, 2, 2, 4, 2, 3, 2, 2, 2, 2, 2, 1, 1, 2, 2)
 names(R.lags) = names_i  # individual lags by AIC (lag_max=4)
 n.factors = 8  # number of common factors by Onatski's (2010) criterion
 R.pcsl = pcoint.SL(L.data, lags=R.lags, n.factors=n.factors, type="SL_trend")
 R.pcjo = pcoint.JO(L.data, lags=R.lags, n.factors=n.factors, type="Case4")
 
-# Arsova,Oersal 2017:67, Tab.6 #
+# Oersal,Arsova 2017:67, Tab.6 #
 R.Ftsl = coint.SL(y=R.pcsl$CSD$Ft, dim_p=2, type_SL="SL_trend")  # lag-order by AIC
 R.Ftjo = coint.JO(y=R.pcsl$CSD$Ft, dim_p=2, type="Case4")
 

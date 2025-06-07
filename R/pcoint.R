@@ -197,7 +197,7 @@ pcoint.BR <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
 #'   \emph{Econometric Reviews}, 37, pp. 1033-1050.
 #' 
 #' @examples
-#' ### reproduce Arsova,Oersal 2017:67, Ch.5 ###
+#' ### reproduce Oersal,Arsova 2017:67, Ch.5 ###
 #' data("MERM")
 #' names_k = colnames(MERM)[-(1:2)] # variable names
 #' names_i = levels(MERM$id_i)      # country names
@@ -205,14 +205,14 @@ pcoint.BR <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
 #'    ts(MERM[MERM$id_i==i, names_k], start=c(1995, 1), frequency=12), 
 #'    simplify=FALSE)
 #' 
-#' # Arsova,Oersal 2017:67, Tab.5 #
+#' # Oersal,Arsova 2017:67, Tab.5 #
 #' R.lags = c(2, 2, 2, 2, 1, 2, 2, 4, 2, 3, 2, 2, 2, 2, 2, 1, 1, 2, 2)
 #' names(R.lags) = names_i  # individual lags by AIC (lag_max=4)
 #' n.factors = 8  # number of common factors by Onatski's (2010) criterion
 #' R.pcsl = pcoint.SL(L.data, lags=R.lags, n.factors=n.factors, type="SL_trend")
 #' R.pcjo = pcoint.JO(L.data, lags=R.lags, n.factors=n.factors, type="Case4")
 #' 
-#' # Arsova,Oersal 2017:67, Tab.6 #
+#' # Oersal,Arsova 2017:67, Tab.6 #
 #' R.Ftsl = coint.SL(y=R.pcsl$CSD$Ft, dim_p=2, type_SL="SL_trend")  # lag-order by AIC
 #' R.Ftjo = coint.JO(y=R.pcsl$CSD$Ft, dim_p=2, type="Case4")
 #' 
@@ -297,7 +297,7 @@ pcoint.SL <- function(L.data, lags, type="SL_trend", t_D=NULL, n.factors=FALSE){
   # apply panel tests
   if(type=="SL_trend"){ moments = coint_moments[[type]][dim_K:1, , drop=FALSE] }  # use exactly those moments which Arsova,Oersal (2018) have simulated
   LRbar = ptest.STATSbar(STATS=LR.stats, distribution="theoretical", moments=moments)  # from Arsova,Oersal 2018:1039, Eq.12
-  Choi  = ptest.METApval(PVALS=LR.pvals, distribution="theoretical")  # from Arsova,Oersal 2017:63, Eq.7-10
+  Choi  = ptest.METApval(PVALS=LR.pvals, distribution="theoretical")  # from Oersal,Arsova 2017:63, Eq.7-10
   
   # return result
   indiv = list(stats=t(LR.stats), pvals=t(LR.pvals), lags=L.dim_p, t_D=L.t_D)

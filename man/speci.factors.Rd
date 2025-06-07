@@ -68,7 +68,7 @@ If \code{differenced} is \code{TRUE}, the approximate factor model is estimated 
   to the objects in \code{$CSD} for PANIC analyses in '\code{pcoint}' objects.
 }
 \examples{
-### reproduce Arsova,Oersal 2017:67, Ch.5 ###
+### reproduce Oersal,Arsova 2017:67, Ch.5 ###
 data("MERM")
 names_k = colnames(MERM)[-(1:2)] # variable names
 names_i = levels(MERM$id_i)      # country names
@@ -86,10 +86,19 @@ pal = c("#999999", RColorBrewer::brewer.pal(n=8, name="Spectral"))
 lvl = levels(R.fac0$eigenvals$scree)
 F.scree = ggplot(R.fac0$eigenvals[1:20, ]) +
   geom_col(aes(x=n, y=share, fill=scree), color="black", width=0.75) +
-  scale_fill_manual(values=pal, breaks=lvl, guide=FALSE) +
+  scale_fill_manual(values=pal, breaks=lvl, guide="none") +
   labs(x="Component number", y="Share on total variance", title=NULL) +
   theme_bw()
 plot(F.scree)
+
+# factor plot (comp. Oersal,Arsova 2017:71, Fig.4) #
+library("ggfortify")
+Ft = ts(R.fac0$Ft, start=c(1995, 1), frequency=12)
+F.factor = autoplot(Ft, facets=FALSE, size=1.5) + 
+  scale_color_brewer(palette="Spectral") +
+  labs(x="Year", y=NULL, color="Factor", title=NULL) +
+  theme_bw()
+plot(F.factor)
 
 }
 \references{

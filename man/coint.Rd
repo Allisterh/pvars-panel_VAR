@@ -96,7 +96,7 @@ R.KNvecm = VECM(y=sjd[ , c("LRM"), drop=FALSE],   dim_p=2,
                 x=sjd[ , c("LRY", "IBO", "IDE")], dim_q=2, dim_r=1, 
                 type="Case2", t_D1=list(t_shift=36), t_D2=list(n.season=4))
 
-### reproduce Arsova,Oersal 2016:22, Tab.7.5 "France" ###
+### reproduce Oersal,Arsova 2016:22, Tab.7.5 "France" ###
 data("ERPT")
 names_k = c("lpm5", "lfp5", "llcusd")  # variable names for "Chemicals and related products"
 names_i = levels(ERPT$id_i)[c(1,6,2,5,4,3,7)]  # ordered country names

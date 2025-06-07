@@ -119,7 +119,7 @@ test_that("coint.JO() and VECM() can reproduce the basic examples with four seas
 })
 
 
-### reproduce Arsova,Oersal 2016:22, Tab.7.5/8 ###
+### reproduce Oersal,Arsova 2016:22, Tab.7.5/8 ###
 # R.JOrank  = coint.JO(y=sjd, dim_p=3, type="Case4")
 # R.TSLrank = coint.SL(y=L.data$France, dim_p=3, type_SL="SL_trend", t_D=list(t_break=89))
 # R.MSBrank = coint.MSB(eit=sjd, lag_max = 5, MIC="AIC", type_MSB = "MSB_trend")

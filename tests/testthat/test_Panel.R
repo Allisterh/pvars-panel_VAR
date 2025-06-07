@@ -25,7 +25,7 @@ test_that("ptest.STATSbar() can reproduce Silvestre,Surdeanu 2011:27, Ch.6,Tab.1
 })
 
 
-test_that("ptest.METApval() can reproduce Arsova,Oersal 2017:68, Ch.5,Tab.5", {
+test_that("ptest.METApval() can reproduce Oersal,Arsova 2017:68, Ch.5,Tab.5", {
   # individual p-values #
   SL_pvals = rbind(
     r1=c(0.829, 0.404, 0.878, 0.565, 0.478, 0.621, 0.776, 0.897, 0.284,  # for r_H0=1
@@ -41,8 +41,8 @@ test_that("ptest.METApval() can reproduce Arsova,Oersal 2017:68, Ch.5,Tab.5", {
 })
 
 
-test_that("ptest.CAIN() can reproduce Arsova,Oersal 2016:22, Tab.7/8", {
-  ### Arsova,Oersal 2016:22, Tab.7.0/8 ###
+test_that("ptest.CAIN() can reproduce Oersal,Arsova 2016:22, Tab.7/8", {
+  ### Oersal,Arsova 2016:22, Tab.7.0/8 ###
   TSL0_pvals = rbind(
     r0=c(0.23, 0.36, 0.22, 0.48, 0.02, 0.52, 0.76),
     r1=c(0.69, 0.93, 0.96, 0.63, 0.62, 0.82, 0.86))
@@ -52,7 +52,7 @@ test_that("ptest.CAIN() can reproduce Arsova,Oersal 2016:22, Tab.7/8", {
   theirs = c(r0=-0.85, r1=NA, r2=NA)
   expect_equivalent(t(ours$stats)["CAIN", 1], theirs[1], tolerance = 0.015)
   
-  ### Arsova,Oersal 2016:22, Tab.7.5/8 ###
+  ### Oersal,Arsova 2016:22, Tab.7.5/8 ###
   TSL5_pvals = rbind(
     r0=c(0.02, 0.04, 0.02, 0.01, 0.04, 0.03, 0.15),
     r1=c(0.25, 0.40, 0.03, 0.06, 0.04, 0.10, 0.60),
@@ -94,7 +94,7 @@ test_that("aux_2StepBR() and aux_RRR() return identical cointegration vectors fo
 })
 
 
-test_that("speci.factors() and aux_ComFact() based on EVD and SVD are identical and can reproduce Arsova,Oersal 2017:67, Ch.5", {
+test_that("speci.factors() and aux_ComFact() based on EVD and SVD are identical and can reproduce Oersal,Arsova 2017:67, Ch.5", {
   # prepare data #
   data("MERM")
   names_k = c("s", "m", "y", "p") # variable names
@@ -113,7 +113,7 @@ test_that("speci.factors() and aux_ComFact() based on EVD and SVD are identical 
   expect_equal(PCA_evd$eit2, PCA_svd$eit2)
   expect_equal(abs(PCA_evd$Ft), abs(PCA_svd$Ft))
   
-  # Onatski (2010) ED criterion for Arsova,Oersal 2017:67, Ch.5 #
+  # Onatski (2010) ED criterion for Oersal,Arsova 2017:67, Ch.5 #
   speci_lvl = speci.factors(L.data, k_max=20, n.iterations=6)
   expect_equivalent(speci_lvl$selection[[2]]["ED"], 8)
   

@@ -63,7 +63,7 @@
 #'   "Determining the Number of Factors from Empirical Distribution of Eigenvalues", 
 #'   \emph{Review of Econometrics and Statistics}, 92, pp. 1004-1016.
 #' @examples
-#' ### reproduce Arsova,Oersal 2017:67, Ch.5 ###
+#' ### reproduce Oersal,Arsova 2017:67, Ch.5 ###
 #' data("MERM")
 #' names_k = colnames(MERM)[-(1:2)] # variable names
 #' names_i = levels(MERM$id_i)      # country names
@@ -81,10 +81,19 @@
 #' lvl = levels(R.fac0$eigenvals$scree)
 #' F.scree = ggplot(R.fac0$eigenvals[1:20, ]) +
 #'   geom_col(aes(x=n, y=share, fill=scree), color="black", width=0.75) +
-#'   scale_fill_manual(values=pal, breaks=lvl, guide=FALSE) +
+#'   scale_fill_manual(values=pal, breaks=lvl, guide="none") +
 #'   labs(x="Component number", y="Share on total variance", title=NULL) +
 #'   theme_bw()
 #' plot(F.scree)
+#' 
+#' # factor plot (comp. Oersal,Arsova 2017:71, Fig.4) #
+#' library("ggfortify")
+#' Ft = ts(R.fac0$Ft, start=c(1995, 1), frequency=12)
+#' F.factor = autoplot(Ft, facets=FALSE, size=1.5) + 
+#'   scale_color_brewer(palette="Spectral") +
+#'   labs(x="Year", y=NULL, color="Factor", title=NULL) +
+#'   theme_bw()
+#' plot(F.factor)
 #' 
 #' @family specification functions
 #' @export

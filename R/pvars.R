@@ -112,8 +112,8 @@ NULL
 #' Data set on the \emph{Exchange Rate Pass-Through}
 #' @docType data
 #' @description The data set \code{ERPT} consists of 
-#'   monthly observations for the logarithm of import prices \eqn{lm*}, 
-#'   foreign prices \eqn{lf*}, and the exchange rate against the US dollar \eqn{llcusd}.
+#'   monthly observations for the logarithm of import prices \eqn{lm^*}, 
+#'   foreign prices \eqn{lf^*}, and the exchange rate against the US dollar \eqn{llcusd}.
 #'   It covers the period January 1995 to March 2005 \eqn{(T=123)} for \eqn{N=7} countries. 
 #'   The asterisk denotes the industry of the variables and can take values from 0 to 8:
 #'   \itemize{

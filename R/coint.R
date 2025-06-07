@@ -118,7 +118,7 @@ coint.JO <- function(y, dim_p, x=NULL, dim_q=dim_p,
 #'   "Testing for the Cointegrating Rank of a VAR Process with Level Shift and Trend Break", 
 #'   \emph{Journal of Time Series Analysis}, 29, pp. 331-358.
 #' @examples
-#' ### reproduce Arsova,Oersal 2016:22, Tab.7.5 "France" ###
+#' ### reproduce Oersal,Arsova 2016:22, Tab.7.5 "France" ###
 #' data("ERPT")
 #' names_k = c("lpm5", "lfp5", "llcusd")  # variable names for "Chemicals and related products"
 #' names_i = levels(ERPT$id_i)[c(1,6,2,5,4,3,7)]  # ordered country names

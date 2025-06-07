@@ -441,7 +441,7 @@ aux_ComFact <- function(X, trend=TRUE, scaled=TRUE, SVD=TRUE, n.factors){
   dim_T = nrow(X)   # number of time periods
   xit = diff(X)  # first-differences against non-stationarity,  from Bai,Ng 2004:1138, Eq.9
   xit = scale(xit, center=trend, scale=FALSE)  # demeaning against a linear trend
-  xsd = scale(xit, center=FALSE, scale=scaled) # scaling against variables' differing units or magnitudes, from Arsova,Oersal 2017:67
+  xsd = scale(xit, center=FALSE, scale=scaled) # scaling against variables' differing units or magnitudes, from Oersal,Arsova 2017:67
   
   # principal component analysis
   if(SVD){
