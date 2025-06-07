@@ -80,15 +80,15 @@ NULL
 #'   each consisting of quarterly observations for 
 #'   \itemize{
 #'   \item the first-difference of log real GDP 
-#'         on national \eqn{dl_GDP} or aggregated EA-level \eqn{EA_dl_GDP}, 
+#'         on national \eqn{dl\_GDP} or aggregated EA-level \eqn{EA\_dl\_GDP}, 
 #'   \item the annualized inflation of the (log) GDP deflator
-#'         on national \eqn{dl_deflator} or aggregated EA-level \eqn{EA_pi}, 
+#'         on national \eqn{dl\_deflator} or aggregated EA-level \eqn{EA\_pi}, 
 #'   \item the EA-wide short-term interest rate \eqn{IR}, 
 #'   \item the EA-wide option-adjusted bond spreads \eqn{BBB}, 
-#'   \item the first-difference of log real GDP in the remaining countries \eqn{dl_GDP_EA}, 
-#'   \item the weighted inflation in the remaining countries \eqn{dl_deflator_EA}, 
+#'   \item the first-difference of log real GDP in the remaining countries \eqn{dl\_GDP\_EA}, 
+#'   \item the weighted inflation in the remaining countries \eqn{dl\_deflator\_EA}, 
 #'   \item the inflation of a world commodity price index \eqn{WCP}, 
-#'   \item the US effective federal funds rate \eqn{US_FFR}, 
+#'   \item the US effective federal funds rate \eqn{US\_FFR}, 
 #'   \item the trade volume in percentage of GDP \eqn{trade}, and 
 #'   \item the government spending in percentage of GDP \eqn{ge}. 
 #'   }
@@ -240,9 +240,9 @@ NULL
 #'   \item the logarithm of government debt held by the public 
 #'   divided by the GDP deflator and population \eqn{DEBT}.
 #'   }
-#'   Moreover, the proxies for shocks to personal \eqn{m_PI} and corporate \eqn{m_CI} 
+#'   Moreover, the proxies for shocks to personal \eqn{m\_PI} and corporate \eqn{m\_CI} 
 #'   income taxes are prepended, where non-zero observations from the related 
-#'   narratively identified shock series \eqn{T_PI} resp. \eqn{T_CI} have been demeaned. 
+#'   narratively identified shock series \eqn{T\_PI} resp. \eqn{T\_CI} have been demeaned. 
 #'   The data set covers the period Q1 1950 to Q4 2006 \eqn{(T=228)} for the US.
 #' @usage data("PCIT")
 #' @format A time series data set of class '\code{data.frame}', 

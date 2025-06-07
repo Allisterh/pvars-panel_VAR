@@ -28,9 +28,9 @@ The data set \code{PCIT} consists of quarterly observations for
   \item the logarithm of government debt held by the public 
   divided by the GDP deflator and population \eqn{DEBT}.
   }
-  Moreover, the proxies for shocks to personal \eqn{m_PI} and corporate \eqn{m_CI} 
+  Moreover, the proxies for shocks to personal \eqn{m\_PI} and corporate \eqn{m\_CI} 
   income taxes are prepended, where non-zero observations from the related 
-  narratively identified shock series \eqn{T_PI} resp. \eqn{T_CI} have been demeaned. 
+  narratively identified shock series \eqn{T\_PI} resp. \eqn{T\_CI} have been demeaned. 
   The data set covers the period Q1 1950 to Q4 2006 \eqn{(T=228)} for the US.
 }
 \references{
