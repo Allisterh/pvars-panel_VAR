@@ -106,6 +106,9 @@ pcoint.JO <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
   LR.pvals = sapply(L.LRrank, FUN=function(x) x$pvals_TR)  # matrix of p-values (K x N) with ordering r_H0 = 0,...,K-1
   
   # apply panel tests
+  idx_D = any(unlist(lapply(L.t_D1, FUN=function(x) names(x) %in% c("t_break", "t_shift"))))
+  if(idx_D){ warning("'pcoint.JO' does not adjust the test distribution to period-specific deterministic regressors.") }
+  ### An LRbar version of JMN (2000) using common relative break periods is not available in the literature. ###
   moments = coint_moments[[type_mom]][dim_K:1, , drop=FALSE]
   LRbar = ptest.STATSbar(STATS=LR.stats, distribution="theoretical", moments=moments)  # from Larsson et al. 2001:112-114
   Choi  = ptest.METApval(PVALS=LR.pvals, distribution="theoretical")  # from Choi 2001:253-256
@@ -165,6 +168,9 @@ pcoint.BR <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
   LM.pvals = sapply(L.LMrank, FUN=function(x) x$pvals_LM)  # matrix of p-values (K x N) with ordering r_H0 = 0,...,K-1
   
   # apply panel tests
+  idx_D = any(unlist(lapply(L.t_D1, FUN=function(x) names(x) %in% c("t_break", "t_shift"))))
+  if(idx_D){ warning("'pcoint.BR' does not adjust the test distribution to period-specific deterministic regressors.") }
+  ### An LRbar version of JMN (2000) using common relative break periods is not available in the literature. ###
   LRbar = ptest.STATSbar(STATS=LM.stats, distribution="theoretical", moments=moments)  # from Breitung 2005:158, Th.2
   Choi  = ptest.METApval(PVALS=LM.pvals, distribution="theoretical")  # panel tests based on combined p-values are not given in Breitung (2005)!
   
@@ -295,6 +301,9 @@ pcoint.SL <- function(L.data, lags, type="SL_trend", t_D=NULL, n.factors=FALSE){
   LR.pvals = sapply(L.SLrank, FUN=function(x) x$pvals_TR)  # matrix of p-values (K x N) with ordering r_H0 = 0,...,K-1
   
   # apply panel tests
+  idx_D = any(unlist(lapply(L.t_D, FUN=function(x) names(x) %in% c("t_break", "t_shift"))))
+  if(idx_D){ warning("'pcoint.SL' does not adjust the test distribution to period-specific deterministic regressors.") }
+  ### An LRbar version of TSL (2008) using common relative break periods is not available in the literature. ###
   if(type=="SL_trend"){ moments = coint_moments[[type]][dim_K:1, , drop=FALSE] }  # use exactly those moments which Arsova,Oersal (2018) have simulated
   LRbar = ptest.STATSbar(STATS=LR.stats, distribution="theoretical", moments=moments)  # from Arsova,Oersal 2018:1039, Eq.12
   Choi  = ptest.METApval(PVALS=LR.pvals, distribution="theoretical")  # from Oersal,Arsova 2017:63, Eq.7-10
