@@ -56,7 +56,7 @@
 #' 
 irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL, MG_IRF=TRUE){
   # define and check
-  x = as.pvarx(x)
+  x = as.pvarx(x, w=w)
   
   # names for variables, for shocks, and for the header of each IRF
   names_k   = if( !is.null(rownames(x$A)) ){ rownames(x$A) }else{ paste0("y[ ", 1:nrow(x$A), " ]") }
@@ -70,10 +70,6 @@ irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL, MG_IRF=TRUE){
     THETA = aux_MG(A.irf, w=w)$mean  # (optionally weighted) group mean
   
   }else{  # ... by IRF for MG of individual VAR coefficients
-    if(!is.null(w)){
-      x$A = aux_MG(x$L.varx, w=w, idx_par="A")$mean  ### TODO: respect MG of VECM!
-      x$B = aux_MG(x$L.varx, w=w, idx_par="B")$mean
-    }
     dim_p = max(sapply(x$L.varx, FUN=function(i) i$dim_p))
     THETA = aux_var2vma(A=x$A, B=x$B, dim_p=dim_p, n.ahead=n.ahead, normf=normf)$THETA
   }

@@ -103,7 +103,7 @@ pvarx.VAR <- function(L.data, lags, type=c("const", "trend", "both", "none"),
   
   # return result
   args_pvarx = list(method="MG of VAR", type=type, dim_K=R.est$L.varx[[1]]$dim_K, 
-                    dim_N=dim_N, n.factors=n.factors, n.iterations=R.est$n.iterations)
+                    dim_N=dim_N, n.factors=n.factors, n.iterations=R.est$n.iterations, w=NULL)
   result = list(A=R.mgA$mean, B=R.mgB$mean, MG_A=R.mgA, MG_B=R.mgB, 
                 L.varx=R.est$L.varx, L.data=L.data, CSD=R.est$PCA, args_pvarx=args_pvarx)
   class(result) = "pvarx"
@@ -193,7 +193,7 @@ pvarx.VEC <- function(L.data, lags, dim_r,
   name_MGest = if(is.null(idx_pool)){ "MG of rank-restricted VAR" }else{ "PMG of rank-restricted VAR" }
   args_pvarx = list(method=name_MGest, 
                     type=type, dim_r=dim_r, dim_K=R.est$L.varx[[1]]$dim_K, dim_N=dim_N, 
-                    idx_pool=idx_pool, n.factors=n.factors, n.iterations=n.iterations)
+                    idx_pool=idx_pool, n.factors=n.factors, n.iterations=n.iterations, w=NULL)
   result = list(A=rvar$A, B=R.mgB$mean, beta=vecm$beta$mean, MG_VECM=vecm, MG_B=R.mgB, 
                 L.varx=R.est$L.varx, L.data=L.data, CSD=R.est$PCA, args_pvarx=args_pvarx)
   class(result) = "pvarx"
@@ -287,6 +287,11 @@ summary.pvarx <- function(object, ..., modulus=TRUE, digits=3){
 #'   
 #' @param x A panel VAR object to be transformed.
 #' @param ... Additional arguments to be passed to or from methods.
+#' @param w Numeric, logical, or character vector. 
+#'   \eqn{N} numeric elements weighting the individual coefficients, or 
+#'   names or \eqn{N} logical elements selecting a subset from the 
+#'   individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
+#'   (the default), all \eqn{N} individuals are included without weights.
 #' 
 #' @return  A list of class '\code{pvarx}'. Objects of this class contain the elements:
 #' \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 
@@ -316,16 +321,13 @@ summary.pvarx <- function(object, ..., modulus=TRUE, digits=3){
 #' 
 #' @export
 #' 
-as.pvarx <- function(x, ...) UseMethod("as.pvarx")
+as.pvarx <- function(x, w=NULL, ...) UseMethod("as.pvarx")
 
 
 #' @method as.pvarx default
 #' @export
-as.pvarx.default <- function(x, ...){
-  if(inherits(x, "pvarx")){
-    return(x)
-    
-  }else if(is.list(x)){
+as.pvarx.default <- function(x, w=NULL, ...){
+  if(is.list(x)){
     # define
     L.varx  = lapply(x, FUN=function(x_i) as.varx(x_i))
     L.data  = lapply(L.varx, FUN=function(x_i) t(x_i$y))
@@ -352,7 +354,7 @@ as.pvarx.default <- function(x, ...){
         for(i in 1:dim_N){ L.argID[[i]]$iv = NULL }
         L.dim_L = sapply(args_pid$L.iv, FUN=function(x_i) nrow(x_i))
         dim_L   = L.dim_L[[1]]
-    }}
+      }}
     
     # check homogeneity
     if( !all(dim_K == L.dim_K) ){ 
@@ -367,29 +369,29 @@ as.pvarx.default <- function(x, ...){
     # add panel estimates
     if(is.null(dim_r)){
       # estimate panel mean-group for VAR
-      R.mgA = aux_MG(L.varx, idx_par="A")
-      R.mgB = aux_MG(L.varx, idx_par="B")
+      R.mgA = aux_MG(L.varx, w=w, idx_par="A")
+      R.mgB = aux_MG(L.varx, w=w, idx_par="B")
       
       # construct object corresponding to pvarx.VAR()
       args_pvarx = list(method="MG of VAR", dim_K=dim_K, dim_N=dim_N, 
-                        n.factors=FALSE, n.iterations=FALSE)
+                        n.factors=FALSE, n.iterations=FALSE, w=w)
       result = list(A=R.mgA$mean, B=R.mgB$mean, MG_A=R.mgA, MG_B=R.mgB, 
                     L.varx=L.varx, L.data=L.data, args_pvarx=args_pvarx)
       
     }else{
       # estimate panel mean-group for rank-restricted VAR
       vecm = list(
-        alpha = aux_MG(L.varx, idx_par="alpha"),
-        beta  = aux_MG(L.varx, idx_par="beta"),
-        GAMMA = aux_MG(L.varx, idx_par="GAMMA"))
+        alpha = aux_MG(L.varx, w=w, idx_par="alpha"),
+        beta  = aux_MG(L.varx, w=w, idx_par="beta"),
+        GAMMA = aux_MG(L.varx, w=w, idx_par="GAMMA"))
       vecm$PI = vecm$alpha$mean %*% t(vecm$beta$mean)
       rvar  = aux_vec2var(PI=vecm$PI, GAMMA=vecm$GAMMA$mean, dim_p=max(L.dim_p))
-      R.mgB = aux_MG(L.varx, idx_par="B")
+      R.mgB = aux_MG(L.varx, w=w, idx_par="B")
       
       # construct objects corresponding to pvarx.VEC()
       args_pvarx = list(method="MG of rank-restricted VAR", 
                         dim_r=dim_r, dim_K=dim_K, dim_N=dim_N, 
-                        n.factors=FALSE, n.iterations=FALSE)
+                        n.factors=FALSE, n.iterations=FALSE, w=w)
       result = list(A=rvar$A, B=R.mgB$mean, beta=vecm$beta$mean, MG_VECM=vecm, MG_B=R.mgB,
                     L.varx=L.varx, L.data=L.data, args_pvarx=args_pvarx)
     }
@@ -408,10 +410,48 @@ as.pvarx.default <- function(x, ...){
 }
 
 
+#' @method as.pvarx pvarx
+#' @export
+as.pvarx.pvarx <- function(x, w=NULL, ...){
+  if(is.null(w)){
+    return(x)
+  
+  }else if(identical(w, x$args_pvarx$w)){
+    return(x)
+   
+  # add panel mean-group for VAR under new 'w' 
+  }else if(is.null(x$args_pvarx$dim_r)){
+    x$MG_A = aux_MG(x$L.varx, w=w, idx_par="A")
+    x$MG_B = aux_MG(x$L.varx, w=w, idx_par="B")
+    x$A = x$MG_A$mean
+    x$B = x$MG_B$mean
+    x$args_pvarx$w = w
+    return(x)
+  
+  # add panel mean-group for rank-restricted VAR under new 'w'
+  }else{
+    dim_p = max(sapply(x$L.varx, FUN=function(x_i) x_i$dim_p))
+    vecm  = list(
+      alpha = aux_MG(x$L.varx, w=w, idx_par="alpha"),
+      beta  = aux_MG(x$L.varx, w=w, idx_par="beta"),
+      GAMMA = aux_MG(x$L.varx, w=w, idx_par="GAMMA"))
+    vecm$PI = vecm$alpha$mean %*% t(vecm$beta$mean)
+    x$MG_B  = aux_MG(x$L.varx, w=w, idx_par="B")
+    x$MG_VECM = vecm
+    x$A = aux_vec2var(PI=vecm$PI, GAMMA=vecm$GAMMA$mean, dim_p=dim_p)$A
+    x$B = x$MG_B$mean
+    x$beta = vecm$beta$mean
+    x$args_pvarx$w = w
+    return(x)
+  }
+}
+
+
 #' @method as.pvarx sboot2
 #' @export
-as.pvarx.sboot2 <- function(x, ...){
-  return(x$pvarx)
+as.pvarx.sboot2 <- function(x, w=NULL, ...){
+  result = as.pvarx(x$pvarx, ..., w=w)
+  return(result)
 }
 
 

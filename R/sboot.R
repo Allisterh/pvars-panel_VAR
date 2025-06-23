@@ -409,19 +409,16 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
   A_MG = B_MG = beta = dim_N = dim_K = dim_S = dim_r = NULL
   L.varx = L.dim_T = L.dim_p = L.resid = L.beta = L.A = L.B = L.D = L.D1 = L.D2 = NULL
   args_pvarx = args_pid = NULL
-  R.pvarx = aux_assign_pvarx(x)
+  R.pvarx = aux_assign_pvarx(x, w=w)
   
   # names for variables, for shocks, and for the header of each IRF
   names_k   = if( !is.null(rownames(A_MG)) ){ rownames(A_MG) }else{ paste0("y[ ", 1:dim_K, " ]") }
   names_s   = if( !is.null(colnames(B_MG)) ){ colnames(B_MG) }else{ paste0("epsilon[ ", 1:dim_S, " ]") }
   names_IRF = c(sapply(names_k, FUN=function(k) paste0(names_s, " %->% ", k)))
-  
-  # calculate MG point estimates under 'w'
-  IRF  = irf.pvarx(R.pvarx, n.ahead=n.ahead, normf=normf, w=w, MG_IRF=MG_IRF)
-  A_MG = aux_MG(L.varx, w=w, idx_par="A")$mean  ### TODO: respect MG of VECM!
-  B_MG = aux_MG(L.varx, w=w, idx_par="B")$mean
-  beta = if(!is.null(dim_r)){ aux_MG(L.varx, w=w, idx_par="beta")$mean }else{ NULL }
   dimnames(B_MG) = list(names_k, names_s)
+  
+  # calculate structural IRF of the original model (point estimates) under 'w'
+  IRF = irf.pvarx(R.pvarx, n.ahead=n.ahead, normf=normf, w=w, MG_IRF=MG_IRF)
   
   # fixed objects in the bootstrap function
   dim_T   = min(L.dim_T)  # number of time periods without presample in total panel
@@ -721,30 +718,20 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #' 
 sboot.mg <- function(x, n.ahead=20, normf=NULL, idx_i=NULL){
   # define
-  dim_K = dim_S = dim_r = NULL
-  L.varx = L.beta = L.A = L.B = NULL
-  R.pvarx = aux_assign_pvarx(x)
   if( is.null(idx_i) ){ idx_i = TRUE; w = NULL }else{ w = idx_i }
+  A_MG = B_MG = beta = L.varx = dim_K = dim_S = NULL
+  R.pvarx = aux_assign_pvarx(x, w=w)
   
-  # collect individual estimates and calculate MG point estimates under 'w'
+  # collect individual IRF estimates and calculate their MG point estimates under 'w'
   IRF = irf.pvarx(R.pvarx, n.ahead=n.ahead, normf=normf, w=w)
   ipb = lapply(L.varx[idx_i], FUN=function(x) irf.varx(x, n.ahead=n.ahead, normf=normf))
-  R.mgA = aux_MG(L.varx, w=w, idx_par="A")  # fill A_ij=0 for j>p_i
-  R.mgB = aux_MG(L.varx, w=w, idx_par="B")
-  
-  if(!is.null(dim_r)){ 
-    R.mgC = aux_MG(L.varx, w=w, idx_par="beta")
-    R.mgC = list(mean=t(R.mgC$mean), coef=aperm(R.mgC$coef, perm=c(2, 1, 3)))
-  }else{ 
-    R.mgC = list(mean=NULL, coef=NULL)
-  }
   
   # return result
   result = list(true = IRF,
                 bootstrap = ipb,
-                A = list(par=R.mgA$mean, sim=R.mgA$coef),
-                B = list(par=R.mgB$mean, sim=R.mgB$coef),
-                beta = list(par=R.mgC$mean, sim=R.mgC$coef),
+                A = list(par=A_MG, sim=R.pvarx$MG_A$coef),
+                B = list(par=B_MG, sim=R.pvarx$MG_B$coef),
+                beta = list(par=beta, sim=R.pvarx$MG_VECM$beta$coef),
                 pvarx = R.pvarx,
                 nboot = 0,
                 rest_mat = matrix(NA, nrow=dim_K, ncol=dim_S),  # for 'bonferroni'
@@ -779,6 +766,7 @@ summary.sboot2 <- function(object, ..., idx_par="A", level=0.95, digits=3){
   R.est = object[[idx_par]]$par  # point estimates
   R.sim = object[[idx_par]]$sim  # bootstrap results
   dim_K = nrow(R.est)
+  if(is.null(R.sim)){ stop("The 'sboot' object does not provide results for parameter '", idx_par, "'.") }
   
   # names for variables and for all regressors
   names_k = if( !is.null(rownames(R.est)) ){ rownames(R.est) }else{ paste0("y.", 1:dim_K) }
@@ -816,6 +804,7 @@ toLatex.sboot2 <- function(object, ..., idx_par="A", measure=c("std.error", "t-v
   dim_K = nrow(R.est)
   idx_m = unlist(lapply(measure, FUN=function(x) switch(x, "std.error"=1, "t-value"=2, "confint"=3:4, 0)))
   dim_M = sum(idx_m!=0)  # number of valid measures selected
+  if(is.null(R.sim)){ stop("The 'sboot' object does not provide results for parameter '", idx_par, "'.") }
   
   # names for variables and for all regressors
   names_k = if( !is.null(rownames(R.est)) ){ rownames(R.est) }else{ paste0("y.", 1:dim_K) }

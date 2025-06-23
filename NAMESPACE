@@ -3,6 +3,7 @@
 S3method(as.pplot,default)
 S3method(as.pplot,pplot)
 S3method(as.pvarx,default)
+S3method(as.pvarx,pvarx)
 S3method(as.pvarx,sboot2)
 S3method(as.t_D,default)
 S3method(as.varx,default)

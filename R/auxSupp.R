@@ -239,10 +239,10 @@ aux_check <- function(x, type_arg, dim_N=NULL, names_i=NULL, tr=FALSE){
 
 
 # assign objects from "pvarx" to function environment
-aux_assign_pvarx <- function(object){
+aux_assign_pvarx <- function(object, w=NULL){
   ### Note: For extending this function by other classes, just specify "as.pvarx" methods for your panel VAR objects. ###
   # define
-  object = as.pvarx(object)
+  object = as.pvarx(object, w=w)
   L.varx = object$L.varx
   
   # gather individual results from "varx"

@@ -4,10 +4,16 @@
 \alias{as.pvarx}
 \title{Coerce into a \code{pvarx} object}
 \usage{
-as.pvarx(x, ...)
+as.pvarx(x, w = NULL, ...)
 }
 \arguments{
 \item{x}{A panel VAR object to be transformed.}
+
+\item{w}{Numeric, logical, or character vector. 
+\eqn{N} numeric elements weighting the individual coefficients, or 
+names or \eqn{N} logical elements selecting a subset from the 
+individuals \eqn{i = 1, \ldots, N} for the MG estimation. If \code{NULL} 
+(the default), all \eqn{N} individuals are included without weights.}
 
 \item{...}{Additional arguments to be passed to or from methods.}
 }
