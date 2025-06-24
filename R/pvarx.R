@@ -450,7 +450,7 @@ as.pvarx.pvarx <- function(x, w=NULL, ...){
 #' @method as.pvarx sboot2
 #' @export
 as.pvarx.sboot2 <- function(x, w=NULL, ...){
-  result = as.pvarx(x$pvarx, ..., w=w)
+  result = as.pvarx(x$pvarx, w=w, ...)
   return(result)
 }
 

@@ -220,7 +220,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
   }
   
   # estimate panel mean-group
-  x$MG_B = aux_MG(x$L.varx, idx_par="B")
+  x$MG_B = aux_MG(x$L.varx, w=x$args_pvarx$w, idx_par="B")
   x$B    = x$MG_B$mean
   
   # return result
@@ -428,7 +428,7 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
   }
   
   # estimate panel mean-group
-  x$MG_B = aux_MG(x$L.varx, idx_par="B")
+  x$MG_B = aux_MG(x$L.varx, w=x$args_pvarx$w, idx_par="B")
   x$B    = x$MG_B$mean
   
   # return result
@@ -579,7 +579,7 @@ pid.iv <- function(x, iv, S2=c("MR", "JL", "NQ"), cov_u="OMEGA", R0=NULL, combin
   }
   
   # estimate panel mean-group
-  x$MG_B = aux_MG(x$L.varx, idx_par="B")
+  x$MG_B = aux_MG(x$L.varx, w=x$args_pvarx$w, idx_par="B")
   x$B    = x$MG_B$mean
   
   # return result

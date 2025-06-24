@@ -628,7 +628,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
       # Step 1b: stationary correction
       R.pvarx$L.varx[[i]]$A = aux_BaB(A_hat=A_hat, dim_p=R.pvarx$L.varx[[i]]$dim_p, PSI=L.PSI_bc[[i]], deltas=deltas)
     }
-    R.pvarx$A = aux_MG(R.pvarx$L.varx, idx_par="A")$mean
+    R.pvarx$A = aux_MG(R.pvarx$L.varx, w=w, idx_par="A")$mean
   }
   
   # return result

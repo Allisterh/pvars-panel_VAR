@@ -76,7 +76,7 @@ pid.chol <- function(x, order_k=NULL){
   x$L.varx = lapply(x$L.varx, function(x_i) idf(x_i))
   
   # estimate panel mean-group
-  x$MG_B = aux_MG(x$L.varx, idx_par="B")
+  x$MG_B = aux_MG(x$L.varx, w=x$args_pvarx$w, idx_par="B")
   x$B    = x$MG_B$mean
   
   # return result
@@ -167,7 +167,7 @@ pid.grt <- function(x, LR=NULL, SR=NULL, start=NULL, max.iter=100, conv.crit=1e-
   x$L.varx = lapply(x$L.varx, function(x_i) idf(x_i))
   
   # estimate panel mean-group
-  x$MG_B = aux_MG(x$L.varx, idx_par="B")
+  x$MG_B = aux_MG(x$L.varx, w=x$args_pvarx$w, idx_par="B")
   x$B    = x$MG_B$mean
   
   # return result
