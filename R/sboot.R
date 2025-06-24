@@ -525,7 +525,8 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
       S.pid = args_pid$pidf(S.pvarx, args_pid)
       
     }else if(is.null(args_pid$method)){
-      S.pid = S.pvarx
+      S.pid   = S.pvarx
+      S.pid$B = B_MG  # diagonal matrix with dimnames
       
     }else if(args_pid$method == "Cholesky"){
       S.pid = pid.chol(S.pvarx, order_k=args_pid$order_k)
@@ -572,13 +573,8 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
     }
     
     # sign and column ordering according to the point estimates
-    if(is.null(args_pid$method)){
-      S.pid$B    = B_MG  # diagonal matrix with dimnames
-    }else if(args_pid$method %in% c("Distance covariances", "Cramer-von Mises distance")){ 
+    if(args_pid$method %in% c("Distance covariances", "Cramer-von Mises distance")){ 
       for(i in 1:dim_N){ S.pid$L.varx[[i]]$B = aux_sico(S.pid$L.varx[[i]]$B, B.orig=L.B[[i]]) }
-      S.pid$MG_B = aux_MG(S.pid$L.varx, w=w, idx_par="B")
-      S.pid$B    = S.pid$MG_B$mean
-    }else{
       S.pid$MG_B = aux_MG(S.pid$L.varx, w=w, idx_par="B")
       S.pid$B    = S.pid$MG_B$mean
     }
