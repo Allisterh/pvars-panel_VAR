@@ -30,7 +30,7 @@ via '\code{indiv}' for individual-specific \eqn{B_i \forall i} using strictly se
 Simulated independent sample(s) of the same size as the data. 
 If the sample sizes \eqn{T_i - p_i} differ across '\eqn{i}', the strictly separated identification
 requires a list of \eqn{N} individual '\code{indepTestDist}'-objects with respective sample sizes.
-If \code{NULL} (the default), a suitable object will be calculated in the function '\code{pid.cvm()}'.}
+If \code{NULL} (the default), a suitable object will be calculated during the call of \code{\link{pid.cvm}}.}
 
 \item{itermax}{Integer. Maximum number of iterations for DEoptim}
 
@@ -122,6 +122,7 @@ Herwartz, H., and Ploedt, M. (2016):
   \emph{Journal of International Money and Finance}, 61, pp. 30-44.
 }
 \seealso{
-\ldots the individual \link[svars]{id.cvm} by Lange et al. (2021) in \strong{svars}. Note that \link{pid.cvm} 
-  relies on a modification of their procedure and thus performs ICA on the pre-whitened shocks '\code{eps}' directly.
+\ldots the individual \code{\link[svars]{id.cvm}} by Lange et al. (2021) in \strong{svars}. 
+  Note that \code{\link{pid.cvm}} relies on a modification of their procedure and 
+  thus performs ICA on the pre-whitened shocks '\code{eps0}' directly.
 }

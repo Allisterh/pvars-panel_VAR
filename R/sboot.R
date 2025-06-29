@@ -21,7 +21,7 @@
 #'   to the iterative correction procedure of Step 1b in Kilian (1998). 
 #'   Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-#'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
+#'   into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
 #' 
@@ -45,7 +45,8 @@
 #' \item{stars}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
 #'   the \eqn{T} resampling draws from each bootstrap iteration.}
 #' 
-#' @seealso \link[svars]{mb.boot}, \link[svars]{ba.boot}, \link[vars]{irf}, and the panel counterpart \link{sboot.pmb}.
+#' @seealso \code{\link[svars]{mb.boot}}, \code{\link[svars]{ba.boot}}, 
+#'   \code{\link[vars]{irf}}, and the panel counterpart \code{\link{sboot.pmb}}.
 #' 
 #' @examples 
 #' \dontrun{
@@ -326,7 +327,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   to the iterative correction procedure of Step 1b in Kilian (1998). 
 #'   Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-#'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
+#'   into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
 #' @param w Numeric, logical, or character vector. 
@@ -360,7 +361,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' \item{stars_i}{Matrix of (\eqn{N \times }\code{n.boot}) integers containing 
 #'   the \eqn{N} cross-sectional resampling draws from each bootstrap iteration.}
 #' 
-#' @seealso For the the individual counterpart see \link{sboot.mb}.
+#' @seealso For the the individual counterpart see \code{\link{sboot.mb}}.
 #' 
 #' @references Brueggemann R., Jentsch, C., and Trenkler, C. (2016): 
 #'   "Inference in VARs with Conditional Heteroskedasticity of Unknown Form", 
@@ -661,7 +662,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #'   or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-#'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
+#'   into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response in the IRF.
 #' @param idx_i Logical or character vector. 
@@ -682,7 +683,7 @@ sboot.pmb <- function(x, b.dim=c(1, 1), n.ahead=20, n.boot=500, n.cores=1, fix_b
 #' \item{nboot}{Integer '0' indicating that no bootstrap iteration has been performed.}
 #' \item{method}{Method used for inference.}
 #' 
-#' @seealso For an actual panel bootstrap procedure see \link{sboot.pmb}.
+#' @seealso For an actual panel bootstrap procedure see \code{\link{sboot.pmb}}.
 #' 
 #' @references Pesaran, M. H., and Smith R. J. (1995):
 #'   "Estimating Long-Run Relationships from Dynamic Heterogeneous Panels",

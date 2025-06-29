@@ -38,7 +38,7 @@ or estimated by the reduced-rank regression if \code{NULL} (the default).}
 \item{t_D1}{List of vectors. The activating break periods \eqn{\tau} 
 for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,t}}, 
 which are restricted to the cointegration relations.
-Just as in '\code{\link{coint}}', the 
+Just as in \code{\link{coint}}, the 
 accompanying lagged regressors are automatically included in \eqn{d_{2,t}}.}
 
 \item{t_D2}{List of vectors. The activating break periods \eqn{\tau} 
@@ -55,7 +55,7 @@ accompanying regressors to be manually included in \eqn{d_{2,it}}.}
 \link[=as.t_D]{deterministic regressors} added to \eqn{d_{2,t}}, 
 which are unrestricted. 
 These additional regressors correspond to '\code{dumvar}' in \strong{urca}'s 
-'\link[urca]{ca.jo}', which is fixed over bootstrap iterations.}
+\code{\link[urca]{ca.jo}}, which is fixed over bootstrap iterations.}
 }
 \value{
 A list of class '\code{\link[=as.varx]{varx}}'.

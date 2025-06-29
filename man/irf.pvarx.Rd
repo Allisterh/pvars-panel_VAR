@@ -15,7 +15,7 @@ or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.
 \item{n.ahead}{Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.}
 
 \item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-into an output matrix of same dimension. See the example in '\link{id.iv}' 
+into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 for the normalization of Jentsch and Lunsford (2021) 
 that fixes the size of the impact response.}
 

@@ -23,7 +23,7 @@
 #'   Simulated independent sample(s) of the same size as the data. 
 #'   If the sample sizes \eqn{T_i - p_i} differ across '\eqn{i}', the strictly separated identification
 #'   requires a list of \eqn{N} individual '\code{indepTestDist}'-objects with respective sample sizes.
-#'   If \code{NULL} (the default), a suitable object will be calculated in the function '\code{pid.cvm()}'.
+#'   If \code{NULL} (the default), a suitable object will be calculated during the call of \code{\link{pid.cvm}}.
 #' @param itermax Integer. Maximum number of iterations for DEoptim
 #' @param steptol Numeric. Tolerance for steps without improvement for DEoptim
 #' @param iter2 Integer. Number of iterations for the second optimization
@@ -64,8 +64,9 @@
 #'   "The Macroeconomic Effects of Oil Price Shocks: Evidence from a Statistical Identification Approach", 
 #'   \emph{Journal of International Money and Finance}, 61, pp. 30-44.
 #'   
-#' @seealso \ldots the individual \link[svars]{id.cvm} by Lange et al. (2021) in \strong{svars}. Note that \link{pid.cvm} 
-#'   relies on a modification of their procedure and thus performs ICA on the pre-whitened shocks '\code{eps}' directly.
+#' @seealso \ldots the individual \code{\link[svars]{id.cvm}} by Lange et al. (2021) in \strong{svars}. 
+#'   Note that \code{\link{pid.cvm}} relies on a modification of their procedure and 
+#'   thus performs ICA on the pre-whitened shocks '\code{eps0}' directly.
 #' 
 #' @examples
 #' \dontrun{
@@ -299,20 +300,20 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 #' @section Notes on the Reproduction in "Examples":
 #'   The reproduction of Herwartz and Wang (HW, 2024, p.630) serves as an 
 #'   exemplary application and unit-test of the implementation by \strong{pvars}. 
-#'   While \link[vars]{VAR} employs equation-wise \link[stats]{lm} with the 
-#'   QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 
-#'   the reproduction by \link{pvarx.VAR} both calculate \eqn{X'(XX')^{-1}} 
-#'   for the multivariate least-squares estimation of \eqn{A_i}. 
-#'   Moreover, both use \link[steadyICA]{steadyICA} for identification such that the 
+#'   While \strong{vars}' \code{\link[vars]{VAR}} employs equation-wise \code{\link[stats]{lm}} 
+#'   with the QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 
+#'   the reproduction by \code{\link{pvarx.VAR}} both calculate \eqn{X'(XX')^{-1}} 
+#'   for the multivariate least-squares estimation of \eqn{A_i}. Moreover, 
+#'   both use \code{\link[steadyICA]{steadyICA}} for identification such that the 
 #'   reproduction result for the pooled rotation matrix \code{Q} is close to HW2024, 
 #'   the mean absolute difference between both 4x4 matrices is less than 0.0032. 
 #'   Note that the single EA-Model is estimated and identified the same way, 
 #'   which can be extracted as a separate '\code{varx}' object from the trivial 
-#'   panel object by \code{$L.varx[[1]]} and even bootstrapped by \link{sboot.mb}.
+#'   panel object by \code{$L.varx[[1]]} and even bootstrapped by \code{\link{sboot.mb}}.
 #'   
 #'   Some differences remain such that the example does not exactly 
-#'   reproduce the results in HW2024. To account for the \eqn{n} exogenous 
-#'   and deterministic regressors in slot \code{$D}, \link{pvarx.VAR} calculates 
+#'   reproduce the results in HW2024. To account for the \eqn{n} exogenous and 
+#'   deterministic regressors in slot \code{$D}, \code{\link{pvarx.VAR}} calculates 
 #'   \eqn{\Sigma_{u,i}} with the degrees of freedom \eqn{T-Kp_i-n} instead of 
 #'   HW2024's \eqn{T-Kp_i-1}. Moreover, the confidence bands for the IRF are 
 #'   based on \strong{pvars}' \link[=sboot.pmb]{panel moving-block-} instead of 
@@ -454,7 +455,7 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
 #'   between proxy and shock series. A normalization of the impulsed shock 
 #'   that may fix the size of the impact response in the IRF can be imposed 
-#'   subsequently via '\code{normf}' in \link{irf.pvarx} and \link{sboot.pmb}.
+#'   subsequently via '\code{normf}' in \code{\link{irf.pvarx}} and \code{\link{sboot.pmb}}.
 #' 
 #' @param x An object of class '\code{pvarx}' or a list of VAR objects 
 #'   that will be \link[=as.varx]{coerced} to '\code{varx}'. 
@@ -469,14 +470,14 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #' @param S2 Character. Identification within multiple proxies \eqn{m_{it}} 
 #'   via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{i,11} B_{i,12}^{-1} ] B_{i,1}} by Mertens, Ravn (2013), 
 #'   via '\code{JL}' for chol\eqn{(\Sigma_{mu,i} \Sigma_{u,i}^{-1} \Sigma_{um,i})} by Jentsch, Lunsford (2021), or
-#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
+#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{\link[base]{svd}} decomposition by Empting et al. (2025). 
 #'   In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 #'   In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.
 #' @param cov_u Character. Selection of the estimated residual covariance matrices \eqn{\hat{\Sigma}_{u,i}} 
 #'   to be used in the identification procedure. 
 #'   Either \code{'OMEGA'} (the default) for \eqn{\hat{U}_i \hat{U}_i'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 #'   or \code{'SIGMA'} for \eqn{\hat{U}_i \hat{U}_i'/(T_i - n_{zi})}, which corrects for the number of regressors \eqn{n_{zi}}. 
-#'   Both character options refer to the name of the respective estimate in the \code{varx} objects.
+#'   Both character options refer to the name of the respective estimate in the '\code{varx}' objects.
 #' @param R0 Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 #'   governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
 #'   structural shock series. If \code{NULL} (the default), \code{R0} 

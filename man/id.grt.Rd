@@ -22,7 +22,8 @@ or any other that will be \link[=as.varx]{coerced} to '\code{varx}'.}
 
 \item{SR}{Matrix. The restricted contemporaneous impact matrix.}
 
-\item{start}{Vector. The starting values for \eqn{\gamma}, set by \link[stats]{rnorm} if \code{NULL} (the default).}
+\item{start}{Vector. The starting values for \eqn{\gamma}, 
+set by \code{\link[stats]{rnorm}} if \code{NULL} (the default).}
 
 \item{max.iter}{Integer. The maximum number of iterations.}
 
@@ -79,7 +80,8 @@ Pfaff, B. (2008):
   \emph{Journal of Statistical Software}, 27, pp. 1-32.
 }
 \seealso{
-\ldots the original \link[vars]{SVEC} by Pfaff (2008) in \strong{vars}. Note that \link{id.grt} 
-  is just a graftage, but allows for the additional model specifications in \link{VECM} 
-  and for the bootstrap procedures in \link{sboot.mb}, both provided by the \strong{pvars} package.
+\ldots the original \code{\link[vars]{SVEC}} by Pfaff (2008) in \strong{vars}. 
+  Note that \code{\link{id.grt}} is just a graftage, but allows for the additional 
+  model specifications in \code{\link{VECM}} and for the bootstrap procedures 
+  in \code{\link{sboot.mb}}, both provided by the \strong{pvars} package.
 }

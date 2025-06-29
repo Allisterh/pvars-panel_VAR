@@ -26,7 +26,7 @@ succession \eqn{l = 1,\ldots,L} in each individual '\code{data.frame}'.}
 \item{S2}{Character. Identification within multiple proxies \eqn{m_{it}} 
 via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{i,11} B_{i,12}^{-1} ] B_{i,1}} by Mertens, Ravn (2013), 
 via '\code{JL}' for chol\eqn{(\Sigma_{mu,i} \Sigma_{u,i}^{-1} \Sigma_{um,i})} by Jentsch, Lunsford (2021), or
-via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
+via '\code{NQ}' for the nearest orthogonal matrix from \code{\link[base]{svd}} decomposition by Empting et al. (2025). 
 In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_{i,1}}.
 In case of \code{combine='pool'}, the argument is automatically fixed to '\code{NQ}'.}
 
@@ -34,7 +34,7 @@ In case of \code{combine='pool'}, the argument is automatically fixed to '\code{
 to be used in the identification procedure. 
 Either \code{'OMEGA'} (the default) for \eqn{\hat{U}_i \hat{U}_i'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 or \code{'SIGMA'} for \eqn{\hat{U}_i \hat{U}_i'/(T_i - n_{zi})}, which corrects for the number of regressors \eqn{n_{zi}}. 
-Both character options refer to the name of the respective estimate in the \code{varx} objects.}
+Both character options refer to the name of the respective estimate in the '\code{varx}' objects.}
 
 \item{R0}{Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
@@ -78,7 +78,7 @@ Given an estimated panel of VAR models, this function applies independence-based
   2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
   between proxy and shock series. A normalization of the impulsed shock 
   that may fix the size of the impact response in the IRF can be imposed 
-  subsequently via '\code{normf}' in \link{irf.pvarx} and \link{sboot.pmb}.
+  subsequently via '\code{normf}' in \code{\link{irf.pvarx}} and \code{\link{sboot.pmb}}.
 }
 \references{
 Mertens, K., and Ravn, M. O. (2013): 

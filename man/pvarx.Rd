@@ -52,7 +52,7 @@ in \eqn{d_{it}} of the VAR model in levels.}
 regressors or a list of \eqn{N} '\code{data.frame}' objects of the 
 individual \link[=as.t_D]{deterministic regressors} added to \eqn{d_{it}}. 
 These customized regressors correspond to '\code{exogen}' in \strong{vars}' 
-'\link[vars]{VAR}', which is fixed over bootstrap iterations.}
+\code{\link[vars]{VAR}}, which is fixed over bootstrap iterations.}
 
 \item{n.factors}{Integer. Number of common factors to be used for SUR. 
 Deactivated if '\code{FALSE}' (the default).}
@@ -65,7 +65,7 @@ for the estimation of SUR resp. the pooled cointegrating vectors.}
 \item{t_D1}{List of vectors. The activating break periods \eqn{\tau} 
 for the period-specific \link[=as.t_D]{deterministic regressors} 
 in \eqn{d_{1,it}}, which are restricted to the cointegration relations. 
-Just as in '\code{\link{pcoint}}', the 
+Just as in \code{\link{pcoint}}, the 
 accompanying lagged regressors are automatically included in \eqn{d_{2,it}}.}
 
 \item{t_D2}{List of vectors. The activating break periods \eqn{\tau} 
@@ -84,7 +84,7 @@ regressors or a list of \eqn{N} '\code{data.frame}' objects of
 individual \link[=as.t_D]{deterministic regressors} added 
 to \eqn{d_{2,it}}, which are unrestricted. 
 These customized regressors correspond to '\code{dumvar}' in \strong{urca}'s 
-'\link[urca]{ca.jo}', which is fixed over bootstrap iterations.}
+\code{\link[urca]{ca.jo}}, which is fixed over bootstrap iterations.}
 
 \item{idx_pool}{Vector. Position \eqn{k = 1,...,K+n_1} of each variable 
 to be pooled using the two-step estimator by Breitung (2005). 

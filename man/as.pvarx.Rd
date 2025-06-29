@@ -2,7 +2,7 @@
 % Please edit documentation in R/pvarx.R
 \name{as.pvarx}
 \alias{as.pvarx}
-\title{Coerce into a \code{pvarx} object}
+\title{Coerce into a '\code{pvarx}' object}
 \usage{
 as.pvarx(x, w = NULL, ...)
 }
@@ -39,11 +39,11 @@ Coerce into a '\code{pvarx}' object. On top of the parent class
   to be transformed contains a panel SVAR model.
 }
 \details{
-'\code{as.pvarx()}' is used as an intermediary in the '\code{pvars}' 
+\code{\link{as.pvarx}} is used as an intermediary in the \strong{pvars} 
   functions to achieve compatibility with different classes of panel VAR objects.
   If the user wishes to extend this compatibility with further classes, she 
-  may simply specify accordant '\code{as.pvarx()}'-methods instead of 
-  altering the original '\code{pvars}' function.
+  may simply specify accordant \code{\link{as.pvarx}}-methods instead of 
+  altering the original \strong{pvars} function.
 }
 \examples{
 data("PCAP")

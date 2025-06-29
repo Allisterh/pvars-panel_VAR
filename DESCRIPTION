@@ -5,7 +5,7 @@ Version: 0.1
 Author: Lennart Empting [aut, cre, cph]
 Authors@R: c(person("Lennart", "Empting", role = c("aut", "cre", "cph"), email = "lennart.empting@vwl.uni-due.de"))
 Maintainer: Lennart Empting <lennart.empting@vwl.uni-due.de>
-Description: Implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and (3) panel-based identification methods for structural vector autoregressive (SVAR) models, allowing for cross-sectional dependence in the residuals and for structural breaks in the deterministic term of the VAR process.
+Description: Implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and (3) panel-based identification methods for structural vector autoregressive (SVAR) models, allowing for cross-sectional dependence in the error terms and for structural breaks in the deterministic terms of the VAR processes.
 Depends: R (>= 3.5.0), svars (>= 1.3.4)
 Imports: stats, utils, MASS, expm, clue, copula, DEoptim, steadyICA, pbapply, vars, scales, ggplot2, reshape2
 Suggests: testthat (>= 2.1.0), urca, plm, panelvar, ggfortify, tikzDevice, RColorBrewer

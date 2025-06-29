@@ -16,14 +16,14 @@ time series \eqn{m_t}.}
 \item{S2}{Character. Identification within multiple proxies \eqn{m_t} 
 via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{11} B_{12}^{-1} ] B_{1}} by Mertens, Ravn (2013), 
 via '\code{JL}' for chol\eqn{(\Sigma_{mu} \Sigma_{u}^{-1} \Sigma_{um})} by Jentsch, Lunsford (2021), or
-via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
+via '\code{NQ}' for the nearest orthogonal matrix from \code{\link[base]{svd}} decomposition by Empting et al. (2025). 
 In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_1}.}
 
 \item{cov_u}{Character. Selection of the estimated residual covariance matrix \eqn{\hat{\Sigma}_{u}} 
 to be used in the identification procedure. 
 Either \code{'OMEGA'} (the default) for \eqn{\hat{U} \hat{U}'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 or \code{'SIGMA'} for \eqn{\hat{U}\hat{U}'/(T-n_{z})}, which corrects for the number of regressors \eqn{n_z}. 
-Both character options refer to the name of the respective estimate in the \code{varx} object.}
+Both character options refer to the name of the respective estimate in the '\code{varx}' object.}
 
 \item{R0}{Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
@@ -49,7 +49,8 @@ Given an estimated VAR model, this function uses proxy variables
   2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
   between proxy and shock series. A normalization of the impulsed shock 
   that may fix the size of the impact response in the IRF can be imposed 
-  subsequently via '\code{normf}' in \link{irf.varx} and \link{sboot.mb}.
+  subsequently via '\code{normf}' in \code{\link{irf.varx}} and 
+  \code{\link{sboot.mb}}.
 }
 \examples{
 ### reproduce Jentsch,Lunsford 2019:2668, Ch.III ###

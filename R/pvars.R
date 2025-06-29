@@ -27,25 +27,28 @@ NULL
 #' @details
 #' \bold{(1)} The panel functions to determine the cointegration rank are:
 #' \itemize{
-#' \item \tabular{ll}{\code{\link{pcoint.JO}}   \tab panel Johansen procedures,}
-#' \item \tabular{ll}{\code{\link{pcoint.BR}}   \tab panel test with pooled two-step estimation,}
-#' \item \tabular{ll}{\code{\link{pcoint.SL}}   \tab panel Saikkonen-Luetkepohl procedures,}
-#  \item \tabular{ll}{\code{\link{pcoint.MSB}}  \tab panel MSB procedures,}
-#' \item \tabular{ll}{\code{\link{pcoint.CAIN}} \tab correlation-augmented inverse normal test.}
-#' }\cr
+#' \item \code{\link{pcoint.JO}}   panel Johansen procedures,
+#' \item \code{\link{pcoint.BR}}   panel test with pooled two-step estimation,
+#' \item \code{\link{pcoint.SL}}   panel Saikkonen-Luetkepohl procedures,
+#  \item \code{\link{pcoint.MSB}}  panel MSB procedures,
+#' \item \code{\link{pcoint.CAIN}} correlation-augmented inverse normal test.
+#' }
+#' 
 #' \bold{(2)} The panel functions to estimate the VAR models are:
 #' \itemize{
-#' \item \tabular{ll}{\code{\link{pvarx.VAR}} \tab mean-group of a panel of VAR models,}
-#' \item \tabular{ll}{\code{\link{pvarx.VEC}} \tab pooled cointegrating vectors in a panel VECM.}
-#' }\cr
+#' \item \code{\link{pvarx.VAR}} mean-group of a panel of VAR models,
+#' \item \code{\link{pvarx.VEC}} pooled cointegrating vectors in a panel VECM.
+#' }
+#' 
 #' \bold{(3)} The panel functions to retrieve structural impact matrices are:
 #' \itemize{
-#' \item \tabular{ll}{\code{\link{pid.chol}} \tab identification of panel SVAR models using Cholesky decomposition to impose recursive causality,}
-#' \item \tabular{ll}{\code{\link{pid.grt}}  \tab identification of panel SVEC models,}
-#' \item \tabular{ll}{\code{\link{pid.iv}}   \tab identification of panel SVAR models by means of proxy variables,}
-#' \item \tabular{ll}{\code{\link{pid.dc}}   \tab independence-based identification of panel SVAR models using distance covariance (DC) statistic,}
-#' \item \tabular{ll}{\code{\link{pid.cvm}}  \tab independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.}
-#' }\cr
+#' \item \code{\link{pid.chol}} identification of panel SVAR models using Cholesky decomposition to impose recursive causality,
+#' \item \code{\link{pid.grt}}  identification of panel SVEC models,
+#' \item \code{\link{pid.iv}}   identification of panel SVAR models by means of proxy variables,
+#' \item \code{\link{pid.dc}}   independence-based identification of panel SVAR models using distance covariance (DC) statistic,
+#' \item \code{\link{pid.cvm}}  independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.
+#' }
+#' 
 #' Supporting tools, such as the specification functions (\code{\link{speci.VAR}}, 
 #' \code{\link{speci.factors}}) and the panel block bootstrap procedure 
 #' (\code{\link{sboot.pmb}}), complement the panel VAR functions and complete 
@@ -145,7 +148,7 @@ NULL
 #' @docType data
 #' @description The data set \code{MDEM} consists of 
 #'   annual observations for the nominal short-term interest rate \eqn{R} and 
-#'   the logarithm of the real money aggregate \eqn{m1} and real GDP \eqn{gdp}.
+#'   the logarithm of the real money aggregate \emph{m1} and real GDP \eqn{gdp}.
 #'   It covers the period 1957 to 1996 \eqn{(T=40)} for \eqn{N=19} countries.
 #' @usage data("MDEM")
 #' @format A long-format data panel of class '\code{data.frame}', 

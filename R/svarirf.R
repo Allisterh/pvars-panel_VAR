@@ -7,7 +7,7 @@
 #' @param ... Currently not used.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-#'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
+#'   into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response.
 #' @param w Numeric, logical, or character vector. 
@@ -91,7 +91,7 @@ irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL, MG_IRF=TRUE){
 #' @param ... Currently not used.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the IRF.
 #' @param normf Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-#'   into an output matrix of same dimension. See the example in '\link{id.iv}' 
+#'   into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 #'   for the normalization of Jentsch and Lunsford (2021) 
 #'   that fixes the size of the impact response.
 #' 
@@ -133,8 +133,8 @@ irf.varx <- function(x, ..., n.ahead=20, normf=NULL){
 #' @title Persistence Profiles
 #' @description Calculates persistence profiles for each of the \eqn{r} long-run relationships.
 #' @param x Rank-restricted VAR object of class '\code{varx}' or any other 
-#'   that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\link[vars]{vec2var}'. 
-#'   If the object is also of child class '\code{id}', \link{PP.variable} calculates 
+#'   that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{\link[vars]{vec2var}}'. 
+#'   If the object is also of child class '\code{id}', \code{\link{PP.variable}} calculates 
 #'   the persistence profiles which are initiated by the provided structural shocks.
 #' @param n.ahead Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the PP.
 #' 

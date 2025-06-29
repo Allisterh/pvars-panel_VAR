@@ -64,20 +64,20 @@ Given an estimated panel of VAR models, this function applies independence-based
 
   The reproduction of Herwartz and Wang (HW, 2024, p.630) serves as an 
   exemplary application and unit-test of the implementation by \strong{pvars}. 
-  While \link[vars]{VAR} employs equation-wise \link[stats]{lm} with the 
-  QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 
-  the reproduction by \link{pvarx.VAR} both calculate \eqn{X'(XX')^{-1}} 
-  for the multivariate least-squares estimation of \eqn{A_i}. 
-  Moreover, both use \link[steadyICA]{steadyICA} for identification such that the 
+  While \strong{vars}' \code{\link[vars]{VAR}} employs equation-wise \code{\link[stats]{lm}} 
+  with the QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 
+  the reproduction by \code{\link{pvarx.VAR}} both calculate \eqn{X'(XX')^{-1}} 
+  for the multivariate least-squares estimation of \eqn{A_i}. Moreover, 
+  both use \code{\link[steadyICA]{steadyICA}} for identification such that the 
   reproduction result for the pooled rotation matrix \code{Q} is close to HW2024, 
   the mean absolute difference between both 4x4 matrices is less than 0.0032. 
   Note that the single EA-Model is estimated and identified the same way, 
   which can be extracted as a separate '\code{varx}' object from the trivial 
-  panel object by \code{$L.varx[[1]]} and even bootstrapped by \link{sboot.mb}.
+  panel object by \code{$L.varx[[1]]} and even bootstrapped by \code{\link{sboot.mb}}.
   
   Some differences remain such that the example does not exactly 
-  reproduce the results in HW2024. To account for the \eqn{n} exogenous 
-  and deterministic regressors in slot \code{$D}, \link{pvarx.VAR} calculates 
+  reproduce the results in HW2024. To account for the \eqn{n} exogenous and 
+  deterministic regressors in slot \code{$D}, \code{\link{pvarx.VAR}} calculates 
   \eqn{\Sigma_{u,i}} with the degrees of freedom \eqn{T-Kp_i-n} instead of 
   HW2024's \eqn{T-Kp_i-1}. Moreover, the confidence bands for the IRF are 
   based on \strong{pvars}' \link[=sboot.pmb]{panel moving-block-} instead of 

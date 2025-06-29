@@ -15,7 +15,8 @@
 #'   2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
 #'   between proxy and shock series. A normalization of the impulsed shock 
 #'   that may fix the size of the impact response in the IRF can be imposed 
-#'   subsequently via '\code{normf}' in \link{irf.varx} and \link{sboot.mb}.
+#'   subsequently via '\code{normf}' in \code{\link{irf.varx}} and 
+#'   \code{\link{sboot.mb}}.
 #'   
 #' @param x VAR object of class '\code{varx}' or any other 
 #'   that will be \link[=as.varx]{coerced} to '\code{varx}'. 
@@ -24,13 +25,13 @@
 #' @param S2 Character. Identification within multiple proxies \eqn{m_t} 
 #'   via '\code{MR}' for lower-triangular \eqn{[I_S : -B_{11} B_{12}^{-1} ] B_{1}} by Mertens, Ravn (2013), 
 #'   via '\code{JL}' for chol\eqn{(\Sigma_{mu} \Sigma_{u}^{-1} \Sigma_{um})} by Jentsch, Lunsford (2021), or
-#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{svd()} decomposition by Empting et al. (2025). 
+#'   via '\code{NQ}' for the nearest orthogonal matrix from \code{\link[base]{svd}} decomposition by Empting et al. (2025). 
 #'   In case of \eqn{S=L=1} proxy, all three choices provide identical results on \eqn{B_1}.
 #' @param cov_u Character. Selection of the estimated residual covariance matrix \eqn{\hat{\Sigma}_{u}} 
 #'   to be used in the identification procedure. 
 #'   Either \code{'OMEGA'} (the default) for \eqn{\hat{U} \hat{U}'/T_i} as used in Mertens, Ravn (2013) and Jentsch, Lunsford (2021)
 #'   or \code{'SIGMA'} for \eqn{\hat{U}\hat{U}'/(T-n_{z})}, which corrects for the number of regressors \eqn{n_z}. 
-#'   Both character options refer to the name of the respective estimate in the \code{varx} object.
+#'   Both character options refer to the name of the respective estimate in the '\code{varx}' object.
 #' @param R0 Matrix. A \eqn{(L \times S)} selection matrix for '\code{NQ}' that 
 #'   governs the attribution of the \eqn{L} proxies to their specific \eqn{S} 
 #'   structural shock series. If \code{NULL} (the default), \code{R0} 
@@ -82,7 +83,8 @@ id.iv <- function(x, iv, S2=c("MR", "JL", "NQ"), cov_u="OMEGA", R0=NULL){
 #'   or any other that will be \link[=as.varx]{coerced} to '\code{varx}'.
 #' @param LR Matrix. The restricted long-run impact matrix.
 #' @param SR Matrix. The restricted contemporaneous impact matrix.
-#' @param start Vector. The starting values for \eqn{\gamma}, set by \link[stats]{rnorm} if \code{NULL} (the default).
+#' @param start Vector. The starting values for \eqn{\gamma}, 
+#'   set by \code{\link[stats]{rnorm}} if \code{NULL} (the default).
 #' @param max.iter Integer. The maximum number of iterations.
 #' @param conv.crit Real number. Convergence value of algorithm.
 #' @param maxls Real number. Maximum movement of the parameters between two iterations of the scoring algorithm.
@@ -106,9 +108,10 @@ id.iv <- function(x, iv, S2=c("MR", "JL", "NQ"), cov_u="OMEGA", R0=NULL){
 #' @references Pfaff, B. (2008):
 #'   "VAR, SVAR and SVEC Models: Implementation within R Package \strong{vars}",
 #'   \emph{Journal of Statistical Software}, 27, pp. 1-32.
-#' @seealso \ldots the original \link[vars]{SVEC} by Pfaff (2008) in \strong{vars}. Note that \link{id.grt} 
-#'   is just a graftage, but allows for the additional model specifications in \link{VECM} 
-#'   and for the bootstrap procedures in \link{sboot.mb}, both provided by the \strong{pvars} package.
+#' @seealso \ldots the original \code{\link[vars]{SVEC}} by Pfaff (2008) in \strong{vars}. 
+#'   Note that \code{\link{id.grt}} is just a graftage, but allows for the additional 
+#'   model specifications in \code{\link{VECM}} and for the bootstrap procedures 
+#'   in \code{\link{sboot.mb}}, both provided by the \strong{pvars} package.
 #' 
 #' @examples
 #' ### reproduce basic example in "vars" ###

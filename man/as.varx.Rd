@@ -45,9 +45,9 @@ Coerce into a '\code{varx}' object. On top of the parent class
   to be transformed contains an SVAR model.
 }
 \details{
-'\code{as.varx()}' is used as an intermediary in the '\code{pvars}' 
+\code{\link{as.varx}} is used as an intermediary in the \strong{pvars} 
   functions to achieve compatibility with different classes of VAR objects.
   If the user wishes to extend this compatibility with further classes, she 
-  may simply specify accordant '\code{as.varx()}'-methods instead of 
-  altering the original '\code{pvars}' function.
+  may simply specify accordant \code{\link{as.varx}}-methods instead of 
+  altering the original \strong{pvars} function.
 }

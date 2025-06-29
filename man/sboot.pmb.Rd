@@ -50,7 +50,7 @@ to the iterative correction procedure of Step 1b in Kilian (1998).
 Choosing \code{deltas = NULL} deactivates the bootstrap-after-bootstrap procedure.}
 
 \item{normf}{Function. A given function that normalizes the \eqn{K \times S} input-matrix 
-into an output matrix of same dimension. See the example in '\link{id.iv}' 
+into an output matrix of same dimension. See the example in \code{\link{id.iv}} 
 for the normalization of Jentsch and Lunsford (2021) 
 that fixes the size of the impact response in the IRF.}
 
@@ -142,5 +142,5 @@ Gambacorta L., Hofmann B., and Peersman G. (2014):
   \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 }
 \seealso{
-For the the individual counterpart see \link{sboot.mb}.
+For the the individual counterpart see \code{\link{sboot.mb}}.
 }

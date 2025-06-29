@@ -65,7 +65,7 @@ NULL
 #'   regressors or a list of \eqn{N} '\code{data.frame}' objects of the 
 #'   individual \link[=as.t_D]{deterministic regressors} added to \eqn{d_{it}}. 
 #'   These customized regressors correspond to '\code{exogen}' in \strong{vars}' 
-#'   '\link[vars]{VAR}', which is fixed over bootstrap iterations. 
+#'   \code{\link[vars]{VAR}}, which is fixed over bootstrap iterations. 
 #' 
 #' @references Pesaran, M. H., and Smith R. J. (1995): 
 #'   "Estimating Long-Run Relationships from Dynamic Heterogeneous Panels",
@@ -115,7 +115,7 @@ pvarx.VAR <- function(L.data, lags, type=c("const", "trend", "both", "none"),
 #' @param t_D1 List of vectors. The activating break periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} 
 #'   in \eqn{d_{1,it}}, which are restricted to the cointegration relations. 
-#'   Just as in '\code{\link{pcoint}}', the 
+#'   Just as in \code{\link{pcoint}}, the 
 #'   accompanying lagged regressors are automatically included in \eqn{d_{2,it}}.
 #' @param t_D2 List of vectors. The activating break periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} 
@@ -131,7 +131,7 @@ pvarx.VAR <- function(L.data, lags, type=c("const", "trend", "both", "none"),
 #'   individual \link[=as.t_D]{deterministic regressors} added 
 #'   to \eqn{d_{2,it}}, which are unrestricted. 
 #'   These customized regressors correspond to '\code{dumvar}' in \strong{urca}'s 
-#'   '\link[urca]{ca.jo}', which is fixed over bootstrap iterations.
+#'   \code{\link[urca]{ca.jo}}, which is fixed over bootstrap iterations.
 #' @param dim_r Integer. Common cointegration-rank \eqn{r} of the VECM.
 #' @param idx_pool Vector. Position \eqn{k = 1,...,K+n_1} of each variable 
 #'   to be pooled using the two-step estimator by Breitung (2005). 
@@ -275,15 +275,15 @@ summary.pvarx <- function(object, ..., modulus=TRUE, digits=3){
 # CRAN manual: https://cran.r-project.org/doc/manuals/R-exts.html#Generic-functions-and-methods
 # Roxygen: https://r-pkgs.org/man.html#man-s3
 
-#' @title Coerce into a \code{pvarx} object
+#' @title Coerce into a '\code{pvarx}' object
 #' @description Coerce into a '\code{pvarx}' object. On top of the parent class 
 #'   '\code{pvarx}', the child class '\code{pid}' is imposed if the input object 
 #'   to be transformed contains a panel SVAR model. 
-#' @details '\code{as.pvarx()}' is used as an intermediary in the '\code{pvars}' 
+#' @details \code{\link{as.pvarx}} is used as an intermediary in the \strong{pvars} 
 #'   functions to achieve compatibility with different classes of panel VAR objects.
 #'   If the user wishes to extend this compatibility with further classes, she 
-#'   may simply specify accordant '\code{as.pvarx()}'-methods instead of 
-#'   altering the original '\code{pvars}' function.
+#'   may simply specify accordant \code{\link{as.pvarx}}-methods instead of 
+#'   altering the original \strong{pvars} function.
 #'   
 #' @param x A panel VAR object to be transformed.
 #' @param ... Additional arguments to be passed to or from methods.

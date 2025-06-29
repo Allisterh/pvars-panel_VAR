@@ -15,7 +15,7 @@
 #' @param t_D1 List of vectors. The activating break periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,t}}, 
 #'   which are restricted to the cointegration relations.
-#'   Just as in '\code{\link{coint}}', the 
+#'   Just as in \code{\link{coint}}, the 
 #'   accompanying lagged regressors are automatically included in \eqn{d_{2,t}}.
 #' @param t_D2 List of vectors. The activating break periods \eqn{\tau} 
 #'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{2,t}}, 
@@ -29,7 +29,7 @@
 #'   \link[=as.t_D]{deterministic regressors} added to \eqn{d_{2,t}}, 
 #'   which are unrestricted. 
 #'   These additional regressors correspond to '\code{dumvar}' in \strong{urca}'s 
-#'   '\link[urca]{ca.jo}', which is fixed over bootstrap iterations.
+#'   \code{\link[urca]{ca.jo}}, which is fixed over bootstrap iterations.
 #' 
 #' @return A list of class '\code{\link[=as.varx]{varx}}'.
 #' 
@@ -174,11 +174,11 @@ summary.varx <- function(object, ...){
 #' @description Coerce into a '\code{varx}' object. On top of the parent class 
 #'   '\code{varx}', the child class '\code{id}' is imposed if the input object 
 #'   to be transformed contains an SVAR model. 
-#' @details '\code{as.varx()}' is used as an intermediary in the '\code{pvars}' 
+#' @details \code{\link{as.varx}} is used as an intermediary in the \strong{pvars} 
 #'   functions to achieve compatibility with different classes of VAR objects.
 #'   If the user wishes to extend this compatibility with further classes, she 
-#'   may simply specify accordant '\code{as.varx()}'-methods instead of 
-#'   altering the original '\code{pvars}' function.
+#'   may simply specify accordant \code{\link{as.varx}}-methods instead of 
+#'   altering the original \strong{pvars} function.
 #' 
 #' @param x A VAR object to be transformed.
 #' @param ... Additional arguments to be passed to or from methods.

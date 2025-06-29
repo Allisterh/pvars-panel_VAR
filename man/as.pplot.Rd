@@ -33,15 +33,16 @@ For LaTeX exports, use e.g. \code{paste0("\\\epsilon_{ ", 1:dim_S, " }")}.}
 \item{color_g}{Vector. Colors of the layered plots \eqn{g=1,\ldots,G}.}
 
 \item{shape_g}{Vector. Shapes of the layered plots \eqn{g=1,\ldots,G}, 
-see \link[ggplot2]{geom_point} for shapes. 
+see \strong{ggplot2}'s \code{\link[ggplot2]{geom_point}} for shapes. 
 If \code{NULL} (the default), no points will be set on the IRF-lines.}
 
-\item{n.rows}{Integer. Number of rows in \link[ggplot2]{facet_wrap}. If \code{NULL} 
-(the default), the dimensions of the facet plots given in \code{...} are reused.}
+\item{n.rows}{Integer. Number of rows in \code{\link[ggplot2]{facet_wrap}}. 
+If \code{NULL} (the default), the dimensions of the facet plots given 
+in \code{...} are reused.}
 
 \item{scales}{Character. Should scales be fixed (\code{"fixed"}), 
 free (\code{"free"}), or free in one dimension (\code{"free_x"}, 
-\code{"free_y"}, the default)? See \link[ggplot2]{facet_wrap}.}
+\code{"free_y"}, the default)? See \code{\link[ggplot2]{facet_wrap}}.}
 
 \item{Latex}{Logical. If \code{TRUE}, the arrows of the facet labels are 
 written in LaTeX math mode.}
@@ -60,14 +61,14 @@ Coerce into a '\code{pplot}' object. This function allows (1) to
   verbatim LaTeX math mode suitable for the export via \strong{tikzDevice}.
 }
 \details{
-'\code{as.pplot()}' is used as an intermediary in the '\code{pplot}' 
+\code{\link{as.pplot}} is used as an intermediary in the '\code{pplot}' 
   functions to achieve compatibility with different classes. Equivalently to 
-  '\code{as.pvarx}' for panels of \eqn{N} VAR objects, '\code{as.pplot()}' 
+  \code{\link{as.pvarx}} for panels of \eqn{N} VAR objects, \code{\link{as.pplot}} 
   summarizes panels of \eqn{G} plot objects that have been returned 
   from the '\code{plot}' method for class '\code{svarirf}' or '\code{sboot}'. 
   If the user wishes to extend the compatibility of the '\code{pplot}' 
   functions with further classes, she may simply specify accordant 
-  '\code{as.pplot()}' methods instead of altering the original 
+  \code{\link{as.pplot}}-methods instead of altering the original 
   '\code{pplot}' functions.
 }
 \examples{
@@ -137,7 +138,7 @@ dev.off()
 
 }
 \seealso{
-\link{PP}, \link{irf.pvarx}, \link{pid.dc}, and \link{id.iv}
-  for further examples of edited plots, in particular for subset and reordered 
-  facet plots with reshaped facet dimensions.
+\code{\link{PP}}, \code{\link{irf.pvarx}}, \code{\link{pid.dc}}, and 
+  \code{\link{id.iv}} for further examples of edited plots, in particular for 
+  subset and reordered facet plots with reshaped facet dimensions.
 }

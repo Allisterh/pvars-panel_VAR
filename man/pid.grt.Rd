@@ -23,7 +23,8 @@ Panel of VAR objects estimated under rank-restriction.}
 
 \item{SR}{Matrix. The restricted contemporaneous impact matrix.}
 
-\item{start}{Vector. The starting values for \eqn{\gamma}, set by \link[stats]{rnorm} if \code{NULL} (the default).}
+\item{start}{Vector. The starting values for \eqn{\gamma}, 
+set by \code{\link[stats]{rnorm}} if \code{NULL} (the default).}
 
 \item{max.iter}{Integer. The maximum number of iterations.}
 
@@ -44,7 +45,7 @@ List of class '\code{pid}' with elements:
 }
 \description{
 Identifies a panel of SVEC models by utilizing a scoring algorithm.
-  See the details of \link[vars]{SVEC} in \strong{vars}.
+  See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
 }
 \references{
 Amisano, G. and Giannini, C. (1997): 
@@ -70,7 +71,9 @@ Pfaff, B. (2008):
   \emph{Journal of Statistical Software}, 27, pp. 1-32.
 }
 \seealso{
-\ldots the original \link[vars]{SVEC} by Pfaff (2008) in \strong{vars}. Note that \link{pid.grt} 
-  relies on this underlying procedure, but allows for the additional model specifications in \link{pvarx.VEC} 
-  and for the bootstrap procedures in \link{sboot.pmb}, both provided by the \strong{pvars} package.
+\ldots the original \code{\link[vars]{SVEC}} by Pfaff (2008) in \strong{vars}. 
+  Note that \code{\link{pid.grt}}  relies on this underlying procedure, 
+  but allows for the additional model specifications in \code{\link{pvarx.VEC}} 
+  and for the bootstrap procedures in \code{\link{sboot.pmb}}, 
+  both provided by the \strong{pvars} package.
 }

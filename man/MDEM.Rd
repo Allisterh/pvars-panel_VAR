@@ -18,7 +18,7 @@ data("MDEM")
 \description{
 The data set \code{MDEM} consists of 
   annual observations for the nominal short-term interest rate \eqn{R} and 
-  the logarithm of the real money aggregate \eqn{m1} and real GDP \eqn{gdp}.
+  the logarithm of the real money aggregate \emph{m1} and real GDP \eqn{gdp}.
   It covers the period 1957 to 1996 \eqn{(T=40)} for \eqn{N=19} countries.
 }
 \references{

@@ -88,14 +88,15 @@ pid.chol <- function(x, order_k=NULL){
 
 #' @title Identification of a panel of SVEC models
 #' @description Identifies a panel of SVEC models by utilizing a scoring algorithm.
-#'   See the details of \link[vars]{SVEC} in \strong{vars}.
+#'   See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
 #' 
 #' @param x An object of class '\code{pvarx}' or a list of VECM objects 
 #'   that will be \link[=as.varx]{coerced} to '\code{varx}'. 
 #'   Panel of VAR objects estimated under rank-restriction.
 #' @param LR Matrix. The restricted long-run impact matrix.
 #' @param SR Matrix. The restricted contemporaneous impact matrix.
-#' @param start Vector. The starting values for \eqn{\gamma}, set by \link[stats]{rnorm} if \code{NULL} (the default).
+#' @param start Vector. The starting values for \eqn{\gamma}, 
+#'   set by \code{\link[stats]{rnorm}} if \code{NULL} (the default).
 #' @param max.iter Integer. The maximum number of iterations.
 #' @param conv.crit Real number. Convergence value of algorithm.
 #' @param maxls Real number. Maximum movement of the parameters between two iterations of the scoring algorithm.
@@ -127,9 +128,11 @@ pid.chol <- function(x, order_k=NULL){
 #' @references Pfaff, B. (2008):
 #'   "VAR, SVAR and SVEC Models: Implementation within R Package \strong{vars}",
 #'   \emph{Journal of Statistical Software}, 27, pp. 1-32.
-#' @seealso \ldots the original \link[vars]{SVEC} by Pfaff (2008) in \strong{vars}. Note that \link{pid.grt} 
-#'   relies on this underlying procedure, but allows for the additional model specifications in \link{pvarx.VEC} 
-#'   and for the bootstrap procedures in \link{sboot.pmb}, both provided by the \strong{pvars} package.
+#' @seealso \ldots the original \code{\link[vars]{SVEC}} by Pfaff (2008) in \strong{vars}. 
+#'   Note that \code{\link{pid.grt}}  relies on this underlying procedure, 
+#'   but allows for the additional model specifications in \code{\link{pvarx.VEC}} 
+#'   and for the bootstrap procedures in \code{\link{sboot.pmb}}, 
+#'   both provided by the \strong{pvars} package.
 #' 
 #' @export
 #' 

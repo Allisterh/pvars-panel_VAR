@@ -4,12 +4,12 @@
 # CRAN manual: https://cran.r-project.org/doc/manuals/R-exts.html#Generic-functions-and-methods
 # Roxygen: https://r-pkgs.org/man.html#man-s3
 
-#' @title Deterministic regressors in \code{pvars}
-#' @description \code{pvars} defines three kind of deterministic regressors, 
+#' @title Deterministic regressors in \strong{pvars}
+#' @description \strong{pvars} defines three kind of deterministic regressors, 
 #'   namely the \strong{\emph{conventional}} '\code{type}', \strong{\emph{customized}} 
 #'   '\code{D}', and \strong{\emph{period-specific}} '\code{t_D}'. 
-#'   While '\code{type}' is a single '\code{character}' 
-#'   and '\code{D}' a data matrix of dimension \eqn{(n_{\bullet} \times (p+T))}, 
+#'   While '\code{type}' is a single character and 
+#'   '\code{D}' a data matrix of dimension \eqn{(n_{\bullet} \times (p+T))}, 
 #'   the specifications for \eqn{\tau} in the \code{list 't_D'} are more complex  
 #'   and therefore preventively checked by '\code{as.t_D}'.
 #'   
@@ -35,7 +35,7 @@
 #'   observations, and '\code{t_D}' contains the positions of activating 
 #'   periods \eqn{\tau} in \eqn{1,\ldots,(p+T)}. In a balanced panel 
 #'   \eqn{p_i+T_i = T^*}, the same date implies the same \eqn{\tau} in 
-#'   \eqn{1,\ldots,T^*}, as shown in the example for '\link{pcoint.CAIN}'. 
+#'   \eqn{1,\ldots,T^*}, as shown in the example for \code{\link{pcoint.CAIN}}. 
 #'   However, in an unbalanced panel, the same date can imply different 
 #'   \eqn{\tau} across \eqn{i} in accordance with the individual time interval 
 #'   \eqn{1,\ldots,(p_i+T_i)}. Note that across the time series in '\code{L.data}', 
@@ -44,7 +44,7 @@
 #' @section Conventional Type: 
 #'   An overview is given here and a detailed explanation in the package vignette. 
 #' \itemize{
-#' \item{\strong{type (VAR)} is specified in VAR models just as in \strong{vars}' '\link[vars]{VAR}', 
+#' \item{\strong{type (VAR)} is specified in VAR models just as in \strong{vars}' \code{\link[vars]{VAR}}, 
 #'       namely by a '\code{const}', a linear '\code{trend}', '\code{both}', or '\code{none}' of those.}
 #' \item{\strong{type_SL} is used in the 'additive' SL procedure for testing the cointegration rank only,
 #'   which removes the mean ('\code{SL_mean}') or mean and linear trend 

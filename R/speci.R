@@ -176,11 +176,11 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #'   jointly via information criteria on the OLS-estimated VAR model for a given 
 #'   number of breaks. These \eqn{m} breaks are common to all \eqn{K} equations 
 #'   of the system and partial, as pertaining the 
-#'   \link[=as.t_D]{deterministic terms} only.
+#'   \link[=as.t_D]{deterministic term} only.
 #' 
 #' @param x VAR object of class '\code{varx}' or any other 
-#'   that will be \link[=as.varx]{coerced} to '\code{varx}'.
-#'   Specifically for \strong{vars}' \link[vars]{VAR}, use \code{p = min(lag_set)} 
+#'   that will be \link[=as.varx]{coerced} to '\code{varx}'. Specifically for 
+#'   \strong{vars}' \code{\link[vars]{VAR}}, use \code{p = min(lag_set)} 
 #'   or simply \code{p=1} such that the customized \code{$D} from the coerced 
 #'   '\code{varx}' object contains no \code{NA} in the effective sample.
 #' @param lag_set Vector. Set of candidates for the lag-order \eqn{p}. 
@@ -188,9 +188,9 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #'   the variation of det\eqn{(\hat{U}_{\tau} \hat{U}_{\tau}')} uniformly and 
 #'   determine the break period(s) \eqn{\tau} unanimously as \eqn{\hat{\tau} = }
 #'   arg min det\eqn{(\hat{U}_{\tau} \hat{U}_{\tau}')} under the given \eqn{p}.
-#' @param dim_m Integer. Number of breaks in the deterministic terms to consider.
+#' @param dim_m Integer. Number of breaks in the deterministic term to consider.
 #'   If \code{FALSE} (the default), the criteria determine only 
-#'   the lag-order \eqn{p} just like \strong{vars}' \link[vars]{VARselect}.
+#'   the lag-order \eqn{p} just like \strong{vars}' \code{\link[vars]{VARselect}}.
 #' @param trim Numeric. Either a numeric value \eqn{h \in (p_{max}/T, 1/m)} that 
 #'   defines the minimal fraction relative to the total sample size \eqn{T} or 
 #'   an integer that defines the minimal number of observations in each sub-sample. 
@@ -199,7 +199,7 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #'   as the set of candidates for \eqn{m=1} single period \eqn{\tau_1}. 
 #' @param type_break Character. Whether the \eqn{m} common breaks pertain the 
 #'   '\code{const}' (the default), the linear '\code{trend}', or '\code{both}'. 
-#'   Adds the period-specific \link[=as.t_D]{deterministic terms} activated 
+#'   Adds the period-specific \link[=as.t_D]{deterministic term} activated 
 #'   during \eqn{\tau}.
 #' @param add_dummy Logical. If \code{TRUE} (not the default), accompanying 
 #'   impulse dummies activated in \eqn{\tau + (0, \ldots, p-1)} are added to each break.
@@ -221,12 +221,12 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #'   (e.g. Bai, Perron 1998 and 2003), but leaves the lag-order \eqn{p} aside. 
 #'   For example, under a given \eqn{p}, Luetkepohl et al. (2004) use a full-rank 
 #'   VAR in levels to determine \eqn{m=1} common break period \eqn{\tau_1} 
-#'   and subsequently perform cointegration analysis with \link{coint.SL} 
+#'   and subsequently perform cointegration analysis with \code{\link{coint.SL}} 
 #'   (which actually provides \eqn{p}-values for up to \eqn{m=2}). 
 #'   Note yet that the lag-order of a VECM is usually determined via 
 #'   information criteria of a full-rank VAR in levels alike.
 #'   
-#'   \link{speci.VAR} combines Bai, Perron (2003) and Approach 3 of Yang (2002)
+#'   \code{\link{speci.VAR}} combines Bai, Perron (2003) and Approach 3 of Yang (2002)
 #'   into a global minimization of information criteria on the pair \eqn{(p,\tau)}. 
 #'   Specifically, Yang (2002:378, Ch.2.2) estimates all candidate VAR models by 
 #'   OLS and then determines their optimal lag-order \eqn{p^*} and \eqn{m=1} break 
@@ -236,7 +236,7 @@ speci.factors <- function(L.data, k_max=20, n.iterations=4, differenced=FALSE, c
 #'   minimum sum of squared residuals from a single-equation model \eqn{(K=1)}. 
 #'   They use dynamic programming to reduce the number of least-squares operations. 
 #'   Although adapting their streamlined set of admissible combinations for \eqn{\tau}, 
-#'   \link{speci.VAR} yet resorts to (parallelized brute-force) OLS estimation 
+#'   \code{\link{speci.VAR}} yet resorts to (parallelized brute-force) OLS estimation 
 #'   of all candidate VAR models and therewith circumvents issues of correct 
 #'   initialization and iterative updating for the models with partial breaks.
 #'   

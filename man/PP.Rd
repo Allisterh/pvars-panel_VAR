@@ -12,8 +12,8 @@ PP.variable(x, n.ahead = 20, shock = NULL)
 }
 \arguments{
 \item{x}{Rank-restricted VAR object of class '\code{varx}' or any other 
-that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\link[vars]{vec2var}'. 
-If the object is also of child class '\code{id}', \link{PP.variable} calculates 
+that can be \link[=as.varx]{coerced} to '\code{varx}', e.g. '\code{\link[vars]{vec2var}}'. 
+If the object is also of child class '\code{id}', \code{\link{PP.variable}} calculates 
 the persistence profiles which are initiated by the provided structural shocks.}
 
 \item{n.ahead}{Integer. Number of periods to consider after the initial impulse, i.e. the horizon of the PP.}
