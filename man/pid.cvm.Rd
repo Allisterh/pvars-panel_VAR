@@ -32,11 +32,11 @@ If the sample sizes \eqn{T_i - p_i} differ across '\eqn{i}', the strictly separa
 requires a list of \eqn{N} individual '\code{indepTestDist}'-objects with respective sample sizes.
 If \code{NULL} (the default), a suitable object will be calculated during the call of \code{\link{pid.cvm}}.}
 
-\item{itermax}{Integer. Maximum number of iterations for DEoptim}
+\item{itermax}{Integer. Maximum number of iterations for DEoptim.}
 
-\item{steptol}{Numeric. Tolerance for steps without improvement for DEoptim}
+\item{steptol}{Numeric. Tolerance for steps without improvement for DEoptim.}
 
-\item{iter2}{Integer. Number of iterations for the second optimization}
+\item{iter2}{Integer. Number of iterations for the second optimization.}
 }
 \value{
 List of class '\code{pid}' with elements:

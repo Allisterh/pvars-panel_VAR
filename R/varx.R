@@ -170,7 +170,7 @@ summary.varx <- function(object, ...){
 # CRAN manual: https://cran.r-project.org/doc/manuals/R-exts.html#Generic-functions-and-methods
 # Roxygen: https://r-pkgs.org/man.html#man-s3
 
-#' @title Coerce into a \code{varx} object
+#' @title Coerce into a '\code{varx}' object
 #' @description Coerce into a '\code{varx}' object. On top of the parent class 
 #'   '\code{varx}', the child class '\code{id}' is imposed if the input object 
 #'   to be transformed contains an SVAR model. 

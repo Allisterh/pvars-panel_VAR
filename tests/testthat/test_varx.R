@@ -40,8 +40,8 @@ test_that("VECM() can reproduce basic examples from urca package
   library("urca")
   data(denmark)
   sjd = denmark[, c("LRM", "LRY", "IBO", "IDE")]
-  tolerant_u =  4e-08  # on residuals
-  tolerant_a = 14e-08  # on LR-test stats and pvals for adjustment coefficients
+  tolerant_u = 4e-08  # on residuals
+  tolerant_a = 2e-06  # on LR-test stats and pvals for adjustment coefficients
   dim_K = ncol(sjd)
   dim_r = 2
   

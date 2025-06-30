@@ -19,7 +19,7 @@
 #'   \eqn{i = 1,\ldots,N} as argument \code{L.data}.
 #' @param type Character. The conventional case of the \link[=as.t_D]{deterministic term}.
 #' @param t_D1 List of vectors. The activating break periods \eqn{\tau} 
-#'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,t}}, 
+#'   for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,it}}, 
 #'   which are restricted to the cointegration relations. 
 #'   The accompanying lagged regressors are automatically included in \eqn{d_{2,it}}. 
 #'   The \eqn{p}-values are calculated for up to two breaks resp. three sub-samples.
@@ -51,7 +51,8 @@ NULL
 
 
 #' @describeIn pcoint based on the Johansen procedure.
-#' @param n.factors Integer. Number of common factors to be used for PANIC. 
+#' @param n.factors Integer. Number of common factors to be subtracted 
+#'   for the PANIC by Arsova and Oersal (2017, 2018). 
 #'   Deactivated if \code{FALSE} (the default).
 #' @references Larsson, R., Lyhagen, J., and Lothgren, M. (2001): 
 #'   "Likelihood-based Cointegration Tests in Heterogeneous Panels",
@@ -127,7 +128,7 @@ pcoint.JO <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
 }
 
 
-#' @describeIn pcoint based on pooled two-step estimation of the cointegrating vectors.
+#' @describeIn pcoint based on the pooled two-step estimation of the cointegrating vectors.
 #' @param n.iterations Integer. The (maximum) number of iterations for the 
 #'   pooled estimation of the cointegrating vectors.
 #' @references Breitung, J. (2005): 
@@ -188,8 +189,9 @@ pcoint.BR <- function(L.data, lags, type=c("Case1", "Case2", "Case3", "Case4"),
 }
 
 
-#' @describeIn pcoint based on the SL-procedure.
-#' @param n.factors Integer. Number of common factors to be used for PANIC. 
+#' @describeIn pcoint based on the Saikkonen-Luetkepohl procedure.
+#' @param n.factors Integer. Number of common factors to be subtracted 
+#'   for the PANIC by Arsova and Oersal (2017, 2018). 
 #'   Deactivated if \code{FALSE} (the default).
 #' @references Oersal, D. D. K., and Droge, B. (2014): 
 #'   "Panel Cointegration Testing in the Presence of a Time Trend", 

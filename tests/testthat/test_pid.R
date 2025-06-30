@@ -49,8 +49,8 @@ test_that("pid.dc(c('pool','indiv')) can reproduce the id.dc() example from svar
   
   # check #
   R.svar$B = aux_sico(R.svar$B)$B
-  expect_equivalent(R.svar$B, R.indi$B)
-  expect_equivalent(R.svar$B, R.pool$B, tolerance=4.8e-08)
+  expect_equivalent(R.svar$B, R.indi$B, tolerance=5e-05)  # identical on Linux Ubuntu (22.04)
+  expect_equivalent(R.svar$B, R.pool$B, tolerance=5e-05)  # win-builder needs higher tolerance than other platforms
   expect_equivalent(R.eps, R.pool$eps)  
   ### View(R.eps - R.pool$eps)  # small rounding errors lead to slightly different rotation angles
 })

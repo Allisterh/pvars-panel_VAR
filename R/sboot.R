@@ -348,7 +348,7 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' \item{B}{List for the structural impact matrix containing 
 #'   the matrix of point estimates '\code{par}' and 
 #'   the array of bootstrap results '\code{sim}'.}
-#' \item{L.PSI_bc}{List of the estimated bias terms \eqn{\hat{\Psi}_i} 
+#' \item{L.PSI_bc}{List of the \eqn{N} estimated bias terms \eqn{\hat{\Psi}_i} 
 #'   for the individual VAR coefficients \eqn{\hat{A}_i} according to Kilian (1998).}
 #' \item{pvarx}{Input panel VAR object of class '\code{pvarx}' 
 #'   that has been subjected to the first-step bias-correction.}

@@ -45,7 +45,7 @@ In the vector, \eqn{p_i} must have the same succession
 \item{type}{Character. The conventional case of the \link[=as.t_D]{deterministic term}.}
 
 \item{t_D1}{List of vectors. The activating break periods \eqn{\tau} 
-for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,t}}, 
+for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{1,it}}, 
 which are restricted to the cointegration relations. 
 The accompanying lagged regressors are automatically included in \eqn{d_{2,it}}. 
 The \eqn{p}-values are calculated for up to two breaks resp. three sub-samples.}
@@ -54,7 +54,8 @@ The \eqn{p}-values are calculated for up to two breaks resp. three sub-samples.}
 for the period-specific \link[=as.t_D]{deterministic regressors} in \eqn{d_{2,it}}, 
 which are unrestricted.}
 
-\item{n.factors}{Integer. Number of common factors to be used for PANIC. 
+\item{n.factors}{Integer. Number of common factors to be subtracted 
+for the PANIC by Arsova and Oersal (2017, 2018). 
 Deactivated if \code{FALSE} (the default).}
 
 \item{n.iterations}{Integer. The (maximum) number of iterations for the 
@@ -92,9 +93,9 @@ Performs test procedures for the rank of cointegration in a panel of VAR models.
 \itemize{
 \item \code{pcoint.JO()}: based on the Johansen procedure.
 
-\item \code{pcoint.BR()}: based on pooled two-step estimation of the cointegrating vectors.
+\item \code{pcoint.BR()}: based on the pooled two-step estimation of the cointegrating vectors.
 
-\item \code{pcoint.SL()}: based on the SL-procedure.
+\item \code{pcoint.SL()}: based on the Saikkonen-Luetkepohl procedure.
 
 \item \code{pcoint.CAIN()}: accounting for correlated probits between the individual SL-procedures.
 

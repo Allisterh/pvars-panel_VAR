@@ -10,8 +10,8 @@
 #'   '\code{D}', and \strong{\emph{period-specific}} '\code{t_D}'. 
 #'   While '\code{type}' is a single character and 
 #'   '\code{D}' a data matrix of dimension \eqn{(n_{\bullet} \times (p+T))}, 
-#'   the specifications for \eqn{\tau} in the \code{list 't_D'} are more complex  
-#'   and therefore preventively checked by '\code{as.t_D}'.
+#'   the specifications for \eqn{\tau} in the list '\code{t_D}' are more complex  
+#'   and therefore preventively checked by \code{\link{as.t_D}}.
 #'   
 #' @param x A list of vectors for \eqn{\tau} to be checked. Since \code{'x'} is
 #'   just checked, Section "Value" explains function-input and -output likewise.

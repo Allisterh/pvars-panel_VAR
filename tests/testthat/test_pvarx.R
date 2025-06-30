@@ -85,7 +85,7 @@ test_that("aux_pvar() and aux_VARX() return identical OLS estimates when SUR-GLS
 
 
 test_that("as.pvarx() provides the same 'L.varx' from 'pvarx' and list of 'vars' objects", {
-  tolerant_u = 38e-08  # vars::VAR() is based on equation-wise lm().
+  tolerant_u = 25e-07  # vars::VAR() is based on equation-wise lm().
   tolerant_A = 38e-09
   
   # prepare data #

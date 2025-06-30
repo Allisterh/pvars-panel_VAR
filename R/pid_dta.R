@@ -24,9 +24,9 @@
 #'   If the sample sizes \eqn{T_i - p_i} differ across '\eqn{i}', the strictly separated identification
 #'   requires a list of \eqn{N} individual '\code{indepTestDist}'-objects with respective sample sizes.
 #'   If \code{NULL} (the default), a suitable object will be calculated during the call of \code{\link{pid.cvm}}.
-#' @param itermax Integer. Maximum number of iterations for DEoptim
-#' @param steptol Numeric. Tolerance for steps without improvement for DEoptim
-#' @param iter2 Integer. Number of iterations for the second optimization
+#' @param itermax Integer. Maximum number of iterations for DEoptim.
+#' @param steptol Numeric. Tolerance for steps without improvement for DEoptim.
+#' @param iter2 Integer. Number of iterations for the second optimization.
 #' 
 #' @return List of class '\code{pid}' with elements:
 #' \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 

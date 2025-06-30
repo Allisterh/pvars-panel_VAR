@@ -75,7 +75,7 @@ Performs test procedures for the rank of cointegration in a single VAR model.
 \itemize{
 \item \code{coint.JO()}: Johansen procedure.
 
-\item \code{coint.SL()}: (T)SL-procedure.
+\item \code{coint.SL()}: (Trenkler)-Saikkonen-Luetkepohl procedure.
 
 }}
 \examples{

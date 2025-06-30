@@ -296,9 +296,9 @@ summary.pvarx <- function(object, ..., modulus=TRUE, digits=3){
 #' @return  A list of class '\code{pvarx}'. Objects of this class contain the elements:
 #' \item{A}{Matrix. The lined-up coefficient matrices \eqn{A_j, j=1,\ldots,p} 
 #'   for the lagged variables in the panel VAR.}
-#' \item{B}{Matrix. The \eqn{(K x S)} structural impact matrix of the panel SVAR model 
+#' \item{B}{Matrix. The \eqn{(K \times S)} structural impact matrix of the panel SVAR model 
 #'   or an identity matrix \eqn{I_K} as a placeholder for the unidentified VAR model.}
-#' \item{beta}{Matrix. The \eqn{((K+n_{d1}) x r)} cointegrating matrix of the VAR model 
+#' \item{beta}{Matrix. The \eqn{((K+n_{d1}) \times r)} cointegrating matrix of the VAR model 
 #'   if transformed from a rank-restricted VECM.}
 #' \item{L.varx}{List of \code{varx} objects for the individual estimation results.}
 #' \item{args_pvarx}{List of characters and integers 
