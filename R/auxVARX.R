@@ -243,8 +243,8 @@ aux_VECM <- function(beta, RRR){
   dim_Kpn = nrow(Z1) + nrow(Z2)  # number of deterministic and endogenous regressors
   
   # respect normalization of the cointegrating vectors
-  if(sum(beta)==0){ C = diag(dim_r) }else{  # also normalization \beta'S_{11}\beta=I cancels (\beta'S_{11}\beta)^{-1} ...
-    C = solve(t(beta) %*% S11 %*% beta) }   # ... out from Johansen's formulas, see Pfaff 2008:82
+  if(ncol(beta) == 0){ C = diag(dim_r) }else{  # also normalization \beta'S_{11}\beta=I cancels (\beta'S_{11}\beta)^{-1} ...
+    C = solve(t(beta) %*% S11 %*% beta) }      # ... out from Johansen's formulas, see Pfaff 2008:82
   
   # calculate coefficient matrices
   # ... from Johansen 1995:93 (after Eq.6.17): For given \hat{\beta}, the remaining estimators are just OLS-estimators.
