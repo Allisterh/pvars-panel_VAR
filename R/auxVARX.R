@@ -588,7 +588,7 @@ aux_BaB <- function(A_hat, dim_p, PSI, deltas=cumprod((100:0)/100)){
   ### These geometric deltas correspond to the recursive loop in Kilian 1998:220, Step 1b.
   m_hat = Mod(eigen(aux_var2companion(A=A_hat, dim_p=dim_p))$values[1])
   if( m_hat >= 1 ){
-    # no bias-correction under non-stationarity 
+    # no bias-correction under non-stationarity
     A_bc = A_hat
   }else{
     # keep bias-corrected A within the range of stationarity

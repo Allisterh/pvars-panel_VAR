@@ -32,7 +32,7 @@ Thereby, all criteria are calculated as outlined by Corona et al. (2017).}
 Thereby, the PCA is applied via the correlation matrix instead of the covariance matrix of \code{X}.}
 
 \item{n.factors}{Integer. A presumed number of factors under which the idiosyncratic component \code{L.idio} is calculated. 
-Deactivated if NULL (the default).}
+Deactivated if \code{NULL} (the default).}
 }
 \value{
 A list of class '\code{speci}', which contains the elements:

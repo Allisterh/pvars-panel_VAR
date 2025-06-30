@@ -17,7 +17,7 @@
 #' @param scaled Logical. If \code{TRUE}, each time series of the panel \code{X} is scaled.
 #'   Thereby, the PCA is applied via the correlation matrix instead of the covariance matrix of \code{X}.
 #' @param n.factors Integer. A presumed number of factors under which the idiosyncratic component \code{L.idio} is calculated. 
-#'   Deactivated if NULL (the default).
+#'   Deactivated if \code{NULL} (the default).
 #' 
 #' @return A list of class '\code{speci}', which contains the elements:
 #' \item{eigenvals}{Data frame. The eigenvalues of the PCA, which have been used to calculate the criteria, 

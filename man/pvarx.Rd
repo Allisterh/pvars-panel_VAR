@@ -55,7 +55,7 @@ These customized regressors correspond to '\code{exogen}' in \strong{vars}'
 \code{\link[vars]{VAR}}, which is fixed over bootstrap iterations.}
 
 \item{n.factors}{Integer. Number of common factors to be used for SUR. 
-Deactivated if '\code{FALSE}' (the default).}
+Deactivated if \code{FALSE} (the default).}
 
 \item{n.iterations}{Integer. The (maximum) number of iterations 
 for the estimation of SUR resp. the pooled cointegrating vectors.}
@@ -91,7 +91,7 @@ to be pooled using the two-step estimator by Breitung (2005).
 The integer vector specifies throughout heterogeneous coefficients up to 
 the uniform upper block \eqn{I_{r}} estimated with the individual estimator 
 by Ahn and Reinsel (1990) if exclusively in the interval \eqn{[0,...,r]}. 
-Deactivated if NULL (the default).}
+Deactivated if \code{NULL} (the default).}
 }
 \value{
 A list of class '\code{\link[=as.pvarx]{pvarx}}' with the elements:
@@ -103,7 +103,7 @@ A list of class '\code{\link[=as.pvarx]{pvarx}}' with the elements:
 \item{L.varx}{List of '\code{varx}' objects for the individual estimation results.}
 \item{L.data}{List of '\code{data.frame}' objects for each individual.}
 \item{CSD}{List of measures for cross-sectional dependency. 
-  '\code{NULL}' if the individual VAR models have been estimated under independence.}
+  \code{NULL} if the individual VAR models have been estimated under independence.}
 \item{args_pvarx}{List of characters and integers 
   indicating the estimator and specifications that have been used.}
 }

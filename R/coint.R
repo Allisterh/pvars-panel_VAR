@@ -27,7 +27,7 @@
 #' \item{stats_ME}{Maximum eigenvalue (ME) test statistics.}
 #' \item{pvals_TR}{\eqn{p}-values of the TR test.}
 #' \item{pvals_ME}{\eqn{p}-values of the ME test. 
-#'   '\code{NA}' if moments of the gamma distribution are not available 
+#'   \code{NA} if moments of the gamma distribution are not available 
 #'   for the chosen data generating process.}
 #' \item{lambda}{Eigenvalues, the squared canonical correlation coeffcients 
 #'   (saved only for the Johansen procedure).}

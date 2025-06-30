@@ -16,7 +16,7 @@
 #'   \eqn{i = 1,\ldots,N} as argument '\code{L.data}'.
 #' @param type Character. The conventional case of the \link[=as.t_D]{deterministic term}.
 #' @param n.factors Integer. Number of common factors to be used for SUR. 
-#'   Deactivated if '\code{FALSE}' (the default).
+#'   Deactivated if \code{FALSE} (the default).
 #' @param n.iterations Integer. The (maximum) number of iterations 
 #'   for the estimation of SUR resp. the pooled cointegrating vectors.
 #' 
@@ -29,7 +29,7 @@
 #' \item{L.varx}{List of '\code{varx}' objects for the individual estimation results.}
 #' \item{L.data}{List of '\code{data.frame}' objects for each individual.}
 #' \item{CSD}{List of measures for cross-sectional dependency. 
-#'   '\code{NULL}' if the individual VAR models have been estimated under independence.}
+#'   \code{NULL} if the individual VAR models have been estimated under independence.}
 #' \item{args_pvarx}{List of characters and integers 
 #'   indicating the estimator and specifications that have been used.}
 #' 
@@ -138,7 +138,7 @@ pvarx.VAR <- function(L.data, lags, type=c("const", "trend", "both", "none"),
 #'   The integer vector specifies throughout heterogeneous coefficients up to 
 #'   the uniform upper block \eqn{I_{r}} estimated with the individual estimator 
 #'   by Ahn and Reinsel (1990) if exclusively in the interval \eqn{[0,...,r]}. 
-#'   Deactivated if NULL (the default). 
+#'   Deactivated if \code{NULL} (the default). 
 #' 
 #' @references Ahn, S. K., and Reinsel (1990): 
 #'   "Estimation for Partially Nonstationary Multivariate Autoregressive Models",
