@@ -4,7 +4,7 @@
 \alias{pvarx}
 \alias{pvarx.VAR}
 \alias{pvarx.VEC}
-\title{Estimation of VAR models for large heterogeneous panels}
+\title{Estimation of VAR models for heterogeneous panels}
 \usage{
 pvarx.VAR(
   L.data,

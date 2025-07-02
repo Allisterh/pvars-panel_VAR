@@ -33,7 +33,11 @@ Supporting tools, such as the specification functions (`speci.VAR`, `speci.facto
 
 ## Installation
 
-Install the most recent development version
+``` r
+install.packages("pvars")
+```
+
+Alternatively, install the most recent development version
 
 ``` r
 install.packages("devtools")

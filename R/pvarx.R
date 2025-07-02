@@ -1,6 +1,6 @@
 
 
-#' @title Estimation of VAR models for large heterogeneous panels
+#' @title Estimation of VAR models for heterogeneous panels
 #' @description Performs the (pooled) mean-group estimation of a panel VAR model.
 #'   First, VAR models are estimated for all \eqn{N} individual entities. 
 #'   Then, their (pooled) mean-group estimate is calculated for each coefficient.
