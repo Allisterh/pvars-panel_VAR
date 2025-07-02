@@ -62,6 +62,10 @@
 #'   \emph{The Cointegrated VAR Model: Methodology and Applications}, 
 #'   Advanced Texts in Econometrics, Oxford University Press, USA, 2nd ed.
 #' 
+#' @examples
+#' t_D = list(t_impulse=c(10, 20, 35), t_shift=10)
+#' as.t_D(t_D)
+#' 
 #' @export
 #' 
 as.t_D <- function(x, ...) UseMethod("as.t_D")

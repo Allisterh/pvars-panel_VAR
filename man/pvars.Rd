@@ -29,7 +29,7 @@ and for structural breaks in the deterministic terms of the VAR processes.
 \bold{(3)} The panel functions to retrieve structural impact matrices are:
 \itemize{
 \item \code{\link{pid.chol}} identification of panel SVAR models using Cholesky decomposition to impose recursive causality,
-\item \code{\link{pid.grt}}  identification of panel SVEC models,
+\item \code{\link{pid.grt}}  identification of panel SVEC models by imposing long- and short-run restrictions,
 \item \code{\link{pid.iv}}   identification of panel SVAR models by means of proxy variables,
 \item \code{\link{pid.dc}}   independence-based identification of panel SVAR models using distance covariance (DC) statistic,
 \item \code{\link{pid.cvm}}  independence-based identification of panel SVAR models using Cramer-von Mises (CVM) distance.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pid_thr.R
 \name{pid.grt}
 \alias{pid.grt}
-\title{Identification of a panel of SVEC models}
+\title{Identification of panel SVEC models by imposing long- and short-run restrictions}
 \usage{
 pid.grt(
   x,
@@ -44,8 +44,30 @@ List of class '\code{pid}' with elements:
 \item{args_pvarx}{List of characters and integers indicating the estimator and specifications that have been used.}
 }
 \description{
-Identifies a panel of SVEC models by utilizing a scoring algorithm.
+Identifies a panel of SVEC models by utilizing a scoring algorithm 
+  to impose long- and short-run restrictions. 
   See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
+}
+\examples{
+data("PCAP")
+names_k = c("g", "k", "l", "y")  # variable names
+names_i = levels(PCAP$id_i)      # country names
+names_s = NULL                   # optional shock names
+L.data  = sapply(names_i, FUN=function(i) 
+  ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
+  simplify=FALSE)
+
+# colnames of the restriction matrices are passed as shock names #
+SR = matrix(NA, nrow=4, ncol=4, dimnames=list(names_k, names_s))
+SR[1, 2] = 0
+SR[3, 4] = 0
+LR = matrix(NA, nrow=4, ncol=4, dimnames=list(names_k, names_s))
+LR[ , 3:4] = 0
+
+# estimate and identify panel SVECM #
+R.pvec = pvarx.VEC(L.data, lags=2, dim_r=2, type="Case4")
+R.pid  = pid.grt(R.pvec, LR=LR, SR=SR)
+
 }
 \references{
 Amisano, G. and Giannini, C. (1997): 
@@ -76,4 +98,11 @@ Pfaff, B. (2008):
   but allows for the additional model specifications in \code{\link{pvarx.VEC}} 
   and for the bootstrap procedures in \code{\link{sboot.pmb}}, 
   both provided by the \strong{pvars} package.
+
+Other panel identification functions: 
+\code{\link{pid.chol}()},
+\code{\link{pid.cvm}()},
+\code{\link{pid.dc}()},
+\code{\link{pid.iv}()}
 }
+\concept{panel identification functions}

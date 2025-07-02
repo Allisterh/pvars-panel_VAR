@@ -179,3 +179,4 @@ Pesaran, M. H., Shin, Y, and Smith R. J. (1999):
   "Pooled Mean Group Estimation of Dynamic Heterogeneous Panels",
   \emph{Journal of the American Statistical Association}, 94, pp. 621-634.
 }
+\concept{panel estimation functions}

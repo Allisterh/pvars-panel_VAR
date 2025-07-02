@@ -53,6 +53,7 @@
 #' R.lags = c(2, 4, 2, 3, 2, 4, 4, 2, 2, 3, 3, 3, 2, 4, 4, 2, 2, 2, 4, 2, 2, 2, 4)
 #' names(R.lags) = names_i
 #' 
+#' @family panel estimation functions
 #' @name pvarx
 NULL
 

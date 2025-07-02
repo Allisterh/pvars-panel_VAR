@@ -25,6 +25,23 @@ A list of class '\code{svarirf}' holding the impulse response functions as a '\c
 \description{
 Calculates impulse response functions.
 }
+\examples{
+data("PCIT")
+names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+names_l = c("m_PI", "m_CI")  # proxy names
+names_s = paste0("epsilon[ ", c("PI", "CI"), " ]")  # shock names
+dim_p   = 4  # lag-order
+
+# estimate and identify proxy SVAR #
+R.vars = vars::VAR(PCIT[ , names_k], p=dim_p, type="const")
+R.idBL = id.iv(R.vars, iv=PCIT[-(1:dim_p), names_l], S2="MR", cov_u="OMEGA")
+colnames(R.idBL$B) = names_s  # labeling
+
+# calculate and plot normalized IRF #
+R.norm = function(B) B / matrix(-diag(B), nrow(B), ncol(B), byrow=TRUE)
+plot(irf(R.idBL, normf=R.norm))
+
+}
 \references{
 Luetkepohl, H. (2005): 
   \emph{New Introduction to Multiple Time Series Analysis}, 

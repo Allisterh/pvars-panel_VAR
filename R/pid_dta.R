@@ -97,6 +97,7 @@
 #' plot(R.irf, selection=list(1:2, 3:4))
 #' }
 #' 
+#' @family panel identification functions
 #' @importFrom copula indepTestSim
 #' @importFrom pbapply pblapply
 #' @importFrom DEoptim DEoptim.control DEoptim
@@ -235,7 +236,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 }
 
 
-#' @title Independence-based identification of panel SVAR models build on distance covariance (DC) statistic
+#' @title Independence-based identification of panel SVAR models using distance covariance (DC) statistic
 #' @description Given an estimated panel of VAR models, this function applies independence-based identification for 
 #'   the structural impact matrix \eqn{B_i} of the corresponding SVAR model
 #'   \deqn{y_{it} = c_{it} + A_{i1} y_{i,t-1} + ... + A_{i,p_i} y_{i,t-p_i} + u_{it}}
@@ -321,6 +322,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 #'   scaled by 0.01, unlike in HW2024. Note that both bootstrap procedures keep 
 #'   \code{D} fixed over their iterations. 
 #' @example inst/examples/pid_dc.R
+#' @family panel identification functions
 #' @importFrom steadyICA steadyICA W2theta
 #' @export
 #' 
@@ -514,6 +516,20 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #' @references Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
 #'   "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 #' 
+#' @examples
+#' data("PCIT")
+#' names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+#' names_l = c("m_PI", "m_CI")  # proxy names
+#' names_s = paste0("epsilon[ ", c("PI", "CI"), " ]")  # shock names
+#' dim_p   = 4  # lag-order
+#' 
+#' # estimate and identify panel SVAR #
+#' L.vars = list(USA = vars::VAR(PCIT[ , names_k], p=dim_p, type="const"))
+#' L.iv   = list(USA = PCIT[-(1:dim_p), names_l])
+#' R.pid  = pid.iv(L.vars, iv=L.iv, S2="NQ", cov_u="SIGMA", combine="pool")
+#' colnames(R.pid$B)[1:2] = names_s  # labeling
+#' 
+#' @family panel identification functions
 #' @importFrom steadyICA steadyICA W2theta
 #' @export
 #' 

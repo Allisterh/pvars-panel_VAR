@@ -127,4 +127,8 @@ Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025):
 \seealso{
 \ldots the individual identification approaches 
   by Lange et al. (2021) in \strong{svars}.
+
+Other identification functions: 
+\code{\link{id.grt}()}
 }
+\concept{identification functions}

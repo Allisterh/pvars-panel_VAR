@@ -38,11 +38,10 @@
 #' L.data  = sapply(names_i, FUN=function(i) 
 #'   ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
 #'   simplify=FALSE)
-#'   
-#' # estimate panel SVAR #
-#' L.vars  = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
-#' R.pvarx = pvarx.VAR(L.data, lags=2, type="both")
-#' R.pid   = pid.chol(L.vars, order_k=names_k)
+#' 
+#' # estimate and identify panel SVAR #
+#' L.vars = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
+#' R.pid  = pid.chol(L.vars, order_k=names_k)
 #' 
 #' # calculate and plot MG-IRF #
 #' library("ggplot2")
@@ -103,6 +102,21 @@ irf.pvarx <- function(x, ..., n.ahead=20, normf=NULL, w=NULL, MG_IRF=TRUE){
 #' @references Jentsch, C., and Lunsford, K. G. (2021):
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs",
 #'   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
+#' @examples
+#' data("PCIT")
+#' names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+#' names_l = c("m_PI", "m_CI")  # proxy names
+#' names_s = paste0("epsilon[ ", c("PI", "CI"), " ]")  # shock names
+#' dim_p   = 4  # lag-order
+#' 
+#' # estimate and identify proxy SVAR #
+#' R.vars = vars::VAR(PCIT[ , names_k], p=dim_p, type="const")
+#' R.idBL = id.iv(R.vars, iv=PCIT[-(1:dim_p), names_l], S2="MR", cov_u="OMEGA")
+#' colnames(R.idBL$B) = names_s  # labeling
+#' 
+#' # calculate and plot normalized IRF #
+#' R.norm = function(B) B / matrix(-diag(B), nrow(B), ncol(B), byrow=TRUE)
+#' plot(irf(R.idBL, normf=R.norm))
 #' 
 #' @import vars
 #' @method irf varx

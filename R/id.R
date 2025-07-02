@@ -56,6 +56,7 @@
 #'   "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 #' @seealso \ldots the individual identification approaches 
 #'   by Lange et al. (2021) in \strong{svars}.
+#' @family identification functions
 #' @example inst/examples/id_iv.R
 #' @export
 #' 
@@ -77,8 +78,10 @@ id.iv <- function(x, iv, S2=c("MR", "JL", "NQ"), cov_u="OMEGA", R0=NULL){
 }
 
 
-#' @title Identification of an SVEC model
-#' @description Identifies an SVEC model by utilizing a scoring algorithm.
+#' @title Identification of SVEC models by imposing long- and short-run restrictions
+#' @description Identifies an SVEC model by utilizing a scoring algorithm 
+#'   to impose long- and short-run restrictions. 
+#'   See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
 #' @param x VAR object of class '\code{varx}' estimated under rank-restriction 
 #'   or any other that will be \link[=as.varx]{coerced} to '\code{varx}'.
 #' @param LR Matrix. The restricted long-run impact matrix.
@@ -127,10 +130,11 @@ id.iv <- function(x, iv, S2=c("MR", "JL", "NQ"), cov_u="OMEGA", R0=NULL){
 #' LR[1, 2:4] = 0
 #' LR[2:4, 4] = 0
 #' 
-#' # estimate and identify #
+#' # estimate and identify SVECM #
 #' R.vecm = VECM(y=Canada[ , names_k], dim_p=3, dim_r=1, type="Case4")
 #' R.grt  = id.grt(R.vecm, LR=LR, SR=SR)
 #' 
+#' @family identification functions
 #' @export
 #' 
 id.grt <- function(x, LR=NULL, SR=NULL, start=NULL, max.iter=100, conv.crit=1e-07, maxls=1.0){

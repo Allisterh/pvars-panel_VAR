@@ -68,6 +68,11 @@ A list of class '\code{t_D}' specifying \eqn{\tau}.
 }
 }
 
+\examples{
+t_D = list(t_impulse=c(10, 20, 35), t_shift=10)
+as.t_D(t_D)
+
+}
 \references{
 Juselius, K. (2007): 
   \emph{The Cointegrated VAR Model: Methodology and Applications}, 

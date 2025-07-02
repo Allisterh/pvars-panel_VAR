@@ -18,6 +18,20 @@
 #' @references Jentsch, Lunsford (2022): 
 #'   "Asymptotically Valid Bootstrap Inference for Proxy SVARs", 
 #'   \emph{Journal of Business and Economic Statistics}, 40, pp. 1876-1891.
+#' @examples
+#' data("PCIT")
+#' names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+#' names_l = c("m_PI", "m_CI")  # proxy names
+#' names_s = paste0("epsilon[ ", c("PI", "CI"), " ]")  # shock names
+#' dim_p   = 4  # lag-order
+#' 
+#' # estimate and identify proxy SVAR #
+#' R.vars = vars::VAR(PCIT[ , names_k], p=dim_p, type="const")
+#' R.idBL = id.iv(R.vars, iv=PCIT[-(1:dim_p), names_l], S2="MR", cov_u="OMEGA")
+#' colnames(R.idBL$B) = names_s  # labeling
+#' 
+#' # calculate and plot FEVD under partial identification #
+#' plot(fevd(R.idBL, n.ahead=20))
 #'
 #' @import vars
 #' @method fevd id

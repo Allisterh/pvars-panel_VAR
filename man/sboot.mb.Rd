@@ -133,6 +133,6 @@ Luetkepohl, H. (2005):
   Springer, 2nd ed.
 }
 \seealso{
-\code{\link[svars]{mb.boot}}, \code{\link[svars]{ba.boot}}, 
-  \code{\link[vars]{irf}}, and the panel counterpart \code{\link{sboot.pmb}}.
+\code{\link[svars]{mb.boot}}, \code{\link[vars]{irf}}, 
+  and the panel counterpart \code{\link{sboot.pmb}}.
 }

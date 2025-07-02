@@ -45,8 +45,8 @@
 #' \item{stars}{Matrix of (\eqn{T \times }\code{n.boot}) integers containing 
 #'   the \eqn{T} resampling draws from each bootstrap iteration.}
 #' 
-#' @seealso \code{\link[svars]{mb.boot}}, \code{\link[svars]{ba.boot}}, 
-#'   \code{\link[vars]{irf}}, and the panel counterpart \code{\link{sboot.pmb}}.
+#' @seealso \code{\link[svars]{mb.boot}}, \code{\link[vars]{irf}}, 
+#'   and the panel counterpart \code{\link{sboot.pmb}}.
 #' 
 #' @examples 
 #' \dontrun{

@@ -80,6 +80,20 @@ Given an estimated panel of VAR models, this function applies independence-based
   that may fix the size of the impact response in the IRF can be imposed 
   subsequently via '\code{normf}' in \code{\link{irf.pvarx}} and \code{\link{sboot.pmb}}.
 }
+\examples{
+data("PCIT")
+names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+names_l = c("m_PI", "m_CI")  # proxy names
+names_s = paste0("epsilon[ ", c("PI", "CI"), " ]")  # shock names
+dim_p   = 4  # lag-order
+
+# estimate and identify panel SVAR #
+L.vars = list(USA = vars::VAR(PCIT[ , names_k], p=dim_p, type="const"))
+L.iv   = list(USA = PCIT[-(1:dim_p), names_l])
+R.pid  = pid.iv(L.vars, iv=L.iv, S2="NQ", cov_u="SIGMA", combine="pool")
+colnames(R.pid$B)[1:2] = names_s  # labeling
+
+}
 \references{
 Mertens, K., and Ravn, M. O. (2013): 
   "The Dynamic Effects of Personal and Corporate Income Tax Changes in the 
@@ -96,3 +110,11 @@ Jentsch, C., and Lunsford, K. G. (2021):
 Empting, L. F. T., Maxand, S., Oeztuerk, S., and Wagner, K. (2025): 
   "Inference in Panel SVARs with Cross-Sectional Dependence of Unknown Form".
 }
+\seealso{
+Other panel identification functions: 
+\code{\link{pid.chol}()},
+\code{\link{pid.cvm}()},
+\code{\link{pid.dc}()},
+\code{\link{pid.grt}()}
+}
+\concept{panel identification functions}

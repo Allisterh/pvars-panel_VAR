@@ -42,11 +42,10 @@ names_i = levels(PCAP$id_i)      # country names
 L.data  = sapply(names_i, FUN=function(i) 
   ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
   simplify=FALSE)
-  
-# estimate panel SVAR #
-L.vars  = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
-R.pvarx = pvarx.VAR(L.data, lags=2, type="both")
-R.pid   = pid.chol(L.vars, order_k=names_k)
+
+# estimate and identify panel SVAR #
+L.vars = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
+R.pid  = pid.chol(L.vars, order_k=names_k)
 
 # calculate and plot MG-IRF #
 library("ggplot2")

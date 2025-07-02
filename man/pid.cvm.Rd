@@ -125,4 +125,11 @@ Herwartz, H., and Ploedt, M. (2016):
 \ldots the individual \code{\link[svars]{id.cvm}} by Lange et al. (2021) in \strong{svars}. 
   Note that \code{\link{pid.cvm}} relies on a modification of their procedure and 
   thus performs ICA on the pre-whitened shocks '\code{eps0}' directly.
+
+Other panel identification functions: 
+\code{\link{pid.chol}()},
+\code{\link{pid.dc}()},
+\code{\link{pid.grt}()},
+\code{\link{pid.iv}()}
 }
+\concept{panel identification functions}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/id.R
 \name{id.grt}
 \alias{id.grt}
-\title{Identification of an SVEC model}
+\title{Identification of SVEC models by imposing long- and short-run restrictions}
 \usage{
 id.grt(
   x,
@@ -35,7 +35,9 @@ set by \code{\link[stats]{rnorm}} if \code{NULL} (the default).}
 List of class '\code{\link[=as.varx]{id}}'.
 }
 \description{
-Identifies an SVEC model by utilizing a scoring algorithm.
+Identifies an SVEC model by utilizing a scoring algorithm 
+  to impose long- and short-run restrictions. 
+  See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
 }
 \examples{
 ### reproduce basic example in "vars" ###
@@ -51,7 +53,7 @@ LR = matrix(NA, nrow=4, ncol=4, dimnames=list(names_k, names_s))
 LR[1, 2:4] = 0
 LR[2:4, 4] = 0
 
-# estimate and identify #
+# estimate and identify SVECM #
 R.vecm = VECM(y=Canada[ , names_k], dim_p=3, dim_r=1, type="Case4")
 R.grt  = id.grt(R.vecm, LR=LR, SR=SR)
 
@@ -84,4 +86,8 @@ Pfaff, B. (2008):
   Note that \code{\link{id.grt}} is just a graftage, but allows for the additional 
   model specifications in \code{\link{VECM}} and for the bootstrap procedures 
   in \code{\link{sboot.mb}}, both provided by the \strong{pvars} package.
+
+Other identification functions: 
+\code{\link{id.iv}()}
 }
+\concept{identification functions}

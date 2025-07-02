@@ -32,6 +32,19 @@ Given an estimated panel of VAR models, this function uses the Cholesky decompos
   \deqn{       = c_{it} + A_{i1} y_{i,t-1} + ... + A_{i,p_i} y_{i,t-p_i} + B_i \epsilon_{it}.}
   Matrix \eqn{B_i} corresponds to the decomposition of the least squares covariance matrix \eqn{\Sigma_{u,i} = B_i B_i'}.
 }
+\examples{
+data("PCAP")
+names_k = c("g", "k", "l", "y")  # variable names
+names_i = levels(PCAP$id_i)      # country names
+L.data  = sapply(names_i, FUN=function(i) 
+  ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
+  simplify=FALSE)
+
+# estimate and identify panel SVAR #
+L.vars = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
+R.pid  = pid.chol(L.vars, order_k=names_k)
+
+}
 \references{
 Luetkepohl, H. (2005): 
   \emph{New Introduction to Multiple Time Series Analysis}, 
@@ -41,3 +54,11 @@ Sims, C. A. (2008):
   "Macroeconomics and Reality", 
   \emph{Econometrica}, 48, pp. 1-48.
 }
+\seealso{
+Other panel identification functions: 
+\code{\link{pid.cvm}()},
+\code{\link{pid.dc}()},
+\code{\link{pid.grt}()},
+\code{\link{pid.iv}()}
+}
+\concept{panel identification functions}

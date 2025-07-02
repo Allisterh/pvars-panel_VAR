@@ -2,7 +2,7 @@
 % Please edit documentation in R/pid_dta.R
 \name{pid.dc}
 \alias{pid.dc}
-\title{Independence-based identification of panel SVAR models build on distance covariance (DC) statistic}
+\title{Independence-based identification of panel SVAR models using distance covariance (DC) statistic}
 \usage{
 pid.dc(
   x,
@@ -159,3 +159,11 @@ Szekely, G. J., Rizzo, M. L., and Bakirov, N. K. (2007):
   "Measuring and Testing Dependence by Correlation of Distances", 
   \emph{Annals of Statistics}, 35, pp. 2769-2794.
 }
+\seealso{
+Other panel identification functions: 
+\code{\link{pid.chol}()},
+\code{\link{pid.cvm}()},
+\code{\link{pid.grt}()},
+\code{\link{pid.iv}()}
+}
+\concept{panel identification functions}

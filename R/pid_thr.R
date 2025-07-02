@@ -30,6 +30,19 @@
 #'   "Macroeconomics and Reality", 
 #'   \emph{Econometrica}, 48, pp. 1-48.
 #' 
+#' @examples
+#' data("PCAP")
+#' names_k = c("g", "k", "l", "y")  # variable names
+#' names_i = levels(PCAP$id_i)      # country names
+#' L.data  = sapply(names_i, FUN=function(i) 
+#'   ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
+#'   simplify=FALSE)
+#' 
+#' # estimate and identify panel SVAR #
+#' L.vars = lapply(L.data, FUN=function(x) vars::VAR(x, p=2, type="both"))
+#' R.pid  = pid.chol(L.vars, order_k=names_k)
+#' 
+#' @family panel identification functions
 #' @export
 #' 
 pid.chol <- function(x, order_k=NULL){ 
@@ -86,8 +99,9 @@ pid.chol <- function(x, order_k=NULL){
 }
 
 
-#' @title Identification of a panel of SVEC models
-#' @description Identifies a panel of SVEC models by utilizing a scoring algorithm.
+#' @title Identification of panel SVEC models by imposing long- and short-run restrictions
+#' @description Identifies a panel of SVEC models by utilizing a scoring algorithm 
+#'   to impose long- and short-run restrictions. 
 #'   See the details of \code{\link[vars]{SVEC}} in \strong{vars}.
 #' 
 #' @param x An object of class '\code{pvarx}' or a list of VECM objects 
@@ -134,6 +148,27 @@ pid.chol <- function(x, order_k=NULL){
 #'   and for the bootstrap procedures in \code{\link{sboot.pmb}}, 
 #'   both provided by the \strong{pvars} package.
 #' 
+#' @examples
+#' data("PCAP")
+#' names_k = c("g", "k", "l", "y")  # variable names
+#' names_i = levels(PCAP$id_i)      # country names
+#' names_s = NULL                   # optional shock names
+#' L.data  = sapply(names_i, FUN=function(i) 
+#'   ts(PCAP[PCAP$id_i==i, names_k], start=1960, end=2019, frequency=1), 
+#'   simplify=FALSE)
+#' 
+#' # colnames of the restriction matrices are passed as shock names #
+#' SR = matrix(NA, nrow=4, ncol=4, dimnames=list(names_k, names_s))
+#' SR[1, 2] = 0
+#' SR[3, 4] = 0
+#' LR = matrix(NA, nrow=4, ncol=4, dimnames=list(names_k, names_s))
+#' LR[ , 3:4] = 0
+#' 
+#' # estimate and identify panel SVECM #
+#' R.pvec = pvarx.VEC(L.data, lags=2, dim_r=2, type="Case4")
+#' R.pid  = pid.grt(R.pvec, LR=LR, SR=SR)
+#' 
+#' @family panel identification functions
 #' @export
 #' 
 pid.grt <- function(x, LR=NULL, SR=NULL, start=NULL, max.iter=100, conv.crit=1e-07, maxls=1.0){ 

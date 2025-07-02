@@ -210,6 +210,13 @@ summary.varx <- function(object, ...){
 #'   to the child-class '\code{id}' for SVAR models, that inherit from
 #'   parent-class '\code{varx}' for any VAR model.}
 #' 
+#' @examples
+#' data("PCIT")
+#' names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+#' 
+#' R.vars = vars::VAR(PCIT[ , names_k], p=4, type="const")
+#' as.varx(R.vars)
+#' 
 #' @export
 #' 
 as.varx <- function(x, ...) UseMethod("as.varx")

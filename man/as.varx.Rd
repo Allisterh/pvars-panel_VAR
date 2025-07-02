@@ -51,3 +51,11 @@ Coerce into a '\code{varx}' object. On top of the parent class
   may simply specify accordant \code{\link{as.varx}}-methods instead of 
   altering the original \strong{pvars} function.
 }
+\examples{
+data("PCIT")
+names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
+
+R.vars = vars::VAR(PCIT[ , names_k], p=4, type="const")
+as.varx(R.vars)
+
+}
