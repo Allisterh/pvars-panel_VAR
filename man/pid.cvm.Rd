@@ -115,7 +115,7 @@ Herwartz, H., and Wang, S. (2024):
 
 Herwartz, H. (2018): 
   "Hodges Lehmann detection of structural shocks - An Analysis of macroeconomic Dynamics in the Euro Area", 
-  \emph{Oxford Bulletin of Economics and Statistics}, 80, p. 736-754.
+  \emph{Oxford Bulletin of Economics and Statistics}, 80, pp. 736-754.
 
 Herwartz, H., and Ploedt, M. (2016): 
   "The Macroeconomic Effects of Oil Price Shocks: Evidence from a Statistical Identification Approach", 

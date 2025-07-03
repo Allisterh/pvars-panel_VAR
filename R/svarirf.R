@@ -1,6 +1,6 @@
 
 
-#' @title Impulse Response Functions for Panel SVAR Models
+#' @title Impulse Response Functions for panel SVAR models
 #' @description Calculates impulse response functions for panel VAR objects.
 #' @param x Panel VAR object of class '\code{pid}' or '\code{pvarx}' 
 #'   or a list of VAR objects that will be \link[=as.varx]{coerced} to '\code{varx}'.

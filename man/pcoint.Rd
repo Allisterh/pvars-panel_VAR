@@ -166,8 +166,8 @@ Oersal, D. D. K., and Arsova, A. (2017):
   \emph{Econometrics and Statistics}, 2, pp. 61-72.
 
 Arsova, A., and Oersal, D. D. K. (2018): 
-  "Likelihood-based Panel Cointegration Test in the Presence of a 
-  Linear Time Trend and Cross-Sectional Dependence", 
+  "Likelihood-based Panel Cointegration Test in the Presence of 
+  a Linear Time Trend and Cross-Sectional Dependence", 
   \emph{Econometric Reviews}, 37, pp. 1033-1050.
 
 Hartung, J. (1999):

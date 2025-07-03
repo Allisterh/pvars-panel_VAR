@@ -75,7 +75,7 @@ Given an estimated panel of VAR models, this function applies independence-based
   The \eqn{S} columns in \eqn{B_i = [B_{i,1} : B_{i,2}]} of the identified shocks 
   \eqn{\epsilon_{its}, s=1,\ldots,S,} are ordered first, and the variance 
   \eqn{\sigma^2_{\epsilon,is} = 1} is normalized to unity (see e.g. Lunsford 
-  2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
+  2015:6, Eq. 9). Further, the sign is fixed to a positive correlation 
   between proxy and shock series. A normalization of the impulsed shock 
   that may fix the size of the impact response in the IRF can be imposed 
   subsequently via '\code{normf}' in \code{\link{irf.pvarx}} and \code{\link{sboot.pmb}}.

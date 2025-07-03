@@ -2,7 +2,7 @@
 % Please edit documentation in R/svarirf.R
 \name{irf.pvarx}
 \alias{irf.pvarx}
-\title{Impulse Response Functions for Panel SVAR Models}
+\title{Impulse Response Functions for panel SVAR models}
 \usage{
 \method{irf}{pvarx}(x, ..., n.ahead = 20, normf = NULL, w = NULL, MG_IRF = TRUE)
 }

@@ -161,7 +161,13 @@ NULL
 #' @references Mark, N. C., and Sul, D. (2003): 
 #'   "Cointegration Vector Estimation by Panel DOLS and Long-Run Money Demand," 
 #'   \emph{Oxford Bulletin of Economics and Statistics}, 65, pp. 655-680.
-#' @source \url{https://www.degruyter.com/view/journals/snde/15/4/article-1558-3708.1825.xml.xml}
+#' @source The prepared national accounts data set is directly obtainable from: 
+#'   \url{https://www.degruyter.com/view/journals/snde/15/4/article-1558-3708.1825.xml.xml} 
+#'   
+#'   The data set employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1) 
+#'   is originally compiled and described in the unpublished appendix of Mark 
+#'   and Sul (2003). See also the working paper version of Mark and Sul (2003) 
+#'   "A Computationally Simple Cointegration Vector Estimator for Panel Data".
 "MDEM"
 
 

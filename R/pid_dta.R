@@ -59,7 +59,7 @@
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
 #' @references Herwartz, H. (2018): 
 #'   "Hodges Lehmann detection of structural shocks - An Analysis of macroeconomic Dynamics in the Euro Area", 
-#'   \emph{Oxford Bulletin of Economics and Statistics}, 80, p. 736-754.
+#'   \emph{Oxford Bulletin of Economics and Statistics}, 80, pp. 736-754.
 #' @references Herwartz, H., and Ploedt, M. (2016): 
 #'   "The Macroeconomic Effects of Oil Price Shocks: Evidence from a Statistical Identification Approach", 
 #'   \emph{Journal of International Money and Finance}, 61, pp. 30-44.
@@ -299,7 +299,7 @@ pid.cvm <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, dd=N
 #'   \emph{Annals of Statistics}, 35, pp. 2769-2794.
 #' 
 #' @section Notes on the Reproduction in "Examples":
-#'   The reproduction of Herwartz and Wang (HW, 2024, p.630) serves as an 
+#'   The reproduction of Herwartz and Wang (HW, 2024:630) serves as an 
 #'   exemplary application and unit-test of the implementation by \strong{pvars}. 
 #'   While \strong{vars}' \code{\link[vars]{VAR}} employs equation-wise \code{\link[stats]{lm}} 
 #'   with the QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 
@@ -454,7 +454,7 @@ pid.dc <- function(x, combine=c("group", "pool", "indiv"), n.factors=NULL, n.ite
 #'   The \eqn{S} columns in \eqn{B_i = [B_{i,1} : B_{i,2}]} of the identified shocks 
 #'   \eqn{\epsilon_{its}, s=1,\ldots,S,} are ordered first, and the variance 
 #'   \eqn{\sigma^2_{\epsilon,is} = 1} is normalized to unity (see e.g. Lunsford 
-#'   2015, p. 6, Eq. 9). Further, the sign is fixed to a positive correlation 
+#'   2015:6, Eq. 9). Further, the sign is fixed to a positive correlation 
 #'   between proxy and shock series. A normalization of the impulsed shock 
 #'   that may fix the size of the impact response in the IRF can be imposed 
 #'   subsequently via '\code{normf}' in \code{\link{irf.pvarx}} and \code{\link{sboot.pmb}}.

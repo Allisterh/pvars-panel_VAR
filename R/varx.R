@@ -177,8 +177,20 @@ summary.varx <- function(object, ...){
 #' @details \code{\link{as.varx}} is used as an intermediary in the \strong{pvars} 
 #'   functions to achieve compatibility with different classes of VAR objects.
 #'   If the user wishes to extend this compatibility with further classes, she 
-#'   may simply specify accordant \code{\link{as.varx}}-methods instead of 
-#'   altering the original \strong{pvars} function.
+#'   may simply specify accordant \code{\link{as.varx}}-methods instead of altering 
+#'   the original \strong{pvars} function. Classes already covered by \strong{pvars} 
+#'   are those of the \strong{vars} ecosystem, in particular the classes
+#' \itemize{
+#' \item '\code{varest}'  for reduced-form VAR estimates from \code{\link[vars]{VAR}},
+#' \item '\code{vec2var}' for reduced-form VECM estimates from \code{\link[vars]{vec2var}},
+#' \item '\code{svarest}' for structural VAR estimates from \code{\link[vars]{BQ}},
+#' \item '\code{svecest}' for structural VECM estimates from \code{\link[vars]{SVEC}}, and
+#' \item '\code{svars}'   for structural VAR estimates from \strong{svars}' 
+#'   \code{\link[svars]{id.chol}}, \code{\link[svars]{id.cvm}}, or \code{\link[svars]{id.dc}}.
+#' }
+#'   By transformation to '\code{varx}', these VAR estimates can thus be subjected 
+#'   to \strong{pvars}' bootstrap procedure \code{\link{sboot.mb}} and S3 methods 
+#'   such as \code{\link[base]{summary}} and \code{\link[utils]{toLatex}}.
 #' 
 #' @param x A VAR object to be transformed.
 #' @param ... Additional arguments to be passed to or from methods.
@@ -214,8 +226,13 @@ summary.varx <- function(object, ...){
 #' data("PCIT")
 #' names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
 #' 
+#' # estimate reduced-form VAR and coerce into 'varx' object #
 #' R.vars = vars::VAR(PCIT[ , names_k], p=4, type="const")
 #' as.varx(R.vars)
+#' 
+#' # identify structural VAR and coerce into 'id' object #
+#' R.svar = svars::id.chol(R.vars, order_k=names_k)
+#' as.varx(R.svar)
 #' 
 #' @export
 #' 

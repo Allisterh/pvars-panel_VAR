@@ -62,7 +62,7 @@ Given an estimated panel of VAR models, this function applies independence-based
 }
 \section{Notes on the Reproduction in "Examples"}{
 
-  The reproduction of Herwartz and Wang (HW, 2024, p.630) serves as an 
+  The reproduction of Herwartz and Wang (HW, 2024:630) serves as an 
   exemplary application and unit-test of the implementation by \strong{pvars}. 
   While \strong{vars}' \code{\link[vars]{VAR}} employs equation-wise \code{\link[stats]{lm}} 
   with the QR-decomposition of the regressor matrix \eqn{X}, HW2024 and accordingly 

@@ -15,7 +15,7 @@ that will be \link[=as.varx]{coerced} to '\code{varx}'.}
 \item{n.cores}{Integer. Number of allocated processor cores.}
 
 \item{fix_beta}{Logical. If \code{TRUE}, the cointegrating vectors \eqn{\beta} 
-are fixed over all bootstrap iterations. Kilian and Demiroglu (2000, p.43) 
+are fixed over all bootstrap iterations. Kilian and Demiroglu (2000:43) 
 suggest this for VECM with known \eqn{\beta}. 
 Ignored in case of rank-unrestricted VAR.}
 }

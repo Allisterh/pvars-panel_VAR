@@ -59,7 +59,7 @@ A list of class '\code{t_D}' specifying \eqn{\tau}.
   ('\code{SL_trend}') by GLS-detrending.}
 \item{\strong{type (VECM)} is used in the 'innovative' Johansen procedure 
   for testing the cointegration rank and estimating the VECM. In accordance 
-  with Juselius (2007: Ch.6.3), the available model specifications are:
+  with Juselius (2007, Ch.6.3), the available model specifications are:
   '\code{Case1}' for none, 
   '\code{Case2}' for a constant in the cointegration relation,
   '\code{Case3}' for an unrestricted constant, 
