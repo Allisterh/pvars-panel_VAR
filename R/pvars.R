@@ -72,8 +72,9 @@ NULL
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
-#'   \emph{ZBW Journal Data Archive}: 
-#'   \url{https://journaldata.zbw.eu/dataset/statistical-identification-in-panel-structural-vector-autoregressive-models-replication-data}
+#'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2024044.1425287131}.
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/})
+#'   in accordance with the deposit license of the \emph{ZBW Journal Data Archive}.  
 "EU_w"
 
 
@@ -107,8 +108,9 @@ NULL
 #'   Models based on Independence Criteria", 
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
-#'   \emph{ZBW Journal Data Archive}: 
-#'   \url{https://journaldata.zbw.eu/dataset/statistical-identification-in-panel-structural-vector-autoregressive-models-replication-data}
+#'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2024044.1425287131}. 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/})
+#'   in accordance with the deposit license of the \emph{ZBW Journal Data Archive}. 
 "EURO"
 
 
@@ -139,8 +141,8 @@ NULL
 #'   "Cointegration in Panel Data with Structural Breaks and Cross-Section Dependence", 
 #'   \emph{Journal of Applied Econometrics}, 30 (1), pp. 1-23.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
-#'   \emph{Journal of Applied Econometrics Data Archive}: 
-#'   \url{http://qed.econ.queensu.ca/jae/datasets/banerjee003/}
+#'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717881037}. 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}). 
 "ERPT"
 
 
@@ -158,16 +160,19 @@ NULL
 #' @references Carrion-i-Silvestre, J. L., and Surdeanu L. (2011): 
 #'   "Panel Cointegration Rank Testing with Cross-Section Dependence", 
 #'   \emph{Studies in Nonlinear Dynamics & Econometrics}, 15 (4), pp. 1-43.
+#' @references Mark, N. C., and Sul, D. (1999): 
+#'   "A Computationally Simple Cointegration Vector Estimator for Panel Data",
+#'   Working Paper, Department of Economics, Ohio State University.
 #' @references Mark, N. C., and Sul, D. (2003): 
 #'   "Cointegration Vector Estimation by Panel DOLS and Long-Run Money Demand," 
 #'   \emph{Oxford Bulletin of Economics and Statistics}, 65, pp. 655-680.
-#' @source The prepared national accounts data set is directly obtainable from: 
-#'   \url{https://www.degruyter.com/view/journals/snde/15/4/article-1558-3708.1825.xml.xml} 
-#'   
+#' @source This is national accounts data sourced from OECD and IMF's 
+#'   \href{https://legacydata.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b}{\emph{International Financial Statistics}}
+#'    of the year 1998, see the open 
+#'   \href{https://www.imf.org/en/About/copyright-and-terms#data}{terms of use}. 
 #'   The data set employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1) 
-#'   is originally compiled and described in the unpublished appendix of Mark 
-#'   and Sul (2003). See also the working paper version of Mark and Sul (2003) 
-#'   "A Computationally Simple Cointegration Vector Estimator for Panel Data".
+#'   has been originally compiled and described in the unpublished appendix of Mark 
+#'   and Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
 "MDEM"
 
 
@@ -191,9 +196,9 @@ NULL
 #  @references Mark, N.C., and Sul, D. (2001): 
 #    "Nominal exchange rates and monetary fundamentals: evidence from a small post-Bretton woods panel,"
 #    \emph{Journal of International Economics}, 53, pp. 29-52.
-#' @source \url{https://ars.els-cdn.com/content/image/1-s2.0-S2452306216300028-mmc1.zip} 
-#'   Supplementary Raw Research Data. This is open data under the CC BY license 
-#'   \url{https://creativecommons.org/licenses/by/4.0/}.
+#' @source The prepared data set is directly obtainable from the journal website: 
+#'   \doi{10.1016/j.ecosta.2016.10.001}. Supplementary Raw Research Data. 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 "MERM"
 
 
@@ -229,9 +234,9 @@ NULL
 #' @references Kamps, C. (2006):
 #'   "New Estimates of Government Net Capital Stocks for 22 OECD Countries, 1960-2001",
 #'   \emph{IMF Staff Papers}, 53, pp. 120-150.
-#' @source Own compilation based on data from PWT, OECD's \emph{Economic Outlook}, and Eurostat. 
-#'   Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006).  
-#'   This is open data under the CC BY license \url{https://creativecommons.org/licenses/by/4.0/}. 
+#' @source Own compilation based on data from \emph{PWT}, \emph{Eurostat}, and OECD's \emph{Economic Outlook}. 
+#'   Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006). 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 #' @example inst/examples/PCAP.R
 "PCAP"
 
@@ -266,8 +271,8 @@ NULL
 #' @references Mertens, K., and Ravn, M. O. (2019):
 #'   "The Dynamic Effects of Personal and Corporate Income Tax Changes in the 
 #'   United States: Reply", \emph{American Economic Review}, 109, pp. 2679-2691.
-#' @source \doi{10.3886/E116190V1}. 
-#'   Supplementary Research Data. This is open data under the CC BY license 
-#'   \url{https://creativecommons.org/licenses/by/4.0/}. 
+#' @source The prepared data set is directly obtainable from \emph{openICPSR}: 
+#'   \doi{10.3886/E116190V1}. Supplementary Research Data. 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 "PCIT"
 

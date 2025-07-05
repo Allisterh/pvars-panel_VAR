@@ -10,13 +10,13 @@ A long-format data panel of class '\code{data.frame}',
   indicate the country and year respectively.
 }
 \source{
-The prepared national accounts data set is directly obtainable from: 
-  \url{https://www.degruyter.com/view/journals/snde/15/4/article-1558-3708.1825.xml.xml} 
-  
+This is national accounts data sourced from OECD and IMF's 
+  \href{https://legacydata.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b}{\emph{International Financial Statistics}}
+   of the year 1998, see the open 
+  \href{https://www.imf.org/en/About/copyright-and-terms#data}{terms of use}. 
   The data set employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1) 
-  is originally compiled and described in the unpublished appendix of Mark 
-  and Sul (2003). See also the working paper version of Mark and Sul (2003) 
-  "A Computationally Simple Cointegration Vector Estimator for Panel Data".
+  has been originally compiled and described in the unpublished appendix of Mark 
+  and Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
 }
 \usage{
 data("MDEM")
@@ -31,6 +31,10 @@ The data set \code{MDEM} consists of
 Carrion-i-Silvestre, J. L., and Surdeanu L. (2011): 
   "Panel Cointegration Rank Testing with Cross-Section Dependence", 
   \emph{Studies in Nonlinear Dynamics & Econometrics}, 15 (4), pp. 1-43.
+
+Mark, N. C., and Sul, D. (1999): 
+  "A Computationally Simple Cointegration Vector Estimator for Panel Data",
+  Working Paper, Department of Economics, Ohio State University.
 
 Mark, N. C., and Sul, D. (2003): 
   "Cointegration Vector Estimation by Panel DOLS and Long-Run Money Demand," 

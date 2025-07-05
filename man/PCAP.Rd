@@ -10,9 +10,9 @@ A long-format data panel of class '\code{data.frame}',
   indicate the country and year respectively.
 }
 \source{
-Own compilation based on data from PWT, OECD's \emph{Economic Outlook}, and Eurostat. 
-  Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006).  
-  This is open data under the CC BY license \url{https://creativecommons.org/licenses/by/4.0/}.
+Own compilation based on data from \emph{PWT}, \emph{Eurostat}, and OECD's \emph{Economic Outlook}. 
+  Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006). 
+  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 }
 \usage{
 data("PCAP")

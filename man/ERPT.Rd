@@ -11,8 +11,8 @@ A long-format data panel of class '\code{data.frame}',
 }
 \source{
 The prepared \emph{Eurostat} data set is directly obtainable from the 
-  \emph{Journal of Applied Econometrics Data Archive}: 
-  \url{http://qed.econ.queensu.ca/jae/datasets/banerjee003/}
+  \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717881037}. 
+  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 }
 \usage{
 data("ERPT")

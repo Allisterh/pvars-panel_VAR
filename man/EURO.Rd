@@ -10,8 +10,9 @@ A list-format data panel of class '\code{list}'
 }
 \source{
 The prepared \emph{Eurostat} data set is directly obtainable from the 
-  \emph{ZBW Journal Data Archive}: 
-  \url{https://journaldata.zbw.eu/dataset/statistical-identification-in-panel-structural-vector-autoregressive-models-replication-data}
+  \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2024044.1425287131}. 
+  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/})
+  in accordance with the deposit license of the \emph{ZBW Journal Data Archive}.
 }
 \usage{
 data("EURO")

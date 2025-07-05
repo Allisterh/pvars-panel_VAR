@@ -10,9 +10,9 @@ A long-format data panel of class '\code{data.frame}',
   indicate the country and month respectively.
 }
 \source{
-\url{https://ars.els-cdn.com/content/image/1-s2.0-S2452306216300028-mmc1.zip} 
-  Supplementary Raw Research Data. This is open data under the CC BY license 
-  \url{https://creativecommons.org/licenses/by/4.0/}.
+The prepared data set is directly obtainable from the journal website: 
+  \doi{10.1016/j.ecosta.2016.10.001}. Supplementary Raw Research Data. 
+  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
 }
 \usage{
 data("MERM")
