@@ -12,7 +12,7 @@ A long-format data panel of class '\code{data.frame}',
 \source{
 The prepared data set is directly obtainable from the journal website: 
   \doi{10.1016/j.ecosta.2016.10.001}. Supplementary Raw Research Data. 
-  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+  This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 }
 \usage{
 data("MERM")

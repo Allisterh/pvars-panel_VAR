@@ -73,7 +73,7 @@ NULL
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
 #'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2024044.1425287131}.
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/})
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license} 
 #'   in accordance with the deposit license of the \emph{ZBW Journal Data Archive}.  
 "EU_w"
 
@@ -109,7 +109,7 @@ NULL
 #'   \emph{Journal of Applied Econometrics}, 39 (4), pp. 620-639.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
 #'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2024044.1425287131}. 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/})
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license} 
 #'   in accordance with the deposit license of the \emph{ZBW Journal Data Archive}. 
 "EURO"
 
@@ -142,7 +142,7 @@ NULL
 #'   \emph{Journal of Applied Econometrics}, 30 (1), pp. 1-23.
 #' @source The prepared \emph{Eurostat} data set is directly obtainable from the 
 #'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717881037}. 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}). 
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}. 
 "ERPT"
 
 
@@ -177,7 +177,7 @@ NULL
 #'   \emph{Journal of Applied Econometrics}, 30 (2), pp. 177-198.
 #' @source The prepared data set is directly obtainable from the 
 #'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717368489}. 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 "ICAP"
 
 
@@ -233,7 +233,7 @@ NULL
 #    \emph{Journal of International Economics}, 53, pp. 29-52.
 #' @source The prepared data set is directly obtainable from the journal website: 
 #'   \doi{10.1016/j.ecosta.2016.10.001}. Supplementary Raw Research Data. 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 "MERM"
 
 
@@ -271,7 +271,7 @@ NULL
 #'   \emph{IMF Staff Papers}, 53, pp. 120-150.
 #' @source Own compilation based on data from \emph{PWT}, \emph{Eurostat}, and OECD's \emph{Economic Outlook}. 
 #'   Capital stocks are derived by the \emph{Perpetual Inventory Method} as described by Kamps (2006). 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 #' @example inst/examples/PCAP.R
 "PCAP"
 
@@ -308,6 +308,6 @@ NULL
 #'   United States: Reply", \emph{American Economic Review}, 109, pp. 2679-2691.
 #' @source The prepared data set is directly obtainable from \emph{openICPSR}: 
 #'   \doi{10.3886/E116190V1}. Supplementary Research Data. 
-#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+#'   This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 "PCIT"
 

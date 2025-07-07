@@ -11,7 +11,7 @@ A time series data set of class '\code{data.frame}',
 \source{
 The prepared data set is directly obtainable from \emph{openICPSR}: 
   \doi{10.3886/E116190V1}. Supplementary Research Data. 
-  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+  This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 }
 \usage{
 data("PCIT")

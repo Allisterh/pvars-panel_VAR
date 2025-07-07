@@ -12,7 +12,7 @@ A long-format data panel of class '\code{data.frame}',
 \source{
 The prepared data set is directly obtainable from the 
   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717368489}. 
-  This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+  This is open data under the \href{https://creativecommons.org/licenses/by/4.0/}{CC BY 4.0 license}.
 }
 \usage{
 data("ICAP")
