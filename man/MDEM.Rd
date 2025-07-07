@@ -10,13 +10,13 @@ A long-format data panel of class '\code{data.frame}',
   indicate the country and year respectively.
 }
 \source{
-This is national accounts data sourced from OECD and IMF's 
+The prepared data is sourced from OECD and IMF's 
   \href{https://legacydata.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b}{\emph{International Financial Statistics}}
    of the year 1998, see the open 
   \href{https://www.imf.org/en/About/copyright-and-terms#data}{terms of use}. 
-  The data set employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1) 
-  has been originally compiled and described in the unpublished appendix of Mark 
-  and Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
+  Employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1), it has been 
+  originally compiled and described in the unpublished appendix of Mark and 
+  Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
 }
 \usage{
 data("MDEM")
@@ -24,7 +24,7 @@ data("MDEM")
 \description{
 The data set \code{MDEM} consists of 
   annual observations for the nominal short-term interest rate \eqn{R} and 
-  the logarithm of the real money aggregate \emph{m1} and real GDP \eqn{gdp}.
+  the logarithm of the real money aggregate \eqn{m1} and real GDP \eqn{gdp}.
   It covers the period 1957 to 1996 \eqn{(T=40)} for \eqn{N=19} countries.
 }
 \references{
@@ -45,6 +45,7 @@ Other data sets:
 \code{\link{ERPT}},
 \code{\link{EURO}},
 \code{\link{EU_w}},
+\code{\link{ICAP}},
 \code{\link{MERM}},
 \code{\link{PCAP}},
 \code{\link{PCIT}}

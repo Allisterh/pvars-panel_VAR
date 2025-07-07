@@ -44,6 +44,7 @@ Banerjee, A., and Carrion-i-Silvestre, J. L. (2015):
 Other data sets: 
 \code{\link{EURO}},
 \code{\link{EU_w}},
+\code{\link{ICAP}},
 \code{\link{MDEM}},
 \code{\link{MERM}},
 \code{\link{PCAP}},

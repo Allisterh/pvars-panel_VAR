@@ -48,6 +48,7 @@ Herwartz, H., and Wang, S. (2024):
 Other data sets: 
 \code{\link{ERPT}},
 \code{\link{EU_w}},
+\code{\link{ICAP}},
 \code{\link{MDEM}},
 \code{\link{MERM}},
 \code{\link{PCAP}},

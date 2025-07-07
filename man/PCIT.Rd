@@ -51,6 +51,7 @@ Other data sets:
 \code{\link{ERPT}},
 \code{\link{EURO}},
 \code{\link{EU_w}},
+\code{\link{ICAP}},
 \code{\link{MDEM}},
 \code{\link{MERM}},
 \code{\link{PCAP}}

@@ -22,12 +22,12 @@ The data set \code{PCAP} consists of annual observations for
   \itemize{
   \item the governmental capital stocks \eqn{G} and their logarithm \eqn{g}, 
   \item the private capital stocks \eqn{K} and their logarithm \eqn{k}, 
-  \item the total hours worked \eqn{L} and their logarithm \eqn{l}, and
+  \item the total hours worked \eqn{L} and their logarithm \eqn{l}, and 
   \item the real GDP \eqn{Y} and its logarithm \eqn{y}.
   }
   It is constructed from the annual observations for
   \itemize{
-  \item the governmental investments \eqn{IG},
+  \item the governmental investments \eqn{IG}, 
   \item the private non-residential investments and capital stocks \eqn{IB} and \eqn{B}, 
   \item the private housing investments and capital stocks \eqn{IH} and \eqn{H}, and 
   \item the persons employed \eqn{ET} and hours worked per person \eqn{HRS}.
@@ -118,6 +118,7 @@ Other data sets:
 \code{\link{ERPT}},
 \code{\link{EURO}},
 \code{\link{EU_w}},
+\code{\link{ICAP}},
 \code{\link{MDEM}},
 \code{\link{MERM}},
 \code{\link{PCIT}}

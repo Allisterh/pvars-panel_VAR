@@ -146,11 +146,46 @@ NULL
 "ERPT"
 
 
+#' Data set on \emph{Infrastructure Capital Stocks}
+#' @docType data
+#' @description The data set \code{ICAP} consists of annual observations for
+#'   \itemize{
+#'   \item the real GDP \eqn{Y} in US dollars, 
+#'   \item the physical capital stocks \eqn{K} in US dollars,
+#'   \item the physical capital stocks \eqn{KBC30} via "backcasting" in US dollars, 
+#'   \item the number of workers \eqn{LWDI} providing the total labor force, and 
+#'   \item the average years of secondary education \eqn{secondary} of the population. 
+#'   }
+#'   It further reports physical measures of infrastructure given by
+#'   \itemize{
+#'   \item the electricity generation capacity \eqn{EGC} in megawatts, 
+#'   \item the number of main phone lines \eqn{mlines}, 
+#'   \item the kilometers of total roads \eqn{troads}, 
+#'   \item the number of cell phones lines \eqn{cells}, 
+#'   \item the kilometers of paved roads \eqn{proads}, and 
+#'   \item the kilometers of rails \eqn{rails}.
+#'   }
+#'   It covers the period 1960 to 2000 \eqn{(T=41)} for \eqn{N=97} countries.
+#'   The monetary values are given in US-Dollars at 2000 prices, i.e. constant PPP.
+#' @usage data("ICAP")
+#' @format A long-format data panel of class '\code{data.frame}', 
+#'   where the columns \code{id_i} and \code{id_t} indicate the country and year 
+#'   respectively. Column \code{COUNTRY} contains the complete country names.   
+#' @family data sets
+#' @references Calderon, C., Moral-Benito, E., and Serven, L. (2015): 
+#'   "Is Infrastructure Capital Productive? A Dynamic Heterogeneous Approach", 
+#'   \emph{Journal of Applied Econometrics}, 30 (2), pp. 177-198.
+#' @source The prepared data set is directly obtainable from the 
+#'   \emph{ZBW Journal Data Archive}: \doi{10.15456/jae.2022321.0717368489}. 
+#'   This is open data under the CC BY license (\url{https://creativecommons.org/licenses/by/4.0/}).
+"ICAP"
+
+
 #' Data set for the \emph{Monetary Demand Model}
 #' @docType data
 #' @description The data set \code{MDEM} consists of 
 #'   annual observations for the nominal short-term interest rate \eqn{R} and 
-#'   the logarithm of the real money aggregate \emph{m1} and real GDP \eqn{gdp}.
+#'   the logarithm of the real money aggregate \eqn{m1} and real GDP \eqn{gdp}.
 #'   It covers the period 1957 to 1996 \eqn{(T=40)} for \eqn{N=19} countries.
 #' @usage data("MDEM")
 #' @format A long-format data panel of class '\code{data.frame}', 
@@ -166,13 +201,13 @@ NULL
 #' @references Mark, N. C., and Sul, D. (2003): 
 #'   "Cointegration Vector Estimation by Panel DOLS and Long-Run Money Demand," 
 #'   \emph{Oxford Bulletin of Economics and Statistics}, 65, pp. 655-680.
-#' @source This is national accounts data sourced from OECD and IMF's 
+#' @source The prepared data is sourced from OECD and IMF's 
 #'   \href{https://legacydata.imf.org/?sk=4c514d48-b6ba-49ed-8ab9-52b0c1a0179b}{\emph{International Financial Statistics}}
 #'    of the year 1998, see the open 
 #'   \href{https://www.imf.org/en/About/copyright-and-terms#data}{terms of use}. 
-#'   The data set employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1) 
-#'   has been originally compiled and described in the unpublished appendix of Mark 
-#'   and Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
+#'   Employed by Carrion-i-Silvestre and Surdeanu (2011:24, Ch.6.1), it has been 
+#'   originally compiled and described in the unpublished appendix of Mark and 
+#'   Sul (2003). See the related working paper of Mark and Sul (1999, Appendix B).
 "MDEM"
 
 
@@ -208,12 +243,12 @@ NULL
 #'   \itemize{
 #'   \item the governmental capital stocks \eqn{G} and their logarithm \eqn{g}, 
 #'   \item the private capital stocks \eqn{K} and their logarithm \eqn{k}, 
-#'   \item the total hours worked \eqn{L} and their logarithm \eqn{l}, and
+#'   \item the total hours worked \eqn{L} and their logarithm \eqn{l}, and 
 #'   \item the real GDP \eqn{Y} and its logarithm \eqn{y}.
 #'   }
 #'   It is constructed from the annual observations for
 #'   \itemize{
-#'   \item the governmental investments \eqn{IG},
+#'   \item the governmental investments \eqn{IG}, 
 #'   \item the private non-residential investments and capital stocks \eqn{IB} and \eqn{B}, 
 #'   \item the private housing investments and capital stocks \eqn{IH} and \eqn{H}, and 
 #'   \item the persons employed \eqn{ET} and hours worked per person \eqn{HRS}.
