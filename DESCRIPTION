@@ -3,14 +3,24 @@ Package: pvars
 Title: VAR Modeling for Heterogeneous Panels
 Version: 1.0.0
 Authors@R: 
-    person("Lennart", "Empting", , "lennart.empting@vwl.uni-due.de", role = c("aut", "cre", "cph"),
+    person("Lennart", "Empting", ,
+           "lennart.empting@vwl.uni-due.de",
+           role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0004-5068-4639"))
+Author: Lennart Empting [aut, cre, cph] (ORCID: <https://orcid.org/0009-0004-5068-4639>)
 Maintainer: Lennart Empting <lennart.empting@vwl.uni-due.de>
-Description: Implements (1) panel cointegration rank tests, (2) estimators
-    for panels of VAR, and (3) panel-based identification methods for
-    structural vector autoregressive (SVAR) models, allowing for
-    cross-sectional dependence in the error terms and for structural
-    breaks in the deterministic terms of the VAR processes.
+Description: Implements (1) panel cointegration rank tests, (2) estimators for panel
+    vector autoregressive (VAR) models, and (3) identification methods for panel
+    structural vector autoregressive (SVAR) models as described in the accompanying vignette.
+    The implemented functions allow to account for cross-sectional dependence
+    and for structural breaks in the deterministic terms of the VAR processes.
+    Among the large set of functions, particularly noteworthy are those that implement
+    (1) the correlation-augmented inverse normal test on the cointegration rank
+    by Arsova and Oersal (2021, <doi:10.1016/j.ecosta.2020.05.002>),
+    (2) the two-step estimator for pooled cointegrating vectors
+    by Breitung (2005, <doi:10.1081/ETC-200067895>), and
+    (3) the pooled identification based on independent component analysis
+    by Herwartz and Wang (2024, <doi:10.1002/jae.3044>).
 License: MIT + file LICENSE
 URL: https://github.com/Lenni89/pvars
 BugReports: https://github.com/Lenni89/pvars/issues
@@ -39,7 +49,6 @@ Suggests:
     testthat (>= 2.1.0),
     tikzDevice,
     urca
-Authors: Lennart Empting [aut, cre, cph] (ORCID: <https://orcid.org/0009-0004-5068-4639>)
 Encoding: UTF-8
 LazyData: TRUE
 NeedsCompilation: no

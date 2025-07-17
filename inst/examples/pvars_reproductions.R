@@ -41,7 +41,7 @@ pal = c("#999999", RColorBrewer::brewer.pal(n=8, name="Spectral"))
 lvl = levels(R.fac0$eigenvals$scree)
 F.scree = ggplot(R.fac0$eigenvals[1:20, ]) +
   geom_col(aes(x=n, y=share, fill=scree), color="black", width=0.75) +
-  scale_fill_manual(values=pal, breaks=lvl, guide=FALSE) +
+  scale_fill_manual(values=pal, breaks=lvl, guide="none") +
   labs(x="Component number", y="Share on total variance", title=NULL) +
   theme_bw()
 
@@ -68,7 +68,8 @@ tikz(file=paste0(path_fig, "Fig_Factors.tex"), width=textwidth, height=0.4*textw
 dev.off()
 
 # Arsova,Oersal 2017:67, Tab.6 #
-vars::VARselect(R.pcsl$CSD$Ft, lag.max=4, type="both")$selection
+vars::VARselect(Ft, lag.max=4, type="both")$selection
+speci.VAR(vars::VAR(Ft, p=1, type="both"), lag_set=1:4, type="both")
 R.Ftsl = coint.SL(y=R.pcsl$CSD$Ft, dim_p=2, type_SL="SL_trend")  # lag-order by AIC
 R.Ftjo = coint.JO(y=R.pcsl$CSD$Ft, dim_p=2, type="Case4")
 

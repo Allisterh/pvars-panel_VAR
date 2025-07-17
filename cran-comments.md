@@ -1,3 +1,6 @@
+## Fixes for Resubmission
+- FIXED: Unknown, possibly misspelled, fields in DESCRIPTION: 'Authors' 
+
 ## Package Information
 This package provides functions for (1) panel cointegration rank tests, (2) estimators for panels of VAR, and (3) panel-based identification methods for structural vector autoregressive (SVAR) models.
 To give an overview on the comprehensive implementations of these three fields of VAR applications, a vignette will be added to the package and referenced in the DESCRIPTION soon.  

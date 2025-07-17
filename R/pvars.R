@@ -18,11 +18,15 @@ NULL
 
 #' pvars: VAR Modeling for Heterogeneous Panels
 #' @name pvars
-#' @author Lennart Empting \email{lennart.empting@vwl.uni-due.de}
+#' @author Lennart Empting 
+#' \email{lennart.empting@vwl.uni-due.de} 
+#' (ORCID: \href{https://orcid.org/0009-0004-5068-4639}{0009-0004-5068-4639})
 #' @description
-#' This package implements (1) panel cointegration rank tests, (2) estimators for panels of VAR, and 
-#' (3) panel-based identification methods for structural vector autoregressive (SVAR) models. 
-#' The implemented functions allow to account for cross-sectional dependence in the error terms 
+#' This package implements (1) panel cointegration rank tests, (2) estimators for 
+#' panel vector autoregressive (VAR) models, and (3) identification methods for 
+#' panel structural vector autoregressive (SVAR) models as described in the 
+#' accompanying vignette. 
+#' The implemented functions allow to account for cross-sectional dependence 
 #' and for structural breaks in the deterministic terms of the VAR processes. 
 #' @details
 #' \bold{(1)} The panel functions to determine the cointegration rank are:
