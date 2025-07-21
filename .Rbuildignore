@@ -4,3 +4,14 @@
 ^README\.md$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^vignettes/jss\.bst$
+^vignettes/jss\.cls$
+^vignettes/jsslogo\.jpg$
+^vignettes/.*\.aux$
+^vignettes/.*\.aux$
+^vignettes/.*\.bbl$
+^vignettes/.*\.blg$
+^vignettes/.*\.log$
+^vignettes/.*\.out$
+^vignettes/.*\.pdf$
+^vignettes/.*\.gz$

@@ -5,3 +5,10 @@
 .httr-oauth
 .DS_Store
 .quarto
+vignettes/*.aux
+vignettes/*.bbl
+vignettes/*.blg
+vignettes/*.log
+vignettes/*.out
+vignettes/*.pdf
+vignettes/*.gz
