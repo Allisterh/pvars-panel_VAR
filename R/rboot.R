@@ -19,7 +19,12 @@
 #'   for the \eqn{K} residual time series.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
+#' # select minimal or full example #
+#' is_min = TRUE
+#' n.boot = ifelse(is_min, 50, 5000)
+#' 
+#' # prepare data and estimate VAR model #
 #' library("vars")
 #' data("Canada")
 #' exogen  = cbind(qtrend=(1:nrow(Canada))^2)  # quadratic trend
@@ -27,7 +32,7 @@
 #' R.resid = resid(R.vars)
 #' 
 #' # bootstrapped JB-test: p-values #
-#' S.jb = boot_JB(x=R.vars, n.boot=5000, n.cores=1)
+#' S.jb = boot_JB(x=R.vars, n.boot=n.boot, n.cores=1)
 #' pvars:::test.normality(u=R.resid, distribution=S.jb[ ,"JB.stats_mlt", ])
 #' pvars:::test.normality(u=R.resid, distribution="theoretical")
 #' apply(R.resid, MARGIN=2, FUN=function(e_k) 

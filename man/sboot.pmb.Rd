@@ -97,7 +97,12 @@ In case of heterogeneous lag-orders \eqn{p_i} or sample sizes \eqn{T_i},
   last residuals is resampled.
 }
 \examples{
-\dontrun{
+\donttest{
+# select minimal or full example #
+is_min = TRUE
+n.boot = ifelse(is_min, 5, 500)
+
+# prepare data panel #
 data("PCAP")
 names_k = c("g", "k", "l", "y")  # variable names
 names_i = levels(PCAP$id_i)      # country names 
@@ -110,12 +115,12 @@ names(R.lags) = names_i
 # estimate, identify, and bootstrap #
 R.pvar = pvarx.VAR(L.data, lags=R.lags, type="both")
 R.pid  = pid.chol(R.pvar)
-R.boot = sboot.pmb(R.pid, n.boot=200)
+R.boot = sboot.pmb(R.pid, n.boot=n.boot)
 summary(R.boot, idx_par="A", level=0.95)  # VAR coefficients with 95\%-confidence intervals
 plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 
 # second step of bootstrap-after-bootstrap #
-R.bab = sboot.pmb(R.boot, n.boot=200)
+R.bab = sboot.pmb(R.boot, n.boot=n.boot)
 summary(R.bab, idx_par="A", level=0.95)  # VAR coefficients with 95\%-confidence intervals
 plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 }

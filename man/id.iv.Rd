@@ -54,7 +54,6 @@ Given an estimated VAR model, this function uses proxy variables
 }
 \examples{
 ### reproduce Jentsch,Lunsford 2019:2668, Ch.III ###
-\dontrun{
 data("PCIT")
 names_k = c("APITR", "ACITR", "PITB", "CITB", "GOV", "RGDP", "DEBT")
 names_l = c("m_PI", "m_CI")  # proxy names
@@ -71,11 +70,16 @@ R.vars = vars::VAR(PCIT[ , names_k[c(2:1, 3:7)]], p=dim_p, type="const")
 R.idRD = id.iv(R.vars, iv=PCIT[-(1:dim_p),names_l[2:1]], S2="MR", cov_u="OMEGA")
 colnames(R.idRD$B) = names_s[2:1]  # labeling
 
+\donttest{
+# select minimal or full example #
+is_min = TRUE
+n.boot = ifelse(is_min, 5, 10000)
+
 # bootstrap both under 1\%-response normalization #
 set.seed(2389)
 R.norm = function(B) B / matrix(-diag(B), nrow(B), ncol(B), byrow=TRUE)
-R.sbBL = sboot.mb(R.idBL, b.length=19, n.boot=10000, normf=R.norm)
-R.sbRD = sboot.mb(R.idRD, b.length=19, n.boot=10000, normf=R.norm)
+R.sbBL = sboot.mb(R.idBL, b.length=19, n.boot=n.boot, normf=R.norm)
+R.sbRD = sboot.mb(R.idRD, b.length=19, n.boot=n.boot, normf=R.norm)
 
 # plot IRF of Fig.1 and 2 with 68\%-confidence levels #
 library("ggplot2")

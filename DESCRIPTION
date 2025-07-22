@@ -43,8 +43,8 @@ Imports:
     vars
 Suggests: 
     ggfortify,
+    ggpubr,
     knitr,
-    panelvar,
     plm,
     RColorBrewer,
     testthat (>= 2.1.0),

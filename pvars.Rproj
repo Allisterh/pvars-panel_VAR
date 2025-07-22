@@ -10,10 +10,11 @@ UseSpacesForTab: Yes
 NumSpacesForTab: 2
 Encoding: ASCII
 
-RnwWeave: Sweave
+RnwWeave: knitr
 LaTeX: pdfLaTeX
 
 BuildType: Package
 PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
+PackageBuildArgs: --compact-vignettes=both
 PackageRoxygenize: rd,collate,namespace

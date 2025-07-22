@@ -49,18 +49,22 @@
 #'   and the panel counterpart \code{\link{sboot.pmb}}.
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
+#' # select minimal or full example #
+#' is_min = TRUE
+#' n.boot = ifelse(is_min, 5, 500)
+#' 
 #' # use 'b.length=1' to conduct basic "vars" bootstraps #
 #' set.seed(23211)
 #' data("Canada")
 #' R.vars = vars::VAR(Canada, p=2, type="const")
 #' R.svar = svars::id.chol(R.vars)
-#' R.boot = sboot.mb(R.svar, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
+#' R.boot = sboot.mb(R.svar, b.length=1, n.boot=n.boot, n.ahead=30, n.cores=1)
 #' summary(R.boot, idx_par="A", level=0.9)  # VAR coefficients with 90%-confidence intervals 
 #' plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' 
 #' # second step of bootstrap-after-bootstrap #
-#' R.bab = sboot.mb(R.boot, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
+#' R.bab = sboot.mb(R.boot, b.length=1, n.boot=n.boot, n.ahead=30, n.cores=1)
 #' summary(R.bab, idx_par="A", level=0.9)  # VAR coefficients with 90%-confidence intervals 
 #' plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' 
@@ -69,7 +73,7 @@
 #' data("Canada")
 #' R.vars = vars::VAR(Canada, p=2, type="const")
 #' R.svar = vars::BQ(R.vars)
-#' R.boot = sboot.mb(R.svar, b.length=1, n.boot=500, n.ahead=30, n.cores=1)
+#' R.boot = sboot.mb(R.svar, b.length=1, n.boot=n.boot, n.ahead=30, n.cores=1)
 #' summary(R.boot, idx_par="B", level=0.9)  # impact matrix with 90%-confidence intervals 
 #' plot(R.boot, lowerq = c(0.05, 0.1), upperq = c(0.95, 0.9), cumulative=2:3) 
 #' # impulse responses of the second and third variable are accumulated
@@ -82,7 +86,7 @@
 #' R.svar = svars::id.cvm(R.vars, dd=R.cob)
 #' 
 #' R.varx = as.varx(R.svar, dd=R.cob, itermax=300, steptol=200, iter2=50)
-#' R.boot = sboot.mb(R.varx, b.length=15, n.boot=500, n.ahead=30, n.cores=1)
+#' R.boot = sboot.mb(R.varx, b.length=15, n.boot=n.boot, n.ahead=30, n.cores=1)
 #' plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' }
 #' 
@@ -379,7 +383,12 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #'   \emph{Journal of Money, Credit and Banking}, 46, pp. 615-642.
 #' 
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # select minimal or full example #
+#' is_min = TRUE
+#' n.boot = ifelse(is_min, 5, 500)
+#' 
+#' # prepare data panel #
 #' data("PCAP")
 #' names_k = c("g", "k", "l", "y")  # variable names
 #' names_i = levels(PCAP$id_i)      # country names 
@@ -392,12 +401,12 @@ sboot.mb <- function(x, b.length=1, n.ahead=20, n.boot=500, n.cores=1, fix_beta=
 #' # estimate, identify, and bootstrap #
 #' R.pvar = pvarx.VAR(L.data, lags=R.lags, type="both")
 #' R.pid  = pid.chol(R.pvar)
-#' R.boot = sboot.pmb(R.pid, n.boot=200)
+#' R.boot = sboot.pmb(R.pid, n.boot=n.boot)
 #' summary(R.boot, idx_par="A", level=0.95)  # VAR coefficients with 95%-confidence intervals
 #' plot(R.boot, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' 
 #' # second step of bootstrap-after-bootstrap #
-#' R.bab = sboot.pmb(R.boot, n.boot=200)
+#' R.bab = sboot.pmb(R.boot, n.boot=n.boot)
 #' summary(R.bab, idx_par="A", level=0.95)  # VAR coefficients with 95%-confidence intervals
 #' plot(R.bab, lowerq = c(0.05, 0.1, 0.16), upperq = c(0.95, 0.9, 0.84))
 #' }

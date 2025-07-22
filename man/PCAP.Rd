@@ -66,12 +66,15 @@ F.base <- ggplot() +
 F.G <- F.base +
   geom_line(data=PCAP[idx_i, ], aes(x=id_t, y=G/1e+12, colour=id_i, group=id_i), 
             linewidth=2) +
-  geom_line(data=PCAP, aes(x=1960, y=0, color="\\\\O23"), linewidth=0) +
+  stat_summary(data=PCAP[idx_i, ], aes(x=id_t, y=G/1e+12, color="\\\\O23"), 
+               fun=mean, geom="line", linewidth=0) +
   geom_text(data=events, aes(x=(t_start+t_end)/2, y=-Inf, label=label), 
             hjust=0, angle=90, colour='white', alpha=0.6) +
   scale_colour_manual(values=pallet, breaks=breaks) +
   labs(x=NULL, y="Trillion US-\\\\$ at 2005 prices", colour="Country", title=NULL) +
-  theme(legend.position = c(0.01, 0.99), legend.justification = c(0, 1), 
+  guides(colour=guide_legend(override.aes = list(linewidth=2))) +
+  theme(legend.position="inside", legend.position.inside=c(0.01, 0.99), 
+        legend.justification = c(0, 1), 
         legend.title=element_text(size=8), legend.text=element_text(size=6), 
         legend.key.width = unit(0.35, "cm"), legend.key.height = unit(0.35, "cm"))
 
@@ -89,12 +92,13 @@ F.gG <- F.base +
   labs(x="Year", y="Growth in \\\\\%", colour="Country", title=NULL)
 
 # export to Latex #
-\dontrun{
+\donttest{
 library(tikzDevice)
 textwidth = 15.5/2.54  # LaTeX textwidth from "cm" into "inch"
+file_fig  = file.path(tempdir(), "Fig_G.tex")
 
-tikz(file="Fig_G.tex", width=1.2*textwidth, height=0.8*textwidth)
- gridExtra::grid.arrange(grobs=list(F.G, F.gG), layout_matrix=cbind(1:2))
+tikz(file=file_fig, width=1.2*textwidth, height=0.8*textwidth)
+ # gridExtra::grid.arrange(grobs=list(F.G, F.gG), layout_matrix=cbind(1:2))
  ggpubr::ggarrange(F.G, F.gG, ncol=1, nrow=2, align="v")
 dev.off()
 }

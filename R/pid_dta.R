@@ -69,17 +69,22 @@
 #'   thus performs ICA on the pre-whitened shocks '\code{eps0}' directly.
 #' 
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' # select minimal or full example #
+#' is_min = TRUE
+#' idx_i  = ifelse(is_min, 1, 1:14)
+#' 
+#' # load and prepare data #
 #' data("EURO")
 #' data("EU_w")
-#' names_i = names(EURO[-1])
+#' names_i = names(EURO[idx_i+1])  # country names (#1 is EA-wide aggregated data)
 #' idx_k   = 1:4   # endogenous variables in individual data matrices
 #' idx_t   = 1:76  # periods from 2001Q1 to 2019Q4
 #' trend2  = idx_t^2
 #' 
 #' # individual VARX models with common lag-order p=2 #
-#' L.data = lapply(EURO[-1], FUN=function(x) x[idx_t, idx_k])
-#' L.exog = lapply(EURO[-1], FUN=function(x) cbind(trend2, x[idx_t, 5:10]))
+#' L.data = lapply(EURO[idx_i+1], FUN=function(x) x[idx_t, idx_k])
+#' L.exog = lapply(EURO[idx_i+1], FUN=function(x) cbind(trend2, x[idx_t, 5:10]))
 #' L.vars = sapply(names_i, FUN=function(i) 
 #'   vars::VAR(L.data[[i]], p=2, type="both", exogen=L.exog[[i]]), 
 #'   simplify=FALSE)

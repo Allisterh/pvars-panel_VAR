@@ -1,5 +1,5 @@
 ### gallery of merged IRF plots ###
-\dontrun{
+\donttest{
 library("ggplot2")
 data("PCAP")
 names_k = c("g", "k", "l", "y")  # variable names
@@ -47,6 +47,7 @@ R.mg = as.pplot(color_g=R.pal, shape_g=c(2, 3, 20),
 # colorize and export a single sub-plot to Latex #
 library("tikzDevice")
 textwidth = 15.5/2.54  # LaTeX textwidth from "cm" into "inch"
+file_fig  = file.path(tempdir(), "Fig_irf.tex")
 
 R.irf = as.pplot(
   DEU = plot(irf(L.chol[["DEU"]], n.ahead=50), selection=list(4, 1)), 
@@ -57,7 +58,7 @@ R.irf = as.pplot(
   names_s = "\\epsilon_{ g }", 
   Latex   = TRUE)
 
-tikz(file="Fig_irf.tex", width=1.2*textwidth, height=0.8*textwidth)
+tikz(file=file_fig, width=1.2*textwidth, height=0.8*textwidth)
   R.irf$F.plot + labs(color="Country") + theme_minimal()
 dev.off()
 }
