@@ -38,6 +38,11 @@ test_that("the residual diagnostics reproduce example from vars package", {
   expect_equivalent(our_arch, vars_arch, tolerance=tolerant)
   expect_equivalent(our_seri, vars_seri, tolerance=tolerant)
   
+  # compare test statistics of exported functions of vars and pvars #
+  our_norm  = rboot.normality(var.2c, n.boot=5)$stats[ , "MULTI"]
+  vars_norm = sapply(R.norm$jb.mul, function(x) x$statistic)
+  expect_equivalent(our_norm, vars_norm)
+  
   # pvars package: p-values from univariate tests #
   # our_unorm = apply(resids, MARGIN=2, FUN=function(x) test.normality(u=x))
   # our_uarch = apply(resids, MARGIN=2, FUN=function(x) test.arch(u=x, lag.h=5))

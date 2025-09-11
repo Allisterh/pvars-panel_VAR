@@ -1,6 +1,6 @@
 
 
-#' @title Bootstrap procedure for JB-test
+#' @title Bootstrap for JB normality test
 #' @description Bootstraps the distribution of the Jarque-Bera test 
 #'   for individual VAR and VECM as described by Kilian, Demiroglu (2000).
 #' @param x VAR object of class '\code{varx}' or any other 
@@ -12,11 +12,17 @@
 #'   suggest this for VECM with known \eqn{\beta}. 
 #'   Ignored in case of rank-unrestricted VAR. 
 #' 
-#' @return An array of dimension (\eqn{3 \times (1+K) \times} \code{n.boot}) 
+#' @return A list of class '\code{rboot}' with elements:
+#' \item{sim}{Array of dimension \eqn{(3 \times (1+K) \times} \code{n.boot}) 
 #'   containing the \code{n.boot} iteration results for 
 #'   \emph{(i)} the JB, skewness and kurtosis test and for
 #'   \emph{(ii)} the multivariate and each univariate test 
-#'   for the \eqn{K} residual time series.
+#'   for the \eqn{K} residual time series.}
+#' \item{stats}{Matrix of dimension \eqn{(3 \times (1+K))} containing the empirical test statistics.}
+#' \item{pvals}{Matrix of dimension \eqn{(3 \times (1+K))} containing the \eqn{p}-values.}
+#' \item{varx}{Input VAR object of class '\code{varx}'.}
+#' \item{args_rboot}{List of characters and integers 
+#'   indicating the test and specifications that have been used.}
 #' 
 #' @examples 
 #' \donttest{
@@ -24,25 +30,17 @@
 #' is_min = TRUE
 #' n.boot = ifelse(is_min, 50, 5000)
 #' 
-#' # prepare data and estimate VAR model #
+#' # prepare the data, estimate and test the VAR model #
+#' set.seed(23211)
 #' library("vars")
 #' data("Canada")
-#' exogen  = cbind(qtrend=(1:nrow(Canada))^2)  # quadratic trend
-#' R.vars  = VAR(Canada, p=2, type="both", exogen=exogen)
-#' R.resid = resid(R.vars)
-#' 
-#' # bootstrapped JB-test: p-values #
-#' S.jb = boot_JB(x=R.vars, n.boot=n.boot, n.cores=1)
-#' pvars:::test.normality(u=R.resid, distribution=S.jb[ ,"JB.stats_mlt", ])
-#' pvars:::test.normality(u=R.resid, distribution="theoretical")
-#' apply(R.resid, MARGIN=2, FUN=function(e_k) 
-#'   pvars:::test.normality(u=e_k, distribution="theoretical"))
-#' sapply(colnames(R.resid), FUN=function(k) 
-#'   pvars:::test.normality(u=R.resid[ , k], distribution=S.jb[ , k, ]))
+#' exogen = cbind(qtrend=(1:nrow(Canada))^2)  # quadratic trend
+#' R.vars = VAR(Canada, p=2, type="both", exogen=exogen)
+#' R.norm = rboot.normality(x=R.vars, n.boot=n.boot, n.cores=1)
 #' 
 #' # density plot #
 #' library("ggplot2")
-#' R.data = data.frame(t(S.jb[ , "JB.stats_mlt", ]))
+#' R.data = data.frame(t(R.norm$sim[ , "MULTI", ]))
 #' R.args = list(df=2*R.vars$K)
 #' F.density = ggplot() +
 #'   stat_density(data=R.data, aes(x=JB, color="bootstrap"), geom="line") +
@@ -52,66 +50,75 @@
 #' plot(F.density)
 #' }
 #' 
+#' @references Jarque, C. M. and Bera, A. K. (1987): 
+#'   "A Test for Normality of Observations and Regression Residuals", 
+#'   \emph{International Statistical Review}, 55, pp. 163-172.
 #' @references Kilian, L. and Demiroglu, U. (2000): 
 #'   "Residual-Based Tests for Normality in Autoregressions: 
 #'   Asymptotic Theory and Simulation Evidence", 
 #'   \emph{Journal of Business and Economic Statistics}, 32, pp. 40-50.
+#' @seealso \ldots the \code{\link[vars]{normality.test}} by Pfaff (2008) in \strong{vars},
+#'   which relies on theoretical distributions. Just as this asymptotic version,
+#'   the bootstrapped version is computed by using the residuals that are 
+#'   standardized by a Cholesky decomposition of the residual covariance matrix. 
+#'   Therefore, the results of the multivariate test depend on the ordering 
+#'   of the variables in the VAR model.
 #' 
 #' @export
 #' 
-boot_JB <- function(x, n.boot=1000, n.cores=1, fix_beta=FALSE){
+rboot.normality <- function(x, n.boot=1000, n.cores=1, fix_beta=FALSE){
   # define
-  y = D = D1 = D2 = A = beta = SIGMA = dim_K = dim_T = dim_p = dim_r = NULL
-  R.varx  = aux_assign_varx(x)
-  u.cov   = SIGMA  # Kilian,Demiroglu 2000:42, Eq.3(2), use OLS covariance matrix.
-  names_k = rownames(u.cov)  # names of residuals
+  x = as.varx(x)
   
-  # fixed objects in the bootstrap function
-  Ystar = matrix(NA, nrow=dim_K, ncol=dim_T+dim_p)
-  if(!is.null(dim_r)){
-    D = rbind(D2, D1)
-    D = aux_rm_Dnl(D, dim_p, x$t_D1, x$t_D2, MARGIN=1)
-    A = aux_rm_Dnl(A, dim_p, x$t_D1, x$t_D2, MARGIN=2)
-  }
+  # run bootstrap procedure
+  sim = boot_JB(x=x, n.boot=n.boot, n.cores=n.cores, fix_beta=fix_beta)
+  ### TODO: if(n.boot<0){ distribution="theoretical" }  # for parent class "rtest"
   
-  # resampling in the bootstrap function
-  L.star = lapply(1:n.boot, FUN=function(n) list(
-    U_H0  = t(MASS::mvrnorm(n=dim_T, mu=rep(0, dim_K), Sigma=u.cov, empirical=FALSE)),  # (K x T) matrix
-    idx_p = 1:dim_p + sample(0:dim_T, 1)))
+  # calculate test statistics
+  stats_mlt = test.normality(u=x$resid, distribution="none")
+  stats_uni = apply(x$resid, MARGIN=1, FUN=function(u_k) 
+    test.normality(u=u_k, distribution="none"))
+  stats_all = cbind(MULTI=stats_mlt, stats_uni)
   
-  # bootstrap function, from Kilian,Demiroglu 2000:43
-  bootf = function(star){
-    # generate bootstrap time series
-    Ustar = star$U_H0  # residuals drawn from H0-distribution of multivariate normality
-    Ystar[ ,1:dim_p] = y[ , star$idx_p]  # presample by a randomly drawn block of length dim_p from {y_t}
-    for(t in (1:dim_T)+dim_p){   # VAR process
-      Ystar[ ,t] = A %*% c(D[ ,t], Ystar[ ,t-(1:dim_p)]) + Ustar[ ,t-dim_p] }
-    
-    # re-estimate the model
-    if(is.null(dim_r)){  # ... by least squares
-      Y = Ystar[ ,-(1:dim_p)]   # matrix of regressands, where presample observations are excluded
-      Z = aux_stack(Ystar, dim_p=dim_p, D=D)   # matrix of regressors
-      B = Y%*%t(Z) %*% solve(Z%*%t(Z))   # OLS estimation, from Luetkepohl 2005:70 / Luetkepohl,Kraetzig 2004:93, Eq.3.9
-      e = Y - B%*%Z  # VAR residuals
-      
-    }else{  # ... by reduced-rank regression
-      def  = aux_stackRRR(Ystar, dim_p=dim_p, D1=D1, D2=D2)
-      RRR  = aux_RRR(def$Z0, def$Z1, def$Z2)
-      beta = if(fix_beta){ beta }else{ RRR$V[ , 0:dim_r, drop=FALSE] }
-      e    = aux_VECM(beta=beta, RRR=RRR)$resid  # VECM residuals
-    }
-    
-    # calculate JB statistics
-    e = t(e)
-    colnames(e)  = names_k
-    JB.stats_mlt = test.normality(u=e, distribution="none")
-    JB.stats_uni = apply(e, MARGIN=2, FUN=function(e_k) test.normality(u=e_k, distribution="none"))
-    return(cbind(JB.stats_mlt, JB.stats_uni))
-  }
+  # calculate p-values
+  pvals_mlt = test.normality(u=x$resid, distribution=sim[ , "MULTI", ])
+  pvals_uni = sapply(rownames(x$resid), FUN=function(k) 
+    test.normality(u=x$resid[k, ], distribution=sim[ , k, ]))
+  pvals_all = cbind(MULTI=pvals_mlt, pvals_uni)
   
-  # run bootstrap-loop and return result
-  result = pbapply::pbsapply(L.star, FUN=function(n) bootf(n), cl=n.cores, simplify="array")
+  # return result
+  argues = list(test="normality", design="recursive", method="Parametric bootstrap", n.boot=n.boot)
+  result = list(sim=sim, stats=stats_all, pvals=pvals_all, varx=x, args_rboot=argues)
+  class(result) = "rboot"
   return(result)
+}
+
+
+#### S3 methods for objects of class 'rboot' ####
+#' @export
+print.rboot <- function(x, ...){
+  # define
+  n.char_series = max(nchar(colnames(x$stats)))+1
+  ### TODO: Respect nchar(rownames) of "rboot" objects for other tests if introduced.
+  
+  # create table
+  header_args = c("### Test on ", x$args_rboot$test, " by ", x$args_rboot$design, " ", x$args_rboot$method,  " ###")
+  header_test = c(rep(" ", times=n.char_series), "statistics", rep(".", times=13), " ", "p-values", rep(".", times=15))
+  table_core  = round(cbind(t(x$stats), t(x$pvals)), 3)
+  
+  # print
+  cat(header_args, "\n", sep="")
+  cat(header_test, "\n", sep="")
+  print(table_core, quote=FALSE, row.names=FALSE)
+}
+
+
+#' @export
+summary.rboot <- function(object, ...){
+  # print
+  print.rboot(object, ...)
+  cat(paste0(c("Specifications", rep(".", times=15))), sep="", "\n")
+  cat("Number of iterations: ", object$args_rboot$n.boot, "\n")
 }
 
 
@@ -138,7 +145,7 @@ test.normality <- function(u, distribution="theoretical"){
   # test statistics
   u.cov = u%*%t(u)/dim_T # MLE covariance matrix 
   ### ...as proposed for this test in Luetkepohl,Kraetzig 2004:129; Luetkepohl 2005:175 uses SSR/dim_T-1 ###
-  u.P = t(chol(u.cov))   # lower triangular, Choleski-decomposed covariance matrix
+  u.P = t(chol(u.cov))   # lower triangular, Cholesky-decomposed covariance matrix
   u.s = solve(u.P)%*%u   # standardized residuals  
   b1 = rowMeans(u.s^3)   # third non-central moment vector (skewness)
   b2 = rowMeans(u.s^4)   # fourth non-central moment vector (kurtosis)
@@ -146,15 +153,15 @@ test.normality <- function(u, distribution="theoretical"){
   s23 = c(dim_T*t(b1) %*% b1/6)        # test statistic for multivariate skewness
   s24 = c(dim_T*t(b2-3) %*% (b2-3)/24) # test statistic for multivariate kurtosis
   JB  = s23 + s24                      # Jarque-Bera test statistic
-  JB.stats = c(JB=JB, Skew=s23, Kurt=s24)
+  stats = c(JB=JB, skewness=s23, kurtosis=s24)
   
   # p-values
   if(is.matrix(distribution)){  # use empirical distribution provided as argument
-    result = rowMeans(JB.stats < distribution, na.rm=TRUE)
+    result = rowMeans(stats < distribution, na.rm=TRUE)
   }else if(distribution=="none"){  # return test statistics directly
-    return(JB.stats)
+    return(stats)
   }else if(distribution=="theoretical"){  # use theoretical distribution
-    result = 1-pchisq(JB.stats, df=c(2, 1, 1)*dim_K)
+    result = 1-pchisq(stats, df=c(2, 1, 1)*dim_K)
   }else{ stop("Incorrect specification of the test distribution!") }
   
   # return result
@@ -243,6 +250,63 @@ test.serial <- function(u, lag.h, x){
   # return result
   result = c(p.value_LM, p.value_LMF)
   names(result) = paste0("AC(", lag.h, ")", c("_LM", "_LMF"))
+  return(result)
+}
+
+
+# bootstrap for JB normality test, from  Kilian,Demiroglu 2000:43
+boot_JB <- function(x, n.boot=1000, n.cores=1, fix_beta=FALSE){
+  # define
+  y = D = D1 = D2 = A = beta = SIGMA = dim_K = dim_T = dim_p = dim_r = NULL
+  R.varx  = aux_assign_varx(x)
+  u.cov   = SIGMA  # Kilian,Demiroglu 2000:42, Eq.3(2), use OLS covariance matrix.
+  names_k = rownames(u.cov)  # names of residuals
+  
+  # fixed objects in the bootstrap function
+  Ystar = matrix(NA, nrow=dim_K, ncol=dim_T+dim_p)
+  if(!is.null(dim_r)){
+    D = rbind(D2, D1)
+    D = aux_rm_Dnl(D, dim_p, x$t_D1, x$t_D2, MARGIN=1)
+    A = aux_rm_Dnl(A, dim_p, x$t_D1, x$t_D2, MARGIN=2)
+  }
+  
+  # resampling in the bootstrap function
+  L.star = lapply(1:n.boot, FUN=function(n) list(
+    U_H0  = t(MASS::mvrnorm(n=dim_T, mu=rep(0, dim_K), Sigma=u.cov, empirical=FALSE)),  # (K x T) matrix
+    idx_p = 1:dim_p + sample(0:dim_T, 1)))
+  
+  # bootstrap function, from Kilian,Demiroglu 2000:43
+  bootf = function(star){
+    # generate bootstrap time series
+    Ustar = star$U_H0  # residuals drawn from H0-distribution of multivariate normality
+    Ystar[ ,1:dim_p] = y[ , star$idx_p]  # presample by a randomly drawn block of length dim_p from {y_t}
+    for(t in (1:dim_T)+dim_p){   # VAR process
+      Ystar[ ,t] = A %*% c(D[ ,t], Ystar[ ,t-(1:dim_p)]) + Ustar[ ,t-dim_p] }
+    
+    # re-estimate the model
+    if(is.null(dim_r)){  # ... by least squares
+      Y = Ystar[ ,-(1:dim_p)]   # matrix of regressands, where presample observations are excluded
+      Z = aux_stack(Ystar, dim_p=dim_p, D=D)   # matrix of regressors
+      B = Y%*%t(Z) %*% solve(Z%*%t(Z))   # OLS estimation, from Luetkepohl 2005:70 / Luetkepohl,Kraetzig 2004:93, Eq.3.9
+      e = Y - B%*%Z  # VAR residuals
+      
+    }else{  # ... by reduced-rank regression
+      def  = aux_stackRRR(Ystar, dim_p=dim_p, D1=D1, D2=D2)
+      RRR  = aux_RRR(def$Z0, def$Z1, def$Z2)
+      beta = if(fix_beta){ beta }else{ RRR$V[ , 0:dim_r, drop=FALSE] }
+      e    = aux_VECM(beta=beta, RRR=RRR)$resid  # VECM residuals
+    }
+    
+    # calculate JB statistics
+    e = t(e)
+    colnames(e) = names_k
+    stats_mlt = test.normality(u=e, distribution="none")
+    stats_uni = apply(e, MARGIN=2, FUN=function(e_k) test.normality(u=e_k, distribution="none"))
+    return(cbind(MULTI=stats_mlt, stats_uni))
+  }
+  
+  # run bootstrap-loop and return result
+  result = pbapply::pbsapply(L.star, FUN=function(n) bootf(n), cl=n.cores, simplify="array")
   return(result)
 }
 

@@ -10,6 +10,9 @@ subtitle: pvars - VAR Modeling for Heterogeneous Panels
 ### Documentation: 
 * A vignette has been added to the package.
 
+### Features: 
+* `rboot.normality` now summarizes the function calls for bootstrapping the test 
+distribution, calculating empirical test statistics, and retrieving p-values.
 
 ***
 # pvars 1.0.0

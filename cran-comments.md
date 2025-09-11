@@ -1,11 +1,11 @@
-## Resubmission 2 (2025-07-XX)
+## Resubmission 2 (2025-09-12)
 - DOCUMENTATION: A vignette has been added to the package and referenced in the DESCRIPTION. 
     The re-submitted version is built under "--compact-vignettes=both" 
     to avoid warning on significant size reductions by "gs+qpdf", 
     although either way both builds are smaller than 5MB.
 - FIXED: References describing particularly noteworthy methods have been added to the description field of the DESCRIPTION.
 - FIXED: All acronyms are now explained in the description text.
-- TODO: Using foo:::f instead of foo::f allows access to unexported objects. Used ::: in documentation:
+- FIXED: Documentation avoids the call of unexported objects foo:::f. Exported function rboot.normality now summarizes these calls.
 - FIXED: \\dontrun\{\} has been replaced by \\donttest\{\}, related examples are not executable in < 5 sec.
     Minimal examples have been specified, but as-cran-checks still take 3 to 4 times longer than checks without donttest examples.
 
