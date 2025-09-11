@@ -7,7 +7,6 @@ Authors@R:
            email = "lennart.empting@vwl.uni-due.de",
            role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0004-5068-4639"))
-Author: Lennart Empting [aut, cre, cph] (ORCID: <https://orcid.org/0009-0004-5068-4639>)
 Maintainer: Lennart Empting <lennart.empting@vwl.uni-due.de>
 Description: Implements (1) panel cointegration rank tests, (2) estimators for panel
     vector autoregressive (VAR) models, and (3) identification methods for panel
