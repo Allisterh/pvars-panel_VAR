@@ -1,4 +1,4 @@
-## Resubmission 2 (2025-09-12)
+## Resubmission 2 (2025-09-11)
 - DOCUMENTATION: A vignette has been added to the package and referenced in the DESCRIPTION. 
     The re-submitted version is built under "--compact-vignettes=both" 
     to avoid warning on significant size reductions by "gs+qpdf", 
