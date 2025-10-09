@@ -46,7 +46,7 @@ fevd.id <- function(x, n.ahead=10, ...){
   dim_p = x$dim_p
   dim_K = nrow(A)
   dim_S = ncol(B)
-  idx_h = 1:n.ahead  # exclude last step 'h'
+  idx_h = 1:n.ahead
   
   # names for variables and for shocks
   names_k = if( !is.null(rownames(A)) ){ rownames(A) }else{ paste0("y[ ", 1:dim_K, " ]") }
@@ -59,7 +59,7 @@ fevd.id <- function(x, n.ahead=10, ...){
   for(k in 1:dim_K){
     THETA_sq  = matrix(R.vma$THETA[k, , idx_h]^2, byrow=TRUE, nrow=n.ahead, ncol=dim_S)  # normalization cancels out, Eq.7
     fev_total = 0  # mean square error of variable 'k' at step 'j'
-    for(j in 1:n.ahead){
+    for(j in idx_h){
       fev_shock = colSums(THETA_sq[1:j, , drop=FALSE])
       fev_total = fev_total + c(R.vma$PHI[k, ,j] %*% SIGMA %*% R.vma$PHI[k, ,j])
       ###fev_total = sum(THETA_sq[1:j, ])  # faster but ignores FEV from unidentified shocks
@@ -91,7 +91,7 @@ plot.svarfevd <- function(x, ...){
   # factors in data.frame preserve the stacking order in geom_bar() and facet_wrap()
   names_d = list(V1=NULL, shock=names_s, variable=paste0("FEVD~of~", names_k))
   ar_fevd = array(unlist(x), dim=c(n.ahead, dim_S, dim_K), dimnames=names_d)
-  df_fevd = reshape2::melt(ar_fevd, varnames=names(names_d))
+  df_fevd = reshape2::melt(ar_fevd, varnames=names(names_d))  # Column vectors 'shock' and 'variable' are created as factors.
   
   # function to display integer steps for horizon
   integer_breaks <- function(n = 5, ...){
@@ -111,8 +111,8 @@ plot.svarfevd <- function(x, ...){
     geom_bar(data=df_fevd, aes(x=V1, y=value, fill=shock), stat="identity", position="stack") +
     facet_wrap(~variable, ncol=1, labeller=label_parsed) +  # parse like in svars:::plot.svarirf
     labs(x="Horizon", y="Contribution to FEV [in %]", fill="Shock") + 
-    scale_fill_grey(labels=parse(text=names_s)) +
-    scale_x_continuous(breaks=integer_breaks()) +
+    scale_fill_grey(labels=parse(text=names_s)) +  # Note: parse() sets a time stamp such that
+    scale_x_continuous(breaks=integer_breaks()) +  # ... the ggplot objects cannot be all.equal().
     theme_bw() + 
     theme(legend.title=element_blank())
 }
