@@ -1,7 +1,10 @@
 pvars
 =====
 
-VAR Modeling for Heterogeneous Panels
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/pvars)](https://cran.r-project.org/package=pvars) 
+[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/pvars)](https://cran.r-project.org/package=pvars)
+
+VAR Modeling for Heterogeneous Panels in R
 
 
 ## Overview
