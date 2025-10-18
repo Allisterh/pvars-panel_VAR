@@ -277,7 +277,7 @@ aux_pvec <- function(L.def, L.beta=NULL, dim_r, idx_pool=NULL, n.factors=FALSE, 
            RRR=L.RRR[[i]], beta=L.beta[[i]], VECM=vecm, 
            resid=vecm$resid, OMEGA=vecm$OMEGA, SIGMA=vecm$SIGMA, dim_r=dim_r, dim_K=dim_K, 
            dim_L=L.def[[i]]$dim_L, dim_T=L.def[[i]]$dim_T, dim_p=L.def[[i]]$dim_p, dim_q=NULL, 
-           type=L.def[[i]]$type, t_D1=L.def[[i]]$t_D1, t_D2=L.def[[i]]$t_D2)
+           args_varx=L.def[[i]]$args_varx)
     class(L.varx[[i]]) = "varx"
   }
   

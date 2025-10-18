@@ -348,7 +348,7 @@ as.pvarx.default <- function(x, w=NULL, ...){
     if(is_id){
       args_pid = L.argID[[1]]
       args_pid$combine = "indiv"
-      is_iv = all(sapply(L.argID, FUN=function(x_i) x_i$method == "Proxy"))
+      is_iv = all(sapply(L.argID, FUN=function(x_i) isTRUE(x_i$method == "Proxy")))  # isTRUE: FALSE if NULL
       if(is_iv){
         args_pid$iv = NULL
         args_pid$L.iv = lapply(L.argID, FUN=function(x_i) x_i$iv)

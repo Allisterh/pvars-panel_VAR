@@ -163,8 +163,9 @@ aux_stackOLS <- function(y, dim_p, x=NULL, dim_q=0, type="none", t_D=list(), D=N
   Z = aux_stack(y=y, dim_p=dim_p, x=x, dim_q=dim_q, D=D)  # regressors
   
   # return result
-  result = list(Y=Y, Z=Z, D=D, y=y, x=x, type=type, t_D=t_D, 
-                dim_p=dim_p, dim_q=dim_q, dim_T=dim_T, dim_K=dim_K, dim_L=dim_L, dim_Kpn=nrow(Z))
+  result = list(Y=Y, Z=Z, D=D, y=y, x=x, dim_p=dim_p, dim_q=dim_q, 
+                dim_T=dim_T, dim_K=dim_K, dim_L=dim_L, dim_Kpn=nrow(Z),
+                args_varx=list(type=type, t_D=t_D))
   return(result)
 }
 
