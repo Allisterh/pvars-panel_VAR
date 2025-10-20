@@ -356,7 +356,7 @@ aux_rm_Dnl <- function(x, dim_p, t_D1, t_D2, MARGIN=1){
       idx_Dnl = which(colnames(x) %in% names_Dnl)
       return(x[ ,-idx_Dnl, drop=FALSE])
     }else{
-      stop("Argument 'MARGIN' must be an integer of either 1 for rows or 2 for columns!")
+      stop("Argument 'MARGIN' must be an integer of either 1 for rows or 2 for columns.")
     }
   }
 }

@@ -112,7 +112,7 @@ VECM <- function(y, dim_p, x=NULL, dim_q=dim_p, dim_r=NULL, beta=NULL,
   }
   
   # return result
-  argues = list(type=type, t_D1=t_D1, t_D2=t_D2)
+  argues = list(method="RRR", type=type, t_D1=t_D1, t_D2=t_D2)
   result = list(A=rvar$A, B=B, y=def$y, x=def$x, D1=def$D1, D2=def$D2, 
                 RRR=RRR, beta=beta, VECM=vecm, resid=vecm$resid, OMEGA=vecm$OMEGA, SIGMA=vecm$SIGMA, 
                 dim_r=dim_r, dim_K=dim_K, dim_L=dim_L, dim_T=dim_T, dim_p=dim_p, dim_q=dim_q,
@@ -292,7 +292,7 @@ as.varx.varest <- function(x, ...){
   SIGMA = OMEGA * (dim_T/(dim_T-ncol(A)))  # OLS covariance matrix of residuals
   
   # return result
-  argues = list(type=type)
+  argues = list(method="qr", type=type)
   result = list(A=A, B=diag(dim_K), y=y, D=D, resid=resid, SIGMA=SIGMA, OMEGA=OMEGA, 
                 dim_K=dim_K, dim_T=dim_T, dim_p=dim_p, args_varx=argues)
   class(result) = "varx"
@@ -321,7 +321,7 @@ as.varx.vec2var <- function(x, ...){
   
   # return result
   if(x$vecm@spec == "longrun"){ warning("The VECM has been re-specified into 'transitory' form.") }
-  argues = list(type=type)
+  argues = list(method="RRR", type=type)
   result = list(A=rvar$A, B=diag(dim_K), y=y, D1=def$D1, D2=def$D2, RRR=RRR, beta=beta, VECM=vecm,
                 resid=vecm$resid, SIGMA=vecm$SIGMA, OMEGA=vecm$OMEGA, 
                 dim_r=dim_r, dim_K=dim_K, dim_T=dim_T, dim_p=dim_p, args_varx=argues)
